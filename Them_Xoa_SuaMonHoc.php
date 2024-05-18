@@ -1,0 +1,348 @@
+<?php
+require_once('entities/account.php');
+require_once('entities/subject.class.php');
+require_once('entities/thongtin.class.php');
+
+$list_subject = Detail::list_Subject();
+$item_per_page=!empty($_GET['per_page'])?$_GET['per_page']:4;
+$current_page=!empty($_GET['page'])?$_GET['page']:1;
+$offset=($current_page-1)*$item_per_page;
+$list_LimitSubject=Detail::showLimitSubject($item_per_page,$offset);
+$totalSubject=count(Detail::list_Subject());
+$totalPage=ceil($totalSubject/$item_per_page);
+$check=false;
+if(isset($_POST['btntimkiem'])){
+    $key=$_POST['tim'];
+    if(!empty($key)){
+        $list_LimitSubject=Detail::showSearchSubject($key,$item_per_page,$offset);
+        $check=true;
+    }
+    
+}
+
+if(isset($_POST['btnSubmit'])){
+    $subjectName=$_POST['name'];
+      $txt_image=$_FILES['image'];
+    $newSubject=new Detail($subjectName,$txt_image);
+    $result=$newSubject->save();
+    if (isset($result)) {
+        if (!$result) {
+            echo '<script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var notification = document.getElementById("notification");
+                notification.style.display = "block";
+                notification.className = "failure";
+                document.getElementById("notification-message").innerText = "Không thêm được!";
+                setTimeout(function() {
+                    notification.style.display = "none";
+                }, 2000);
+            });
+            </script>';
+        } else {
+            echo '<script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var notification = document.getElementById("notification");
+                notification.style.display = "block";
+                notification.className = "success";
+                document.getElementById("notification-message").innerText = "Thêm thành công!";
+                setTimeout(function() {
+                    notification.style.display = "none";
+                }, 2000);
+            });
+            </script>';
+        }
+    }
+  }
+  if(isset($_POST['Delete'])){
+    $id=$_POST['Id'];
+    $result = Detail::delete_Subject($id);
+  }
+if(isset($result)){
+    $list_LimitSubject = Detail::showLimitSubject($item_per_page, $offset);
+}
+?>
+<script>
+     function delete_btn(id) {
+            if (confirm('Bạn có chắc muốn xóa môn học?')) {
+                var form = document.createElement("form");
+                form.setAttribute("method", "post");
+                form.setAttribute("action", "");
+
+                var idInput = document.createElement("input");
+                idInput.setAttribute("type", "hidden");
+                idInput.setAttribute("name", "Id");
+                idInput.setAttribute("value", id);
+
+                var deleteBtn = document.createElement("input");
+                deleteBtn.setAttribute("type", "hidden");
+                deleteBtn.setAttribute("name", "Delete");
+                deleteBtn.setAttribute("value", "Delete");
+
+                form.appendChild(idInput);
+                form.appendChild(deleteBtn);
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+</script>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThemSuaXoaMonHoc</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="myScript/script.js"></script>
+</head>
+<style>
+    .single{
+        border: 1px solid  #eeeded;
+        border-radius: 3px;
+        background-color:  #eeeded;
+        margin-bottom: 30px;
+        justify-content:center ;
+    }
+    .single:hover{
+        transform: scale(1.1) ;
+        background-color: #908E8E;
+        color:#eeeded;
+    }
+    .AED{
+        width: 30px;
+        height: 30px;
+        display: flex;
+        font-size: 20px;
+    }
+    .one{
+    }
+    .AED .two{
+        margin-left: 13px;
+    }
+    .AED .three{
+        margin-left: 13px;
+    }
+    table  {
+        justify-content: center;
+        border: 1px solid;
+        border-radius: 3px;
+        
+    }
+    .single1 {
+            display: flex;
+            align-items: flex-end;
+            background-color: red;
+            font-size: 20px;
+        }
+        .page-item{
+            border: 1px solid #eeeded;
+            text-decoration: none;
+            color: black;
+            padding: 3px 9px;
+            font-weight: bold;
+            background-color: #eeeded;
+
+
+        }
+        .current-page{
+            color:#fff;
+            background-color: black;
+            cursor: pointer;
+        }
+        .page-item:hover{
+            background-color:#908E8E;
+            border-radius: 1px solid #908E8E;
+            color: #fff;
+            text-decoration: none;
+            transform: scale(1.1) ;
+        }
+        .btn1{
+            background-color: black; 
+        }
+        .btn1:hover{
+            transform: scale(1.1) ;
+            color: #eeeded;
+            background-color: black;
+        }
+        .tim{
+            margin-bottom: 20px;
+            width: 400px;
+        }
+        .them{
+            margin-top: 12px;
+        }
+    #notification {
+        justify-content: center;
+        text-align: center;
+        display: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+    }
+    .success {
+        background-color: green;
+    }
+    .failure {
+        background-color: red;
+    }
+   .three:hover{
+        color: black;
+        transform: scale(1.1);
+    }
+    .one:hover{
+        color: black;
+        transform: scale(1.1);
+    }
+    .two:hover{
+        color: black;
+        transform: scale(1.1);
+    }
+</style>
+<body>
+<div class="infor container text-center py-1 mt-1">
+      <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+          <div class="single" >
+            <a href="" style=" text-decoration: none;
+        color: black;">
+                <div class="single-how-works-icon"><i class="fas fa-user"></i></div>
+                <h6 style="    text-transform: uppercase;">thông tin<span> cá nhân</span></h6>
+            </a>
+            <!-- <p>Thêm chỉnh sửa thông tin môn học, tài liệu môn học</p> -->
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+          <div class="single" >
+          <a href="" style=" text-decoration: none;
+        color: black;">
+        <div class="single-how-works-icon"><i class="fas fa-book"></i></div>
+        <h6 style="    text-transform: uppercase;">thông tin<span> bài đăng</span></h6>
+          </a>
+            <!-- <p>Thêm chỉnh sửa thông tin môn học, tài liệu môn học</p> -->
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+          <div class="single">
+          <a href="" style=" text-decoration: none;
+        color: black;">
+        <div class="single-how-works-icon" ><i class="fas fa-microscope"></i></div>
+        <h6 style="    text-transform: uppercase;">thông tin<span> nghiên cứu</span></h6>
+          </a>
+            <!-- <p>Thêm và chỉnh sửa thông tin các bài nghiên cứu</p> -->
+          </div>
+        </div>
+
+      </div>
+</div>
+
+<div class="container">
+    <div class="row">
+    <div class="col-lg-4 col-md-12 col-12 "style="margin-bottom:30px;">
+    <div class="container them">
+            <h2 class="text-center" style="">THÊM MÔN HỌC</h2>
+            <form action="#" method="post" class="formSubject" enctype="multipart/form-data" style="height:307px">
+              <div class="form-group" >
+                <label for="name">Tên môn học:</label>
+                <input type="text" id="name" name="name" class="form-control">
+              </div>
+              <div class="form-group " style="margin-top:30px;margin-bottom:45px;">
+                <label for="image">Chọn ảnh môn học:</label>
+                <input type="file" name="image" id="txt_image" accept=".PNG,.GIF,.JPG,.JPEG,.jpg,.png,.jpeg"  >						
+              </div>                      
+              <div class="form-group1 ">
+                <button type="submit" class="btn1 btn btn-dark" name="btnSubmit">Xác nhận</button>
+              </div>
+            </form>
+    </div>
+    <div id="notification" style="display: none;">
+    <p id="notification-message"></p>
+    </div>
+    </div>
+    <div class="col-lg-8 col-md-12 col-12">
+    <div class="">
+    <div class="container-fluid tim">
+    <form class="d-flex" action="#" method="post" enctype="multipart/form-data">
+      <input class="form-control me-2" type="search" name="tim" placeholder="Tìm kiếm" aria-label="Search">
+      <button class="btn1 btn btn-dark" type="submit" name="btntimkiem">Tìm kiếm</button>
+    </form>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Tên môn học</th>
+                <th>Ảnh môn học</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody >
+                <?php
+                if(isset($list_LimitSubject))
+                {
+                   if(is_array($list_LimitSubject))
+                   {
+                     foreach($list_LimitSubject as $item)
+                     {
+                        echo'<tr colspan="2"><td>'.htmlspecialchars($item['subjectName']).'</td>'.
+                        '<td> <img src="'.htmlspecialchars($item['subjectImage']).'" width="50px" height="50px" alt=""></td>'.'
+                        <td>
+                        <div class="AED">
+                            <div class="one">
+                                <a href="themTaiLieu.php?sid='.$item['subjectCode'].'"><i class="fas fa-square-plus" style="color:blue; "></i></a>
+                            </div>
+                            <div class="two">
+                                <a href="javascript:void(0);" ><i class="fad fa-trash" style="color:red; " onclick="delete_btn(\''.htmlspecialchars($item['subjectCode']).'\')"></i></a>
+                            </div>
+                            <div class="three">
+                                <a href="suamonhoc.php?sid='.$item['subjectCode'].'" ><i class="fas fa-pen-to-square"style="color:green;"></i></a>
+                            </div>
+                        </div>
+                    </td> </tr>';
+
+                     }
+                    }
+                }
+                
+                ?>
+        </tbody>
+    </table>
+    <div class="">
+    <?php
+        if($current_page>3){
+            $firs_page=1;
+    ?>
+        <a class="page-item" href="?per_page=<?=$item_per_page?>&page=<?=$firs_page?>">First</a>
+            <?php }?>
+            
+        <?php
+        for($num=1;$num<=$totalPage;$num++){?>
+            <?php if($num!=$current_page){ ?>
+                <?php if ($num>$current_page-3 &&$num<$current_page+3){?>
+                    <a class="page-item" href="?per_page=<?=$item_per_page?>&page=<?=$num?> <?php ?>"><?=$num?></a>
+        <?php }?>
+        <?php }else{ ?></else>
+            <strong  class="current-page page-item"><?=$num?></strong>
+            <?php }?>
+        <?php } 
+          if($current_page<$totalPage-3){
+              $end_page=$totalPage;
+          ?>
+          <a class="page-item" href="?per_page=<?=$item_per_page?>&page=<?=$end_page?>">Last</a>
+    <?php }?>
+    <!-- <?php require_once("phantrang.php") ?> -->
+
+    </div>
+    </div>
+    </div>
+    </div>
+</div>
+</body>
+</html>

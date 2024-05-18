@@ -51,6 +51,12 @@ public static function list_Subject()
     $result=$db->select_to_array($sql);
     return $result;
 }
+public static function list_SubjectWithSearch($key){
+    $db= new Db();
+    $sql ="SELECT * FROM Subject where subjectName LIKE '%$key%' ";
+    $result=$db->select_to_array($sql);
+    return $result;
+}
 public static function get_Subject($id)
 {
     $db= new Db();
@@ -150,14 +156,26 @@ public static function delete_Subject($id)
     $db= new Db();
     $sql ="DELETE  FROM Subject Where subjectCode='$id'";
     $result=$db->query_execute($sql);
-return $result;
+    return $result;
 }
 public static function delete_SubjectDetaile($id)
 {
     $db= new Db();
     $sql ="DELETE  FROM subjectDetaiil Where id=$id";
     $result=$db->query_execute($sql);
-return $result;
+    return $result;
+}
+public static function showLimitSubject($item, $offset){
+    $db= new Db();
+    $sql ="SELECT * FROM Subject ORDER BY subjectCode ASC LIMIT $item OFFSET $offset";
+    $result=$db->select_to_array($sql);
+    return $result;
+}
+public static function showSearchSubject($key,$item, $offset){
+    $db= new Db();
+    $sql ="SELECT * FROM Subject WHERE subjectName LIKE '%$key%' LIMIT $item OFFSET $offset;";
+    $result=$db->select_to_array($sql);
+    return $result;
 }
 }
 

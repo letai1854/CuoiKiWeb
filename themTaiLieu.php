@@ -56,25 +56,80 @@ if(isset($_POST['btnAccept']))
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <link rel="stylesheet" href="style.css">
-   
+    <style>
+      .single{
+        border: 1px solid  #eeeded;
+        border-radius: 3px;
+        background-color:  #eeeded;
+        margin-bottom: 30px;
+        justify-content:center ;
+        width: auto;
+    }
+    .single:hover{
+        transform: scale(1.1) ;
+        background-color: #908E8E;
+        color:#eeeded;
+    }
+      .title{
+        display: flex;
+        justify-content: center;
+      }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div id="logo">
-          <div>    <img src="./logo.png" alt="Logo"></div>
-              
-                <div><h2 style="margin-left: 6px;">ĐẠI HỌC <br> TÔN ĐỨC THẮNG</h2>
-                  <h4 style="margin-left: 6px;">KHOA CÔNG NGHỆ THÔNG TIN</h4>
-                </div>
-            </div>
+<div class="infor container text-center py-1 mt-1">
+      <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+          <div class="single" >
+            <a href="" style=" text-decoration: none;
+        color: black;">
+                <div class="single-how-works-icon"><i class="fas fa-user"></i></div>
+                <h6 style=" color:black;   text-transform: uppercase;">thông tin <br>cá <br> nhân</h6>
+            </a>
+            <!-- <p>Thêm chỉnh sửa thông tin môn học, tài liệu môn học</p> -->
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+          <div class="single" >
+          <a href="" style=" text-decoration: none;
+        color: black;">
+        <div class="single-how-works-icon"><i class="fas fa-book"></i></div>
+        <h6 style="  color:black;  text-transform: uppercase;">thông tin <br> bài <br> đăng</h6>
+          </a>
+            <!-- <p>Thêm chỉnh sửa thông tin môn học, tài liệu môn học</p> -->
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+          <div class="single">
+          <a href="" style=" text-decoration: none;
+        color: black;">
+        <div class="single-how-works-icon" ><i class="fas fa-microscope"></i></div>
+        <h6 style="  color:black;  text-transform: uppercase;">thông tin nghiên <br> cứu</h6>
+          </a>
+            <!-- <p>Thêm và chỉnh sửa thông tin các bài nghiên cứu</p> -->
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+          <div class="single">
+          <a href="" style=" text-decoration: none;
+        color: black;">
+        <div class="single-how-works-icon" ><i class="fas fa-newspaper"></i></div>
+        <h6 style="  color:black;  text-transform: uppercase;">thông tin môn <br>  học</h6>
+          </a>
+            <!-- <p>Thêm và chỉnh sửa thông tin các bài nghiên cứu</p> -->
+          </div>
+        </div>
+
       </div>
+</div>
       <div class="titleSubject">
-        <h1 class=" " style="color: rgba(4, 17, 255, 0.966);"><?php echo $name ?></h1>
+        <h1 class=" title"><?php echo $name ?></h1>
       </div>
+      
       <div class="row  container">
-        <div class="col-xl-9 col-md-6 col-12">
+        <div class="col-xl-4 col-md-6 col-12">
           <div class="container ">
-            <h2 class="text-center" style="color: rgba(255, 21, 4, 0.966);">Thêm tài liệu</h2>
+            <h2 class="text-center" style="">THÊM TÀI LIỆU</h2>
             <form action="#" method="post" class="formSubject"enctype="multipart/form-data">
               <div class="form-group">
                 <label for="name">Tên tài liệu:</label>
@@ -106,6 +161,32 @@ if(isset($_POST['btnAccept']))
             </form>
           </div>
         </div>
+        <div class="col-lg-8 col-md-12 col-12">
+    <div class="">
+    <div class="container-fluid tim">
+    <form class="d-flex" action="#" method="post" enctype="multipart/form-data">
+      <input class="form-control me-2" type="search" name="tim" placeholder="Tìm kiếm" aria-label="Search">
+      <button class="btn1 btn btn-dark" type="submit" name="btntimkiem">Tìm kiếm</button>
+    </form>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Tên môn học</th>
+                <th>Ảnh môn học</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody >
+                
+               
+        </tbody>
+    </table>
+    <div class="">
+    
+    </div>
+    </div>
+    </div>
       </div> 
       </div>
   
