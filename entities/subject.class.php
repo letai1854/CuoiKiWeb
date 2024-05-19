@@ -64,7 +64,7 @@ public static function get_Subject($id)
     $result=$db->select_to_array($sql);
     return $result;
 }
-public static function suaTaiLieu($id,$Title,$file,$Type){
+public static function suaTaiLieu($id,$Title,$file){
     $file_temp = $file['tmp_name'];
     $user_file = $file['name'];
     $filepath = "upload/" . $user_file;
@@ -72,13 +72,13 @@ public static function suaTaiLieu($id,$Title,$file,$Type){
         return false;
     }
     $db= new Db();
-    $sql = "CALL updateDetailSubject($id,'$Title','$filepath',' $Type')";
+    $sql = "CALL updateDetailSubject($id,'$Title','$filepath')";
     $result=$db->query_execute($sql);
     return $result;
 }
-public static function suaVideo($id,$Title,$file,$Type){
+public static function suaVideo($id,$Title,$file){
     $db= new Db();
-    $sql = "CALL updateDetailSubject($id,'$Title','$file',' $Type')";
+    $sql = "CALL updateDetailSubject($id,'$Title','$file')";
     $result=$db->query_execute($sql);
     return $result;
 }
@@ -171,9 +171,27 @@ public static function showLimitSubject($item, $offset){
     $result=$db->select_to_array($sql);
     return $result;
 }
+public static function showLimitSubjectDetail($id,$type,$item, $offset){
+    $db= new Db();
+    $sql ="SELECT * FROM subjectDetaiil where subjectType ='$type' and subjectCode=$id ORDER BY subjectCode ASC LIMIT $item OFFSET $offset";
+    $result=$db->select_to_array($sql);
+    return $result;
+}
+public static function showSubjectDetail($id,$type){
+    $db= new Db();
+    $sql ="SELECT * FROM subjectDetaiil where subjectType ='$type' and subjectCode=$id";
+    $result=$db->select_to_array($sql);
+    return $result;
+}
 public static function showSearchSubject($key,$item, $offset){
     $db= new Db();
     $sql ="SELECT * FROM Subject WHERE subjectName LIKE '%$key%' LIMIT $item OFFSET $offset;";
+    $result=$db->select_to_array($sql);
+    return $result;
+}
+public static function showSearchSubjectDetail($key,$id,$type,$item, $offset){
+    $db= new Db();
+    $sql ="SELECT * FROM subjectDetaiil where subjectType ='$type' and subjectCode=$id and  subjectTitle LIKE '%$key%' LIMIT $item OFFSET $offset;";
     $result=$db->select_to_array($sql);
     return $result;
 }

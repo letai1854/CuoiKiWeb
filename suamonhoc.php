@@ -23,18 +23,18 @@ if(isset($_POST['btnSubmit']))
     }
     if ($result == true)
     {
-      echo '<script>
-      document.addEventListener("DOMContentLoaded", function() {
-          var notification = document.getElementById("notification");
-          notification.style.display = "block";
-          notification.className = "success";
-          document.getElementById("notification-message").innerText = "Sửa thành công!";
-          setTimeout(function() {
-              notification.style.display = "none";
-          }, 2000);
-      });
-      </script>';
-      // header("Location: Them_Xoa_SuaMonHoc.php");
+      // echo '<script>
+      // document.addEventListener("DOMContentLoaded", function() {
+      //     var notification = document.getElementById("notification");
+      //     notification.style.display = "block";
+      //     notification.className = "success";
+      //     document.getElementById("notification-message").innerText = "Sửa thành công!";
+      //     setTimeout(function() {
+      //         notification.style.display = "none";
+      //     }, 2000);
+      // });
+      // </script>';
+      header("Location: Them_Xoa_SuaMonHoc.php");
     } else 
     {
       echo '<script>
@@ -109,6 +109,15 @@ if(isset($_POST['btnSubmit']))
     .failure {
         background-color: red;
     }
+    .btn1{
+            background-color: black; 
+            color: white;
+        }
+        .btn1:hover{
+            transform: scale(1.1) ;
+            color: #eeeded;
+            background-color: black;
+        }
    </style>
 </head>
 <body>
@@ -129,8 +138,8 @@ if(isset($_POST['btnSubmit']))
                     echo $hinh
                 ?>
               </div>                         
-              <div class="form-group">
-                <button type="submit" class="btn btn-primary" name="btnSubmit">Xác nhận</button>
+              <div class="form-group1">
+                <button type="submit" class="btn1 btn" name="btnSubmit">Xác nhận</button>
               </div>
             </form>
             <div id="notification" style="display: none;">

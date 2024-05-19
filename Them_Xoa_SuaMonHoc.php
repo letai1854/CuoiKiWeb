@@ -4,7 +4,7 @@ require_once('entities/subject.class.php');
 require_once('entities/thongtin.class.php');
 
 $list_subject = Detail::list_Subject();
-$item_per_page=!empty($_GET['per_page'])?$_GET['per_page']:4;
+$item_per_page=!empty($_GET['per_page'])?$_GET['per_page']:7;
 $current_page=!empty($_GET['page'])?$_GET['page']:1;
 $offset=($current_page-1)*$item_per_page;
 $list_LimitSubject=Detail::showLimitSubject($item_per_page,$offset);
@@ -16,8 +16,7 @@ if(isset($_POST['btntimkiem'])){
     if(!empty($key)){
         $list_LimitSubject=Detail::showSearchSubject($key,$item_per_page,$offset);
         $check=true;
-    }
-    
+    }  
 }
 
 if(isset($_POST['btnSubmit'])){
@@ -337,8 +336,6 @@ if(isset($result)){
           ?>
           <a class="page-item" href="?per_page=<?=$item_per_page?>&page=<?=$end_page?>">Last</a>
     <?php }?>
-    <!-- <?php require_once("phantrang.php") ?> -->
-
     </div>
     </div>
     </div>
