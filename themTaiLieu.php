@@ -6,6 +6,7 @@ if(isset($_POST['btnAccept']))
   $type=$_POST['type'];
   $file=$_FILES['editor'];
   $video=$_POST['video'];
+  $id=$_GET['sid'];
   // $check=false;
   if($video!="" && $type=="other"){
     $result=Detail::saveVideo($id,$name,$video,$type);
@@ -56,13 +57,28 @@ $id=$_GET['sid'];
 $subject=Detail::get_Subject($id);
 $name1=$subject[0]['subjectName'];
 $subjectDetail=Detail::list_SubjectDtail($id);
+
 $type = isset($_GET['type']) ? base64_decode($_GET['type']) : '';
 $checkTim=false;
 if($type==''){
   $type='theory';
 }
+session_start();
+
+if (isset($_SESSION['documentType'])) {
+if($_SESSION['i']==1){
+  $type=$_SESSION['documentType'];
+  $_SESSION['i']=2;
+}
+}
+session_write_close();
+
 if(isset($_POST['loai'])){
   $type=$_POST['Type'];
+  session_start();
+  $_SESSION['documentType']=$type;
+  $_SESSION['i']=1;
+  session_write_close();
   $checkTim=false;
 }
 if(!isset($_POST['loai'])){
@@ -97,25 +113,6 @@ function showListSubjectDetail($subjectDetail,$type){
                    {
                      foreach($subjectDetail as $item)
                      {
-                    //   if($type==''){
-                    //     if($item['subjectType']=="theory"||$item['subjectType']==" theory"){
-                    //       echo'<tr colspan="2"><td>'.htmlspecialchars($item['subjectTitle']).'</td>'.
-                    //     '<td> <p>'.htmlspecialchars($item['file']).'</p></td>'.'
-                    //     <td>
-                    //     <div class="AED">
-                    //         <div class="two">
-                    //         <a href="javascript:void(0);" onclick="delete_btn(\'' . htmlspecialchars($item['id']) . '\', \'' . htmlspecialchars($item['subjectType']) . '\')">
-                    //         <i class="fad fa-trash" style="color:red;"></i>
-                    //     </a>
-                    //         </div>
-                    //         <div class="three">
-                    //         <a href="suaTaiLieu.php?sid='.$item['id'].'&type='.base64_encode($item['subjectType']).'&id='.htmlspecialchars($item['subjectCode']).'" ><i class="fas fa-pen-to-square"style="color:green;"></i></a>
-                    //         </div>
-                    //     </div>
-                    // </td> </tr>';
-                    //     }
-                    //   }
-                      // else if (trim($item['subjectType'])==trim($type)){
                         echo'<tr colspan="2"><td>'.htmlspecialchars($item['subjectTitle']).'</td>'.
                         '<td> <p>'.htmlspecialchars($item['file']).'</p></td>'.'
                         <td>
@@ -395,36 +392,65 @@ function showListSubjectDetail($subjectDetail,$type){
             <div class="titlethem">
             <h2 class="text-center" style="">THÊM TÀI LIỆU</h2>
             </div>
-            <form action="#" method="post" class="formSubject"enctype="multipart/form-data">
-              <div class="form-group">
-                <label for="name">Tên tài liệu:</label>
-                <input type="text" id="name" name="name" class="form-control">
-              </div>
-           
-              <div class="form-group">
-                <label for="type">Loại:</label>
-                <select id="type" name="type" class="form-control">
-                  <option value="theory" >Lý thuyết</option>
-                  <option value="practice">Thực hành</option>
-                  <option value="other">Khác</option>
-                </select>
-              </div>
-              <div class="form-group" id="file-group">
-                <label for="document">Chọn file:</label>
-                <!-- <textarea name="editor" id="editor"></textarea> -->
-                <input type="file" id="document" name="editor" accept=".pdf,.doc,.docx" class="form-control">
-              </div>       
-              <div class="form-group" id="video-group" style="display: none;">
-              <label for="video">Chọn video:</label>
-              <input type="text" id="video" name="video" class="form-control">
-              </div>      
-              <div class="form-group1">
-                <input type="hidden" name="type" id="typeHiddenAccept">
-                <button type="submit" class="btn1 btn btn-dark" name="btnAccept">Xác nhận</button>
-              </div>
-              
+            <!-- <form action="#" method="post" class="formSubject" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Tên tài liệu:</label>
+            <input type="text" id="name" name="name" class="form-control">
+            <small id="nameError" class="error" style="color:red">Vui lòng nhập tên tài liệu</small>
+        </div>
+        <div class="form-group">
+            <label for="type">Loại:</label>
+            <select id="type" name="type" class="form-control">
+                <option value="theory">Lý thuyết</option>
+                <option value="practice">Thực hành</option>
+                <option value="other">Khác</option>
+            </select>
+        </div>
+        <div class="form-group" id="file-group">
+            <label for="document">Chọn file:</label>
+            <input type="file" id="document" name="editor" accept=".pdf,.doc,.docx" class="form-control">
+            <small id="documentError" class="error" style="color:red">Vui lòng chọn file tài liệu</small>
+        </div>
+        <div class="form-group" id="video-group" style="display: none;">
+            <label for="video">Chọn video:</label>
+            <input type="text" id="video" name="video" class="form-control">
+            <small id="videoError" class="error" style="color:red">Vui lòng nhập đường dẫn video hợp lệ (https://...)</small>
+        </div>
+        <div class="form-group1">
+            <input type="hidden" name="type" id="typeHiddenAccept">
+            <button type="submit" class="btn1 btn btn-dark" name="btnAccept">Xác nhận</button>
+        </div>
+    </form> -->
+    <form action="#" method="post" class="formSubject" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Tên tài liệu:</label>
+            <input type="text" id="name" name="name" class="form-control">
+            <small id="nameError" class="error" style="color:red">Vui lòng nhập tên tài liệu</small>
+        </div>
+        <div class="form-group">
+            <label for="type">Loại:</label>
+            <select id="type" name="type" class="form-control">
+                <option value="theory">Lý thuyết</option>
+                <option value="practice">Thực hành</option>
+                <option value="other">Khác</option>
+            </select>
+        </div>
+        <div class="form-group" id="file-group">
+            <label for="document">Chọn file:</label>
+            <input type="file" id="document" name="editor" accept=".pdf,.doc,.docx" class="form-control">
+            <small id="documentError" class="error" style="color:red">Vui lòng chọn file tài liệu</small>
+        </div>
+        <div class="form-group" id="video-group" style="display: none;">
+            <label for="video">Chọn video:</label>
+            <input type="text" id="video" name="video" class="form-control">
+            <small id="videoError" class="error" style="color:red">Vui lòng nhập đường dẫn video hợp lệ (https://...)</small>
+        </div>
+        <div class="form-group1">
+            <input type="hidden" name="type" id="typeHiddenAccept">
+            <button type="submit" class="btn1 btn btn-dark" name="btnAccept">Xác nhận</button>
+        </div>
+    </form>
 
-            </form>
           </div>
           <div id="notification" style="display: none;">
               <p id="notification-message"></p>
@@ -545,7 +571,7 @@ function showListSubjectDetail($subjectDetail,$type){
     </div>
   </div> 
 </div>
-<script>
+<!-- <script>
   document.getElementById('type').addEventListener('change', function() {
     var type = this.value;
     var fileGroup = document.getElementById('file-group');
@@ -558,7 +584,73 @@ function showListSubjectDetail($subjectDetail,$type){
       videoGroup.style.display = 'none';
     }
   });
-</script>
+</script> -->
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var typeSelect = document.getElementById('type');
+            var fileGroup = document.getElementById('file-group');
+            var videoGroup = document.getElementById('video-group');
+            var nameField = document.getElementById('name');
+            var documentField = document.getElementById('document');
+            var videoField = document.getElementById('video');
+            
+            // Đảm bảo các thông báo lỗi ẩn khi tải trang
+            document.getElementById('nameError').style.display = 'none';
+            document.getElementById('documentError').style.display = 'none';
+            document.getElementById('videoError').style.display = 'none';
+
+            typeSelect.addEventListener('change', function() {
+                var type = this.value;
+                if (type === 'other') {
+                    fileGroup.style.display = 'none';
+                    videoGroup.style.display = 'block';
+                } else {
+                    fileGroup.style.display = 'block';
+                    videoGroup.style.display = 'none';
+                }
+            });
+
+            document.querySelector('form').addEventListener('submit', function(event) {
+                var isValid = true;
+                
+                // Kiểm tra tên tài liệu
+                var name = nameField.value.trim();
+                if (name === "") {
+                    document.getElementById('nameError').style.display = 'inline';
+                    isValid = false;
+                } else {
+                    document.getElementById('nameError').style.display = 'none';
+                }
+
+                // Kiểm tra file tài liệu nếu type không phải là "Khác"
+                if (typeSelect.value !== 'other') {
+                    var documentFile = documentField.value.trim();
+                    if (documentFile === "") {
+                        document.getElementById('documentError').style.display = 'inline';
+                        isValid = false;
+                    } else {
+                        document.getElementById('documentError').style.display = 'none';
+                    }
+                }
+
+                // Kiểm tra đường dẫn video nếu type là "Khác"
+                if (typeSelect.value === 'other') {
+                    var videoUrl = videoField.value.trim();
+                    var urlPattern = /^https:/i;
+                    if (videoUrl === "" || !urlPattern.test(videoUrl)) {
+                        document.getElementById('videoError').style.display = 'inline';
+                        isValid = false;
+                    } else {
+                        document.getElementById('videoError').style.display = 'none';
+                    }
+                }
+
+                if (!isValid) {
+                    event.preventDefault(); // Ngăn form submit nếu có lỗi
+                }
+            });
+        });
+    </script>
 <script>
   function updateTypeValue(value) {
     document.getElementById('typeHiddenAccept').value = value;

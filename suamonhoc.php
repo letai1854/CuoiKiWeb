@@ -50,7 +50,6 @@ if(isset($_POST['btnSubmit']))
       </script>';
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -126,10 +125,11 @@ if(isset($_POST['btnSubmit']))
         <div class="col-xl-8 col-md-6 col-12">
           <div class="container ">
             <h2 class="text-center"  style="">Sửa Môn Học</h2>
-            <form action="#" method="post" class="formSubject" enctype="multipart/form-data" style="height:382px">
+            <form action="#" method="post" class="formSubject" enctype="multipart/form-data" style="height:382px" onsubmit="return validateForm2()">
               <div class="form-group">
                 <label for="name">Tên môn học:</label>
                 <input type="text" id="name" name="namesubject" class="form-control" value=" <?php echo $name ?> ">
+                <small id="nameError" style="color: red; display: none;">Vui lòng nhập tên môn học</small>
               </div>
               <div class="form-group">
                 <label for="image">Chọn ảnh môn học:</label>
@@ -201,6 +201,25 @@ if(isset($_POST['btnSubmit']))
 
   
       <?php require_once("footer.php") ?>
-    
 </body>
 </html>
+<script>
+  function validateForm2() {
+    var isValid = true;
+
+    // Kiểm tra trường tên môn học
+    var name = document.getElementById('name').value.trim();
+    var nameError = document.getElementById('nameError');
+    if (name === "") {
+      nameError.style.display = 'inline';
+      isValid = false;
+    } else {
+      nameError.style.display = 'none';
+    }
+    return isValid;
+  }
+  // Loại bỏ thông báo lỗi khi người dùng nhập dữ liệu vào các trường
+  document.getElementById('name').addEventListener('input', function() {
+    document.getElementById('nameError').style.display = 'none';
+  });
+</script> 
