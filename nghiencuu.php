@@ -4,13 +4,34 @@ require_once('entities/subject.class.php');
 require_once('entities/thongtin.class.php');
 
 $list_subject = Detail::list_Subject();
-$item_per_page=!empty($_GET['per_page'])?$_GET['per_page']:3;
+$item_per_page=!empty($_GET['per_page'])?$_GET['per_page']:10;
 $current_page=!empty($_GET['page'])?$_GET['page']:1;
 $offset=($current_page-1)*$item_per_page;
 
 
 $checkTim=false;
 $checkTim = isset($_GET['c']) ? base64_decode($_GET['c']) : false;
+$type = isset($_GET['type']) ? base64_decode($_GET['type']) : '';
+if($type==''){
+$type=1;
+}
+$tieuDe = "THÊM BÀI NGHIÊN CỨU";
+$anHinhDaiDien = false;
+switch($type) {
+    case '1':
+        $tieuDe = "THÊM BÀI HỘI NGHỊ KHOA HỌC";
+        break;
+    case '2':
+        $tieuDe = "THÊM BÀI CÔNG TRÌNH NCKH";
+        $anHinhDaiDien = true;
+        break;
+    case '3':
+        $tieuDe = "THÊM BÀI CÔNG BỐ KHOA HỌC";
+        $anHinhDaiDien = true;
+        break;
+    default:
+        $tieuDe = "THÊM BÀI NGHIÊN CỨU";
+}
 if(isset($_POST['btntimkiem'])){
     $checkTim=true;
     $key=$_POST['tim']; 
@@ -18,10 +39,21 @@ if(isset($_POST['btntimkiem'])){
 
 
 if(isset($_POST['btnSubmit'])){
-    $subjectName=$_POST['name'];
-      $txt_image=$_FILES['image'];
-    $newSubject=new Detail($subjectName,$txt_image);
-    $result=$newSubject->save();
+    $title=$_POST['title'];
+    $content = $_POST['content'];
+    $date = date('Y-m-d H:i:s');
+    switch($type) {
+        case 1:
+            $txt_image=$_FILES['image'];
+            $newresearch=thongtin::addThongTinHoiNghi($title,$content,$date,$txt_image); 
+            break;
+        case 2: 
+            $newresearch=thongtin::addThongTinCongTrinhCongBo($title,$content, $date,2);
+            break;
+        case 3:
+            $newresearch=thongtin::addThongTinCongTrinhCongBo($title,$content, $date,3);
+            break;
+    }
     if (isset($result)) {
         if (!$result) {
             echo '<script>
@@ -52,7 +84,7 @@ if(isset($_POST['btnSubmit'])){
   }
   if(isset($_POST['Delete'])){
     $id=$_POST['Id'];
-    $result = Detail::delete_Subject($id);
+    $result = thongtin::deleteThongTinNghienCuu($id);
   }
 if(isset($result)){
     $list_LimitSubject = Detail::showLimitSubject($item_per_page, $offset);
@@ -64,18 +96,14 @@ function showListSubjectDetail($list_LimitSubject){
        {
          foreach($list_LimitSubject as $item)
          {
-            echo'<tr colspan="2"><td>'.htmlspecialchars($item['subjectName']).'</td>'.
-            '<td> <img src="'.htmlspecialchars($item['subjectImage']).'" width="50px" height="50px" alt=""></td>'.'
+            echo'<tr colspan="2"><td>'.htmlspecialchars($item['title']).'</td>'.'
             <td>
             <div class="AED">
-                <div class="one">
-                    <a href="themTaiLieu.php?sid='.$item['subjectCode'].'"><i class="fas fa-square-plus" style="color:blue; "></i></a>
-                </div>
                 <div class="two">
-                    <a href="javascript:void(0);" ><i class="fad fa-trash" style="color:red; " onclick="delete_btn(\''.htmlspecialchars($item['subjectCode']).'\')"></i></a>
+                    <a href="javascript:void(0);" ><i class="fad fa-trash" style="color:red; " onclick="delete_btn(\''.htmlspecialchars($item['id']).'\')"></i></a>
                 </div>
                 <div class="three">
-                    <a href="suamonhoc.php?sid='.$item['subjectCode'].'" ><i class="fas fa-pen-to-square"style="color:green;"></i></a>
+                    <a href="suathongtinnghiencuu.php?sid='.htmlspecialchars($item['id']).'&type='.base64_encode(htmlspecialchars($item['type'])).'" ><i class="fas fa-pen-to-square"style="color:green;"></i></a>
                 </div>
             </div>
         </td> </tr>';
@@ -88,7 +116,7 @@ function showListSubjectDetail($list_LimitSubject){
 ?>
 <script>
      function delete_btn(id) {
-            if (confirm('Bạn có chắc muốn xóa môn học?')) {
+            if (confirm('Bạn có chắc muốn xóa thông tin nghiên cứu?')) {
                 var form = document.createElement("form");
                 form.setAttribute("method", "post");
                 form.setAttribute("action", "");
@@ -150,6 +178,10 @@ function showListSubjectDetail($list_LimitSubject){
     }
     .one{
     }
+    .ck-editor__editable[role="textbox"] {
+                /* Editing area */
+                min-height: 300px;
+        }
     .AED .two{
         margin-left: 13px;
     }
@@ -163,11 +195,22 @@ function showListSubjectDetail($list_LimitSubject){
         
     }
     .single1 {
-            display: flex;
-            align-items: flex-end;
-            background-color: red;
-            font-size: 20px;
-        }
+        border: 1px solid  #eeeded;
+        border-radius: 6px;
+        background-color:  #eeeded;
+        margin-bottom: 30px;
+        justify-content:center ;
+        font-size: 10px;
+        white-space: nowrap;
+        padding: 8px;
+        color: #fff;
+        background-color: black;
+    }
+    .single1:hover{
+        transform: scale(1.1) ;
+        background-color: #202020;
+        color:#eeeded;
+    }
         .page-item{
             border: 1px solid #eeeded;
             text-decoration: none;
@@ -231,36 +274,51 @@ function showListSubjectDetail($list_LimitSubject){
         color: black;
         transform: scale(1.1);
     }
+    .title1{
+        text-align: center;
+    }
+    .btn1{
+            background-color: black; 
+            color: white;
+    }
+    .btn1:hover{
+            transform: scale(1.1) ;
+            color: #eeeded;
+            background-color: black;
+    }
+    th{
+        white-space: nowrap;
+    }
 </style>
 <body>
 <div class="infor container text-center py-1 mt-1">
       <div class="row">
-      <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+      <div class="col-lg-4 col-md-4 col-sm-6 col-12">
           <div class="single" >
             <a href="" style=" text-decoration: none;
         color: black;">
                 <div class="single-how-works-icon"><i class="fas fa-user"></i></div>
-                <h6 style="    text-transform: uppercase;">thông tin<span> cá nhân</span></h6>
+                <h6 style="    text-transform: uppercase;">thông tin <br> cá nhân</span></h6>
             </a>
             <!-- <p>Thêm chỉnh sửa thông tin môn học, tài liệu môn học</p> -->
           </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-12">
           <div class="single" >
           <a href="./themthongtin.php" style=" text-decoration: none;
         color: black;">
-        <div class="single-how-works-icon"><i class="fas fa-book"></i></div>
-        <h6 style="    text-transform: uppercase;">thông tin<span> bài đăng</span></h6>
+        <div class="single-how-works-icon"><i class="fas fa-newspaper"></i></div>
+        <h6 style="    text-transform: uppercase;">thông tin <br> bài đăng</span></h6>
           </a>
             <!-- <p>Thêm chỉnh sửa thông tin môn học, tài liệu môn học</p> -->
           </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-12">
           <div class="single">
-          <a href="./nghiencuu.php" style=" text-decoration: none;
+          <a href="./Them_Xoa_SuaMonHoc.php" style=" text-decoration: none;
         color: black;">
-        <div class="single-how-works-icon" ><i class="fas fa-microscope"></i></div>
-        <h6 style="    text-transform: uppercase;">thông tin<span> nghiên cứu</span></h6>
+        <div class="single-how-works-icon" ><i class="fas fa-book"></i></div>
+        <h6 style="    text-transform: uppercase;">thông tin <br>    môn học</span></h6>
           </a>
             <!-- <p>Thêm và chỉnh sửa thông tin các bài nghiên cứu</p> -->
           </div>
@@ -268,23 +326,63 @@ function showListSubjectDetail($list_LimitSubject){
 
       </div>
 </div>
+<div class="title1 container">
+    <h2>NGHIÊN CỨU</h2>
+</div>
+<div class="infor container text-center py-1 mt-1">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+          <div class="single1" >
+          <a href="?type=<?php echo base64_encode(1) ?>" style=" text-decoration: none;
+        color: black;">
+        <h6 style=" color: #fff;   text-transform: uppercase;">HỘI NGHỊ KHOA HỌC</span></h6>
+          </a>
+            <!-- <p>Thêm chỉnh sửa thông tin môn học, tài liệu môn học</p> -->
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+          <div class="single1" >
+            <a href="?type=<?php echo base64_encode(2) ?>" style=" text-decoration: none;
+        color: black;">
+                <h6 style=" color: #fff;   text-transform: uppercase;">CÔNG TRÌNH  NCKH</span></h6>
+            </a>
+            <!-- <p>Thêm chỉnh sửa thông tin môn học, tài liệu môn học</p> -->
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+          <div class="single1">
+          <a href="?type=<?php echo base64_encode(3) ?>" style=" text-decoration: none;
+        color: black;">
+        <h6 style=" color: #fff;   text-transform: uppercase;">CÔNG BỐ KHOA HỌC</span></h6>
+          </a>
+            <!-- <p>Thêm và chỉnh sửa thông tin các bài nghiên cứu</p> -->
+          </div>
+        </div>
 
+      </div>
+</div>
 <div class="container">
     <div class="row">
-    <div class="col-lg-4 col-md-12 col-12 "style="margin-bottom:30px;">
+    <div class="col-lg-7 col-md-12 col-12 "style="margin-bottom:30px;">
     <div class="container them">
-            <h2 class="text-center" style="">THÊM MÔN HỌC</h2>
-            <form action="#" method="post" class="formSubject" enctype="multipart/form-data" style="height:307px">
-              <div class="form-group" >
-                <label for="name">Tên môn học:</label>
-                <input type="text" id="name" name="name" class="form-control">
+            <h2 class="text-center" style=""><?php echo $tieuDe; ?></h2>
+            <form action="#" method="post" class="formSubject" enctype="multipart/form-data">
+              <div class="form-group">
+                    <label for="heading" >Tiêu đề:</label>
+                    <input type="text" id="title" name = "title"><br>
               </div>
-              <div class="form-group " style="margin-top:30px;margin-bottom:45px;">
-                <label for="image">Chọn ảnh môn học:</label>
-                <input type="file" name="image" id="txt_image" accept=".PNG,.GIF,.JPG,.JPEG,.jpg,.png,.jpeg"  >						
-              </div>                      
-              <div class="form-group1 ">
-                <button type="submit" class="btn1 btn btn-dark" name="btnSubmit">Xác nhận</button>
+              <?php if (!$anHinhDaiDien): ?>
+              <div class="form-group">
+                    <label for="txt_image" >Hình đại diện:</label>
+                    <input type="file" name="image" id="txt_image" accept=".PNG,.GIF,.JPG,.JPEG,.jpg,.png,.jpeg">	
+              </div>
+              <?php endif; ?>
+              <div class="form-group">
+                    <label for="txt_image" >Nội dung:</label>
+                    <textarea id="content" name="content" placeholder="Nhập nội dung thông tin" style="width:700px"></textarea>
+              </div>              
+              <div class="form-group1">
+                <button type="submit" class="btn1 btn" name="btnSubmit">Xác nhận</button>
               </div>
             </form>
     </div>
@@ -292,7 +390,7 @@ function showListSubjectDetail($list_LimitSubject){
     <p id="notification-message"></p>
     </div>
     </div>
-    <div class="col-lg-8 col-md-12 col-12">
+    <div class="col-lg-5 col-md-12 col-12">
     <div class="">
     <div class="container-fluid tim">
     <form class="d-flex" action="#" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
@@ -301,11 +399,10 @@ function showListSubjectDetail($list_LimitSubject){
     </form>
     <div id="error-message" style="color: red; display: none;">Yêu cầu nhập dữ liệu</div>
     </div>
-    <table class="table table-hover">
+    <table class="container table table-hover">
         <thead>
             <tr>
-                <th>Tên môn học</th>
-                <th>Ảnh môn học</th>
+                <th>Tiêu đề</th>
                 <th>Chức năng</th>
             </tr>
         </thead>
@@ -313,14 +410,12 @@ function showListSubjectDetail($list_LimitSubject){
                 <?php
                 $totalSubject=1;
                 $list_thongbao="";
-                   
-                   
                 if(isset($_POST['btntimkiem'])){
                     $checkTim=true;
                     $key=$_POST['tim'];
                     if(!empty($key)){
-                        $list_LimitSubject=Detail::showSearchSubject($key,$item_per_page,$offset);
-                        $totalSubject=count(Detail::countSearchSubject($key));
+                        $list_LimitSubject=thongtin::getSearchThongTinNghienCuu($type,$key,$item_per_page,$offset);
+                        $totalSubject=count(thongtin::countSearchThongTinNghienCuu($type,$key));
                     }
                 }
                 if($checkTim==true)
@@ -336,14 +431,14 @@ function showListSubjectDetail($list_LimitSubject){
                 $checkTim=true;
                 
                 if(!empty($key)){
-                    $list_LimitSubject=Detail::showSearchSubject($key,$item_per_page,$offset);
-                    $totalSubject=count(Detail::countSearchSubject($key));
+                    $list_LimitSubject=thongtin::getSearchThongTinNghienCuu($type,$key,$item_per_page,$offset);
+                    $totalSubject=count(thongtin::countSearchThongTinNghienCuu($type,$key));
                 }  
                 }
                 else{
                     $checkTim=false;
-                    $list_LimitSubject=Detail::showLimitSubject($item_per_page,$offset);
-                    $totalSubject=count(Detail::list_Subject());
+                    $list_LimitSubject=thongtin::getThongTinNghienCuu($type,$item_per_page,$offset);
+                    $totalSubject=count(thongtin::countThongTinNghienCuu($type));
                 }
                 $totalPage=ceil($totalSubject/$item_per_page);
                 showListSubjectDetail($list_LimitSubject);
@@ -406,3 +501,27 @@ function showListSubjectDetail($list_LimitSubject){
 </script>
 </body>
 </html>
+<script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
+<script>
+    function validateForm1() {
+        var fileInput = document.getElementById('txt_image');
+        if (fileInput.files.length === 0) {
+            alert('Vui lòng upload ảnh đại diện cho thông tin.');
+            return false;
+        }
+        return true;
+    }   
+    ClassicEditor
+        .create( document.querySelector( '#content' ), {
+            ckfinder:
+            {
+                uploadUrl: 'fileupload.php'
+            }
+        } )
+        .then (editor => {
+            consol.log(editor);
+        })
+        .catch( error => {
+            console.error( error );
+        } );
+</script>

@@ -286,7 +286,7 @@ body > nav > div > div.outer-div > div.giangvien{
   list-style-type: none;
 
 }
-    hr {
+    .hr1 {
         width: 30px;
         background-color: coral;
         height: 2px;

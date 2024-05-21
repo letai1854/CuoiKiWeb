@@ -76,6 +76,12 @@ public static function suaTaiLieu($id,$Title,$file){
     $result=$db->query_execute($sql);
     return $result;
 }
+public static function suaTenTaiLieu($id,$Title){
+    $db= new Db();
+    $sql = "CALL updatNameDetail('$Title',$id)";
+    $result=$db->query_execute($sql);
+    return $result;
+}
 public static function suaVideo($id,$Title,$file){
     $db= new Db();
     $sql = "CALL updateDetailSubject($id,'$Title','$file')";
@@ -189,9 +195,21 @@ public static function showSearchSubject($key,$item, $offset){
     $result=$db->select_to_array($sql);
     return $result;
 }
+public static function countSearchSubject($key){
+    $db= new Db();
+    $sql ="SELECT * FROM Subject WHERE subjectName LIKE '%$key%'";
+    $result=$db->select_to_array($sql);
+    return $result;
+}
 public static function showSearchSubjectDetail($key,$id,$type,$item, $offset){
     $db= new Db();
     $sql ="SELECT * FROM subjectDetaiil where subjectType ='$type' and subjectCode=$id and  subjectTitle LIKE '%$key%' LIMIT $item OFFSET $offset;";
+    $result=$db->select_to_array($sql);
+    return $result;
+}
+public static function countSearchSubjectDetail($key,$id,$type){
+    $db= new Db();
+    $sql ="SELECT * FROM subjectDetaiil where subjectType ='$type' and subjectCode=$id and  subjectTitle LIKE '%$key%'";
     $result=$db->select_to_array($sql);
     return $result;
 }

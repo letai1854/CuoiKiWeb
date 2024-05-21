@@ -97,7 +97,7 @@
             <div class="single-how-works-icon" tyle="font-size: 90px;"><i class="fas fa-microscope"></i></div>
             <h2 style="    text-transform: uppercase;">thông tin<span> nghiên cứu</span></h2>
             <!-- <p>Thêm và chỉnh sửa thông tin các bài nghiên cứu</p> -->
-            <button class="welcome-hero-btn how-work-btn">Xem thêm</button>
+            <button class="welcome-hero-btn how-work-btn"><a href="./nghiencuu.php" style="text-decoration: none; color:black">Xem Thêm</a></button>
           </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6">
@@ -105,7 +105,7 @@
             <div class="single-how-works-icon" tyle="font-size: 90px;"><i class="fas fa-newspaper"></i></div>
             <h2 style="    text-transform: uppercase;">thông tin<span> bài đăng</span></h2>
             <!-- <p>Thêm và chỉnh sửa thông tin thông báo-tin tức-việc làm.</p> -->
-            <button class="welcome-hero-btn how-work-btn">Xem thêm</button>
+            <button class="welcome-hero-btn how-work-btn"><a href="./themthongtin.php" style="text-decoration: none; color:black">Xem Thêm</a></button>
           </div>
         </div>
       </div>

@@ -23,15 +23,19 @@ if(isset($_POST['btnAccept']))
   }
   if($loai!="other") 
   {
-    $result=Detail::suaTaiLieu($id,$ten,$f);
-    $subject=Detail::list_SubjectDetailId($id);
-    $file=$subject[0]['file'];
-    $check=true;
-
+    if($_FILES['editor']['name'] != ''){
+      $result=Detail::suaTaiLieu($id,$ten,$f);
+      $subject=Detail::list_SubjectDetailId($id);
+      $file=$subject[0]['file'];
+      $check=true;
+    }
+    else{
+      $result=Detail::suaTenTaiLieu($ten,$id);
+    }
   }
   if(!$check){
     echo '<script>alert("Hãy chọn đúng dữ liệu!")</script>';
-  }
+  } 
   if(isset($result))
   {
 		if(!$result)

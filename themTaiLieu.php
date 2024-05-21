@@ -1,13 +1,5 @@
 <?php
 require_once("entities/subject.class.php");
-$id=$_GET['sid'];
-$subject=Detail::get_Subject($id);
-$name1=$subject[0]['subjectName'];
-$subjectDetail=Detail::list_SubjectDtail($id);
-$type = isset($_GET['type']) ? base64_decode($_GET['type']) : '';
-if($type==''){
-  $type='theory';
-}
 if(isset($_POST['btnAccept']))
 {
   $name=$_POST['name'];
@@ -60,24 +52,30 @@ if(isset($_POST['btnAccept']))
 		}
 	}
 }
-$checkType=false;
+$id=$_GET['sid'];
+$subject=Detail::get_Subject($id);
+$name1=$subject[0]['subjectName'];
+$subjectDetail=Detail::list_SubjectDtail($id);
+$type = isset($_GET['type']) ? base64_decode($_GET['type']) : '';
+$checkTim=false;
+if($type==''){
+  $type='theory';
+}
 if(isset($_POST['loai'])){
   $type=$_POST['Type'];
-  $checkType=true;
+  $checkTim=false;
 }
-$item_per_page=!empty($_GET['per_page'])?$_GET['per_page']:7;
+if(!isset($_POST['loai'])){
+  $checkTim = isset($_GET['c']) ? base64_decode($_GET['c']) : false;
+}
+$item_per_page=!empty($_GET['per_page'])?$_GET['per_page']:2;
 $current_page=!empty($_GET['page'])?$_GET['page']:1;
 $offset=($current_page-1)*$item_per_page;
-$list_LimitSubject=Detail::showLimitSubjectDetail($id,$type,$item_per_page,$offset);
-$totalSubject=count(Detail::showSubjectDetail($id,$type));
-$totalPage=ceil($totalSubject/$item_per_page);
 $checkSearch=false;
 if(isset($_POST['btntimkiem'])){
+  $checkTim=true;
   $key=$_POST['tim'];
   $type = $_POST['type'];
-  if(!empty($key)){
-      $list_LimitSubject=Detail::showSearchSubjectDetail($key,$id,$type,$item_per_page,$offset);
-  }  
 }
 if(isset($_POST['Delete'])){
   $i=$_POST['Id'];
@@ -99,25 +97,25 @@ function showListSubjectDetail($subjectDetail,$type){
                    {
                      foreach($subjectDetail as $item)
                      {
-                      if($type==''){
-                        if($item['subjectType']=="theory"||$item['subjectType']==" theory"){
-                          echo'<tr colspan="2"><td>'.htmlspecialchars($item['subjectTitle']).'</td>'.
-                        '<td> <p>'.htmlspecialchars($item['file']).'</p></td>'.'
-                        <td>
-                        <div class="AED">
-                            <div class="two">
-                            <a href="javascript:void(0);" onclick="delete_btn(\'' . htmlspecialchars($item['id']) . '\', \'' . htmlspecialchars($item['subjectType']) . '\')">
-                            <i class="fad fa-trash" style="color:red;"></i>
-                        </a>
-                            </div>
-                            <div class="three">
-                            <a href="suaTaiLieu.php?sid='.$item['id'].'&type='.base64_encode($item['subjectType']).'&id='.htmlspecialchars($item['subjectCode']).'" ><i class="fas fa-pen-to-square"style="color:green;"></i></a>
-                            </div>
-                        </div>
-                    </td> </tr>';
-                        }
-                      }
-                      else if (trim($item['subjectType'])==trim($type)){
+                    //   if($type==''){
+                    //     if($item['subjectType']=="theory"||$item['subjectType']==" theory"){
+                    //       echo'<tr colspan="2"><td>'.htmlspecialchars($item['subjectTitle']).'</td>'.
+                    //     '<td> <p>'.htmlspecialchars($item['file']).'</p></td>'.'
+                    //     <td>
+                    //     <div class="AED">
+                    //         <div class="two">
+                    //         <a href="javascript:void(0);" onclick="delete_btn(\'' . htmlspecialchars($item['id']) . '\', \'' . htmlspecialchars($item['subjectType']) . '\')">
+                    //         <i class="fad fa-trash" style="color:red;"></i>
+                    //     </a>
+                    //         </div>
+                    //         <div class="three">
+                    //         <a href="suaTaiLieu.php?sid='.$item['id'].'&type='.base64_encode($item['subjectType']).'&id='.htmlspecialchars($item['subjectCode']).'" ><i class="fas fa-pen-to-square"style="color:green;"></i></a>
+                    //         </div>
+                    //     </div>
+                    // </td> </tr>';
+                    //     }
+                    //   }
+                      // else if (trim($item['subjectType'])==trim($type)){
                         echo'<tr colspan="2"><td>'.htmlspecialchars($item['subjectTitle']).'</td>'.
                         '<td> <p>'.htmlspecialchars($item['file']).'</p></td>'.'
                         <td>
@@ -132,8 +130,7 @@ function showListSubjectDetail($subjectDetail,$type){
                             </div>
                         </div>
                     </td> </tr>';
-                      }
-
+                      // }
                      }
                     }
                 }
@@ -357,7 +354,7 @@ function showListSubjectDetail($subjectDetail,$type){
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
           <div class="single" >
-          <a href="" style=" text-decoration: none;
+          <a href="./themthongtin.php" style=" text-decoration: none;
         color: black;">
         <div class="single-how-works-icon"><i class="fas fa-newspaper"></i></div>
         <h6 style="  color:black;  text-transform: uppercase;">thông tin <br> bài <br> đăng</h6>
@@ -367,7 +364,7 @@ function showListSubjectDetail($subjectDetail,$type){
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
           <div class="single">
-          <a href="" style=" text-decoration: none;
+          <a href="./nghiencuu.php" style=" text-decoration: none;
         color: black;">
         <div class="single-how-works-icon" ><i class="fas fa-microscope"></i></div>
         <h6 style="  color:black;  text-transform: uppercase;">thông tin nghiên <br> cứu</h6>
@@ -377,7 +374,7 @@ function showListSubjectDetail($subjectDetail,$type){
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
           <div class="single">
-          <a href="" style=" text-decoration: none;
+          <a href="./Them_Xoa_SuaMonHoc.php" style=" text-decoration: none;
         color: black;">
         <div class="single-how-works-icon" ><i class="fas fa-book"></i></div>
         <h6 style="  color:black;  text-transform: uppercase;">thông tin môn <br>  học</h6>
@@ -433,17 +430,18 @@ function showListSubjectDetail($subjectDetail,$type){
               <p id="notification-message"></p>
           </div>
         </div>
-        <div class="col-lg-8 col-md-12 col-12">
-    <div class="">
-    <div class="row">
+    <div class="col-lg-8 col-md-12 col-12">
+      <div class="">
+        <div class="row">
       <div class="col-lg-7 col-md-6 col-12">
           <div class="container-fluid tim">
               <div class="timkiem">
-                  <form class="d-flex" action="#" method="post" enctype="multipart/form-data">
-                  <input class="form-control me-2" type="search" name="tim" placeholder="Tìm kiếm" aria-label="Search">
+                  <form class="d-flex" action="#" method="post" enctype="multipart/form-data" onsubmit="return validateForm1()">
+                  <input class="form-control me-2" type="search" id="tim" name="tim" placeholder="Tìm kiếm" aria-label="Search">
                   <input type="hidden" name="type" id="typeHidden">
-                  <button class="btn1 btn btn-dark" type="submit" name="btntimkiem">Tìm kiếm</button>
+                  <button class="btn1 btn btn-dark" type="submit" name="btntimkiem"><i class="fas fa-magnifying-glass"></i></button>
                   </form>
+                  <div id="error-message" style="color: red; display: none;">Yêu cầu nhập dữ liệu</div>
               </div>
           </div>
       </div>
@@ -461,6 +459,7 @@ function showListSubjectDetail($subjectDetail,$type){
 
         </div>
     </div>
+      </div>
 
     <table class="container table table-hover">
         <thead>
@@ -472,16 +471,48 @@ function showListSubjectDetail($subjectDetail,$type){
         </thead>  
         <tbody >
       <?php 
+      $totalSubject=1;
+      $list_thongbao="";
+     
       if(isset($_POST['btntimkiem'])){
+        $checkTim=true;
         $key=$_POST['tim'];
         $type = $_POST['type'];
         if(!empty($key)){
             $list_LimitSubject=Detail::showSearchSubjectDetail($key,$id,$type,$item_per_page,$offset);
+            $totalSubject=count(Detail::countSearchSubjectDetail($key,$id,$type));
         }  
       }
+      if($checkTim==true)
+        {
+                if($checkTim==true){
+                    if(isset($_GET['key'])){
+                        $key=base64_decode($_GET['key']);
+                    }
+                    if(isset($_POST['tim'])){
+                        $key= $_POST['tim'];
+                    }
+                    if(isset($_GET['type'])){
+                        $type=base64_decode($_GET['type']);
+                    }
+                    if(isset($_POST['type'])){
+                        $type = $_POST['type']; 
+                    }
+
+                }
+            $checkTim=base64_encode(true);
+            
+            if(!empty($key)){
+              $list_LimitSubject=Detail::showSearchSubjectDetail($key,$id,$type,$item_per_page,$offset);
+              $totalSubject=count(Detail::countSearchSubjectDetail($key,$id,$type));
+            }  
+        }
       else{
+        $checkTim=false;
         $list_LimitSubject=Detail::showLimitSubjectDetail($id,$type,$item_per_page,$offset);
+        $totalSubject=count(Detail::showSubjectDetail($id,$type));
       }
+        $totalPage=ceil($totalSubject/$item_per_page);
         showListSubjectDetail($list_LimitSubject,$type);
       ?>               
         </tbody>
@@ -491,14 +522,14 @@ function showListSubjectDetail($subjectDetail,$type){
         if($current_page>3){
             $firs_page=1;
         ?>
-        <a class="page-item" href="?sid=<?=$id ?>&type=<?= base64_encode($type) ?> &per_page=<?=$item_per_page?>&page=<?=$firs_page?>">First</a>
+        <a class="page-item" href="?sid=<?=$id ?>&type=<?= base64_encode($type) ?> &per_page=<?=$item_per_page?>&page=<?=$firs_page?>&c=<?= base64_encode($checkTim) ?><?= $checkTim ? "&key=".base64_encode($key) : '' ?>">First</a>
             <?php }?>
             
         <?php
         for($num=1;$num<=$totalPage;$num++){?>
             <?php if($num!=$current_page){ ?>
                 <?php if ($num>$current_page-3 &&$num<$current_page+3){?>
-                    <a class="page-item" href="?sid=<?=$id ?>&type=<?= base64_encode($type) ?>&per_page=<?=$item_per_page?>&page=<?=$num?>"><?=$num?></a>
+                    <a class="page-item" href="?sid=<?=$id ?>&type=<?= base64_encode($type) ?>&per_page=<?=$item_per_page?>&page=<?=$num?>&c=<?= base64_encode($checkTim) ?><?= $checkTim ? "&key=".base64_encode($key) : '' ?>"><?=$num?></a>
         <?php }?>
         <?php }else{ ?></else>
             <strong  class="current-page page-item"><?=$num?></strong>
@@ -507,7 +538,7 @@ function showListSubjectDetail($subjectDetail,$type){
           if($current_page<$totalPage-3){
               $end_page=$totalPage;
           ?>
-          <a class="page-item" href="?sid=<?=$id ?>&type=<?= base64_encode($type) ?>per_page=<?=$item_per_page?>&page=<?=$end_page?>">Last</a>
+          <a class="page-item" href="?sid=<?=$id ?>&type=<?= base64_encode($type) ?>per_page=<?=$item_per_page?>&page=<?=$end_page?>&c=<?= base64_encode($checkTim) ?><?= $checkTim ? "&key=".base64_encode($key) : '' ?>">Last</a>
               <?php }?>
     </div>
     </div>
@@ -538,6 +569,32 @@ function showListSubjectDetail($subjectDetail,$type){
     const selectElement = document.getElementById('documentType');
     updateTypeValue(selectElement.value);
   });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const inputField = document.getElementById('tim');
+    const errorMessage = document.getElementById('error-message');
+
+    // Kiểm tra dữ liệu nhập vào khi người dùng nhập liệu
+    inputField.addEventListener('input', function() {
+      if (inputField.value.trim() !== '') {
+        errorMessage.style.display = 'none';
+      }
+    });
+  });
+
+  function validateForm1() {
+    const inputField = document.getElementById('tim');
+    const errorMessage = document.getElementById('error-message');
+
+    if (inputField.value.trim() === '') {
+      errorMessage.style.display = 'block';
+      return false; // Ngăn không cho biểu mẫu được gửi
+    }
+
+    errorMessage.style.display = 'none';
+    return true; // Cho phép gửi biểu mẫu nếu có dữ liệu
+  }
 </script>
       <!-- <script src="ckeditor5-build-classic/ckeditor.js"></script>
     <script>

@@ -1,59 +1,82 @@
 <?php
     require_once("entities/thongtin.class.php");
     $id = $_GET['sid'];
-    $thongTin = ThongTin::getThongTinById($id);
+    $thongTin = ThongTin::getThongTinNghienCuuById($id);
 
-    $infoTitle = $thongTin[0]['infoTitle'];
-    $infoType = $thongTin[0]['infoType'];
-    $infoContents = $thongTin[0]['infoContents'];
-    $infoImage=$thongTin[0]['infoImage'];
-
-
-    if (isset($_POST['btnSubmit'])) { 
-        $infoTitle = $_POST['title'];
-        $date = date('Y-m-d H:i:s');
-        $infoImage = $_FILES['image'];
-        $infoType = $_POST['infotype'];
-        $infoContent = $_POST['content'];
-
-        if ($_FILES['image']['name'] != '') 
-        {
-            $result = ThongTin::updateThongTin($id, $infoTitle, $date, $infoImage, $infoType, $infoContent);
-        }
-        else
-        {
-            $result = ThongTin::updateThongTinKhongImage($id, $infoTitle, $date,$infoType, $infoContent);
-        }
-        if ($result == true)
-        {
-            echo '<script>
-            document.addEventListener("DOMContentLoaded", function() {
-                var notification = document.getElementById("notification");
-                notification.style.display = "block";
-                notification.className = "success";
-                document.getElementById("notification-message").innerText = "Thêm thành công!";
-                setTimeout(function() {
-                    notification.style.display = "none";
-                }, 2000);
-            });
-            </script>';
-            header("Location: themthongtin.php");
-        } 
-        else 
-        {
-            echo '<script>
-            document.addEventListener("DOMContentLoaded", function() {
-                var notification = document.getElementById("notification");
-                notification.style.display = "block";
-                notification.className = "failure";
-                document.getElementById("notification-message").innerText = "Không thêm được!";
-                setTimeout(function() {
-                    notification.style.display = "none";
-                }, 2000);
-            });
-            </script>';
-        }
+    $infoTitle = $thongTin[0]['title'];
+    $infoContents = $thongTin[0]['content'];
+    $anHinhDaiDien = false;
+    $tieuDe="";
+    $type = isset($_GET['type']) ? base64_decode($_GET['type']) : '';
+    switch($type) {
+        case 1:
+            $tieuDe = "SỬA BÀI HỘI NGHỊ KHOA HỌC";
+            $file=$thongTin[0]['image'];
+            $hinh="<br> <br> <img src='".$file."'width='100'>";
+            break;
+        case 2:
+            $tieuDe = "SỬA BÀI CÔNG TRÌNH NCKH";
+            $anHinhDaiDien = true;
+            break;
+        case 3:
+            $tieuDe = "SỬA BÀI CÔNG BỐ KHOA HỌC";
+            $anHinhDaiDien = true;
+            break;
     }
+    if(isset($_POST['btnSubmit'])){
+        $title=$_POST['title'];
+        $content = $_POST['content'];
+        $date = date('Y-m-d H:i:s');
+        switch($type) {
+            case 1:
+                $txt_image=$_FILES['image'];
+                if ($_FILES['image']['name'] != '') 
+                {
+                    $result=thongtin::updateThongTinNghienCuu($id,$txt_image,$title,$content, $date);
+                }
+                else{
+                    $result=thongtin::updateThongTinNghienCuuKhongImage($id,$title,$content, $date);
+                }
+                break;
+            case 2: 
+                $result=thongtin::updateThongTinNghienCuuKhongImage($id,$title,$content, $date);
+                break;
+            case 3:
+                $result=thongtin::updateThongTinNghienCuuKhongImage($id,$title,$content, $date);
+                break;
+        }
+        if (isset($result)) {
+            if (!$result) {
+                echo '<script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var notification = document.getElementById("notification");
+                    notification.style.display = "block";
+                    notification.className = "failure";
+                    document.getElementById("notification-message").innerText = "Không sửa được!";
+                    setTimeout(function() {
+                        notification.style.display = "none";
+                    }, 2000);
+                });
+                </script>';
+            } else {
+                echo '<script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var notification = document.getElementById("notification");
+                    notification.style.display = "block";
+                    notification.className = "success";
+                    document.getElementById("notification-message").innerText = "Sửa thành công!";
+                    setTimeout(function() {
+                        notification.style.display = "none";
+                    }, 2000);
+                });
+                </script>';
+                header("Location: nghiencuu.php?type=".base64_encode($type));
+
+            }
+        }
+      }
+
+
 ?>
 
 
@@ -161,7 +184,7 @@
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
         <div class="single">
-          <a href="" style=" text-decoration: none;
+          <a href="./nghiencuu.php" style=" text-decoration: none;
         color: black;">
         <div class="single-how-works-icon" ><i class="fas fa-microscope"></i></div>
         <h6 style=" color: black;   text-transform: uppercase;">thông tin<span> nghiên cứu</span></h6>
@@ -172,7 +195,7 @@
     </div>
     </div>
       <div class="titleh1" style="text-align:center">
-        <h1 class=" ">SỬA BÀI ĐĂNG</h1>
+        <h1 class=" "> <?php echo $tieuDe ?></h1>
       </div>
       <!-- <hr style="color: red; border-top: 2px solid red; font-weight: bold;"> </p></div> -->
    <div class="container ct">
@@ -186,22 +209,17 @@
                         echo $infoTitle;
                     ?>"><br>
               </div>
-              <div class="form-group">
-                <label for="job-type" style="margin-right: 26px;" >Loại:</label>
-                <select id="job-type" name="infotype">
-                <option value="vieclam" <?php echo ($infoType == 'vieclam') ? 'selected' : ''; ?>>Việc làm</option>
-                <option value="thongbao" <?php echo ($infoType == 'thongbao') ? 'selected' : ''; ?>>Thông báo</option>
-                <option value="tintuc" <?php echo ($infoType == 'tintuc') ? 'selected' : ''; ?>>Tin tức</option>
-                </select>
-              </div>
+              <?php if (!$anHinhDaiDien): ?>
               <div class="form-group">
                     <label for="txt_image" >Hình đại diện:</label>
-                    <input type="file" name="image" id="txt_image" accept=".PNG,.GIF,.JPG,.JPEG,.jpg,.png,.jpeg">	
-                    <div class="">
-                        <p><?php echo $infoImage ?></p>
-                    </div>
+                    <input type="file" name="image" id="txt_image" accept=".PNG,.GIF,.JPG,.JPEG,.jpg,.png,.jpeg">
+                    <?php
+                    echo $hinh
+                ?>	
               </div>
+              <?php endif; ?>
               <div class="form-group">
+                    <label for="heading" >Nội dung:</label>
                     <textarea id="content" name="content" placeholder="Nhập nội dung thông tin" style="width:700px"><?php echo $infoContents; ?></textarea>
               </div>              
               <div class="form-group1">
