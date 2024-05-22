@@ -295,7 +295,7 @@ function showListSubjectDetail($list_LimitSubject){
       <div class="row">
       <div class="col-lg-4 col-md-4 col-sm-6 col-12">
           <div class="single" >
-            <a href="" style=" text-decoration: none;
+            <a href="./themgiangvien.php" style=" text-decoration: none;
         color: black;">
                 <div class="single-how-works-icon"><i class="fas fa-user"></i></div>
                 <h6 style="    text-transform: uppercase;">thông tin <br> cá nhân</span></h6>
@@ -370,11 +370,13 @@ function showListSubjectDetail($list_LimitSubject){
               <div class="form-group">
                     <label for="heading" >Tiêu đề:</label>
                     <input type="text" id="title" name = "title"><br>
+                    <small id="nameError" class="error" style="color:red; display: none;">Vui lòng nhập tiêu đề</small>
               </div>
               <?php if (!$anHinhDaiDien): ?>
               <div class="form-group">
                     <label for="txt_image" >Hình đại diện:</label>
                     <input type="file" name="image" id="txt_image" accept=".PNG,.GIF,.JPG,.JPEG,.jpg,.png,.jpeg">	
+                    <small id="imageError" class="error" style="color:red; display: none;">Vui lòng chọn ảnh đại diện</small>
               </div>
               <?php endif; ?>
               <div class="form-group">
@@ -524,4 +526,50 @@ function showListSubjectDetail($list_LimitSubject){
         .catch( error => {
             console.error( error );
         } );
+</script>
+<script>
+document.querySelector('.formSubject').addEventListener('submit', function(event) {
+    let isValid = true;
+
+    // Kiểm tra tiêu đề
+    const title = document.getElementById('title').value.trim();
+    const nameError = document.getElementById('nameError');
+    if (!title) {
+        nameError.style.display = 'inline';
+        isValid = false;
+    } else {
+        nameError.style.display = 'none';
+    }
+
+    // Kiểm tra hình đại diện nếu $anHinhDaiDien là false
+    <?php if (!$anHinhDaiDien): ?>
+    const image = document.getElementById('txt_image').files[0];
+    const imageError = document.getElementById('imageError');
+    if (!image) {
+        imageError.style.display = 'inline';
+        isValid = false;
+    } else {
+        imageError.style.display = 'none';
+    }
+    <?php endif; ?>
+
+    // Kiểm tra nội dung
+
+    // Ngăn gửi form nếu có lỗi
+    if (!isValid) {
+        event.preventDefault();
+    }
+});
+
+// Ẩn lỗi khi người dùng bắt đầu nhập
+document.getElementById('title').addEventListener('input', function() {
+    document.getElementById('nameError').style.display = 'none';
+});
+
+<?php if (!$anHinhDaiDien): ?>
+document.getElementById('txt_image').addEventListener('change', function() {
+    document.getElementById('imageError').style.display = 'none';
+});
+<?php endif; ?>
+
 </script>

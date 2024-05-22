@@ -161,7 +161,7 @@ if(isset($_POST['btnSubmit']))
         </div>
           <div class="col-lg-6 col-md-6 col-sm-6 col-12">
           <div class="single" >
-          <a href="" style=" text-decoration: none;
+          <a href="./themthongtin.php" style=" text-decoration: none;
         color: black;">
         <div class="single-how-works-icon"><i class="fas fa-newspaper"></i></div>
         <h6 style="  color: black;  text-transform: uppercase;">thông tin<span> bài đăng</span></h6>
@@ -171,7 +171,7 @@ if(isset($_POST['btnSubmit']))
         </div>
           <div class="col-lg-6 col-md-6 col-sm-6 col-12">
           <div class="single" >
-            <a href="" style=" text-decoration: none;
+            <a href="./themgiangvien.php" style=" text-decoration: none;
         color: black;">
                 <div class="single-how-works-icon"><i class="fas fa-user"></i></div>
                 <h6 style="  color: black;  text-transform: uppercase;">thông tin<span> cá nhân</span></h6>
@@ -181,7 +181,7 @@ if(isset($_POST['btnSubmit']))
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-12">
         <div class="single">
-          <a href="" style=" text-decoration: none;
+          <a href="./nghiencuu.php" style=" text-decoration: none;
         color: black;">
         <div class="single-how-works-icon" ><i class="fas fa-microscope"></i></div>
         <h6 style=" color: black;   text-transform: uppercase;">thông tin<span> nghiên cứu</span></h6>

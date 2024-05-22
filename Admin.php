@@ -81,7 +81,7 @@
             <div class="single-how-works-icon" style="font-size: 90px;"><i class="fas fa-user"></i></div>
             <h2 style="    text-transform: uppercase;">thông tin<span> cá nhân</span></h2>
             <!-- <p>Chỉnh sửa các thông tin cá nhân của giảng viên</p> -->
-            <button class="welcome-hero-btn how-work-btn">Xem thêm</button>
+            <button class="welcome-hero-btn how-work-btn"><a href="./themgiangvien.php" style="text-decoration: none; color:black">Xem Thêm</a></button>
           </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6">

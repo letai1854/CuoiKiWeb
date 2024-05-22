@@ -316,7 +316,7 @@ session_write_close();
       <div class="row">
       <div class="col-lg-3 col-md-4 col-sm-6 col-12">
           <div class="single" >
-            <a href="" style=" text-decoration: none;
+            <a href="./themgiangvien.php" style=" text-decoration: none;
         color: black;">
                 <div class="single-how-works-icon"><i class="fas fa-user"></i></div>
                 <h6 style="color:black;    text-transform: uppercase;">thông tin<span> cá nhân</span></h6>
@@ -376,8 +376,6 @@ session_write_close();
     <div class="form-group">
         <textarea id="content" name="content" placeholder="Nhập nội dung thông tin" style="width:700px"></textarea>
     </div>
-    <small id="contentError" style="color: red; display: none;">Vui lòng nhập nội dung</small>
-
     <div class="form-group1">
         <button type="submit" class="btn1 btn" name="btnSubmit">Xác nhận</button>
     </div>
@@ -706,22 +704,10 @@ session_write_close();
         }
 
         // Kiểm tra trường nội dung
-        var content = document.getElementById('content').value.trim();
-    var contentError = document.getElementById('contentError');
-    if (content === "") {
-        contentError.style.display = 'inline';
-        isValid = false;
-    } else {
-        contentError.style.display = 'none';
-    }
-
         return isValid;
     }
 
     // Loại bỏ thông báo lỗi khi người dùng nhập dữ liệu vào các trường
-    document.getElementById('content').addEventListener('input', function() {
-        document.getElementById('contentError').style.display = 'none';
-    });
     document.getElementById('title').addEventListener('input', function() {
         document.getElementById('nameError').style.display = 'none';
     });

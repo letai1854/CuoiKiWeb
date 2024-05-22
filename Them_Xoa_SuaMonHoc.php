@@ -237,7 +237,7 @@ function showListSubjectDetail($list_LimitSubject){
       <div class="row">
       <div class="col-lg-3 col-md-4 col-sm-6 col-12">
           <div class="single" >
-            <a href="" style=" text-decoration: none;
+            <a href="./themgiangvien.php" style=" text-decoration: none;
         color: black;">
                 <div class="single-how-works-icon"><i class="fas fa-user"></i></div>
                 <h6 style="    text-transform: uppercase;">thông tin<span> cá nhân</span></h6>

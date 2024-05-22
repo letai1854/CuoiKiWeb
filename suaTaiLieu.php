@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", function() {
           <div class="row">
         <div class="col-lg-6 col-md-6  col-12">
             <div class="single" >
-              <a href="" style=" text-decoration: none;
+              <a href="./themgiangvien.php" style=" text-decoration: none;
           color: black;">
                   <div class="single-how-works-icon"><i class="fas fa-user"></i></div>
                   <h6 style=" color:black;   text-transform: uppercase;">thông tin <br>cá nhân</h6>
@@ -266,7 +266,7 @@ document.addEventListener("DOMContentLoaded", function() {
           </div>
           <div class="col-lg-6 col-md-6  col-12">
             <div class="single" >
-            <a href="" style=" text-decoration: none;
+            <a href="./themthongtin.php" style=" text-decoration: none;
           color: black;">
           <div class="single-how-works-icon"><i class="fas fa-newspaper"></i></div>
           <h6 style="  color:black;  text-transform: uppercase;">thông tin <br>bài đăng</h6>
@@ -276,7 +276,7 @@ document.addEventListener("DOMContentLoaded", function() {
           </div>
           <div class="col-lg-6 col-md-6  col-12">
             <div class="single">
-            <a href="" style=" text-decoration: none;
+            <a href="./nghiencuu.php" style=" text-decoration: none;
           color: black;">
           <div class="single-how-works-icon" ><i class="fas fa-microscope"></i></div>
           <h6 style="  color:black;  text-transform: uppercase;">thông tin <br>nghiên cứu</h6>
@@ -286,7 +286,7 @@ document.addEventListener("DOMContentLoaded", function() {
           </div>
           <div class="col-lg-6 col-md-6 col-12">
             <div class="single">
-            <a href="" style=" text-decoration: none;
+            <a href="./Them_Xoa_SuaMonHoc.php" style=" text-decoration: none;
           color: black;">
           <div class="single-how-works-icon" ><i class="fas fa-book"></i></div>
           <h6 style="  color:black;  text-transform: uppercase;">thông tin <br>môn học</h6>
