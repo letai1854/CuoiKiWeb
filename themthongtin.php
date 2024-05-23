@@ -376,6 +376,15 @@ session_write_close();
     <div class="form-group">
         <textarea id="content" name="content" placeholder="Nhập nội dung thông tin" style="width:700px"></textarea>
     </div>
+
+    
+
+
+
+
+
+
+
     <div class="form-group1">
         <button type="submit" class="btn1 btn" name="btnSubmit">Xác nhận</button>
     </div>

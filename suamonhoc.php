@@ -4,6 +4,7 @@ $id=$_GET['sid'];
 $subject=Detail::get_Subject($id);
 $name=$subject[0]['subjectName'];
 $file=$subject[0]['subjectImage'];
+$info=$subject[0]['subjectInfo'];
 $hinh="<br> <br> <img src='".$file."'width='100'>";
 
 
@@ -11,14 +12,14 @@ if(isset($_POST['btnSubmit']))
 {
     if ($_FILES['image']['name'] != '') 
     {
-        $result=Detail::update_subject($id,$_POST['namesubject'],$_FILES['image']);
+        $result=Detail::update_subject($id,$_POST['namesubject'],$_FILES['image'],$_POST['info']);
         $subject=Detail::get_Subject($id);
         $file=$subject[0]['subjectImage'];
         $hinh="<br> <br> <img src='". $file."'width='100'>";
     }
     else
     {
-        $result=Detail::update_subjectname($id,$_POST['namesubject']);
+        $result=Detail::update_subjectname($id,$_POST['namesubject'],$_POST['info']);
         $hinh="<br> <br> <img src='".$file."'width='100'>";
     }
     if ($result == true)
@@ -125,11 +126,16 @@ if(isset($_POST['btnSubmit']))
         <div class="col-xl-8 col-md-6 col-12">
           <div class="container ">
             <h2 class="text-center"  style="">Sửa Môn Học</h2>
-            <form action="#" method="post" class="formSubject" enctype="multipart/form-data" style="height:382px" onsubmit="return validateForm2()">
+            <form action="#" method="post" class="formSubject" enctype="multipart/form-data" style="height:450px" onsubmit="return validateForm2()">
               <div class="form-group">
                 <label for="name">Tên môn học:</label>
                 <input type="text" id="name" name="namesubject" class="form-control" value=" <?php echo $name ?> ">
                 <small id="nameError" style="color: red; display: none;">Vui lòng nhập tên môn học</small>
+              </div>
+              <div class="form-group " >
+                <label for="name">Thông tin môn học:</label>
+                <textarea id="info" name="info" class="form-control"> <?php echo $info ?> </textarea>
+                <small id="infoError" style="color: red; display: none;">Vui lòng nhập thông tin môn học</small>
               </div>
               <div class="form-group">
                 <label for="image">Chọn ảnh môn học:</label>
@@ -217,9 +223,22 @@ if(isset($_POST['btnSubmit']))
       nameError.style.display = 'none';
     }
     return isValid;
+    var info = document.getElementById('info').value.trim();
+    var infoError = document.getElementById('infoError');
+    if (info === "") {
+      infoError.style.display = 'inline';
+      isValid = false;
+    } else {
+      infoError.style.display = 'none';
+    }
+    return isValid;
   }
   // Loại bỏ thông báo lỗi khi người dùng nhập dữ liệu vào các trường
   document.getElementById('name').addEventListener('input', function() {
     document.getElementById('nameError').style.display = 'none';
+
+  });
+  document.getElementById('info').addEventListener('input', function() {
+    document.getElementById('infoError').style.display = 'none';
   });
 </script> 

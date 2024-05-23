@@ -69,6 +69,12 @@
             $result=$db->select_to_array($sql);
             return $result;
         }
+        public static function getListThongTinByTypeLimit8($infoType) {
+            $db= new Db();
+            $sql="SELECT * FROM News WHERE infoType= '$infoType' ORDER BY id DESC LIMIT 8";
+            $result=$db->select_to_array($sql);
+            return $result;
+        }
         public static function getListThongTinByTypeLimit($infoType,$item,$offset) {
             $db= new Db();
             $sql="SELECT * FROM News WHERE infoType= '$infoType' ORDER BY id ASC LIMIT $item OFFSET $offset";

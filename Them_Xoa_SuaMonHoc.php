@@ -20,7 +20,8 @@ if(isset($_POST['btntimkiem'])){
 if(isset($_POST['btnSubmit'])){
     $subjectName=$_POST['name'];
       $txt_image=$_FILES['image'];
-    $newSubject=new Detail($subjectName,$txt_image);
+      $info=$_POST['info'];
+    $newSubject=new Detail($subjectName,$txt_image,$info);
     $result=$newSubject->save();
     if (isset($result)) {
         if (!$result) {
@@ -231,6 +232,17 @@ function showListSubjectDetail($list_LimitSubject){
         color: black;
         transform: scale(1.1);
     }
+    .form-container {
+    background-color: #eeeded;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.form-group textarea {
+    height: 150px; /* Adjust height as needed */
+    resize: none;
+}
+
 </style>
 <body>
 <div class="infor container text-center py-1 mt-1">
@@ -272,13 +284,18 @@ function showListSubjectDetail($list_LimitSubject){
 <div class="container">
     <div class="row">
     <div class="col-lg-4 col-md-12 col-12 "style="margin-bottom:30px;">
-    <div class="container them">
+    <div class="form-container them">
             <h2 class="text-center" style="">THÊM MÔN HỌC</h2>
-            <form action="#" method="post" class="formSubject" enctype="multipart/form-data" style="height:307px" onsubmit="return validateForm2()">
+            <form action="#" method="post" class="formSubject" enctype="multipart/form-data" style="height:500px" onsubmit="return validateForm2()">
               <div class="form-group" >
                 <label for="name">Tên môn học:</label>
                 <input type="text" id="name" name="name" class="form-control">
                 <small id="nameError" style="color: red; display: none;">Vui lòng nhập tên môn học</small>
+              </div>
+              <div class="form-group " >
+                <label for="name">Thông tin môn học:</label>
+                <textarea id="info" name="info" class="form-control"></textarea>
+                <small id="infoError" style="color: red; display: none;">Vui lòng nhập thông tin môn học</small>
               </div>
               <div class="form-group " style="margin-top:30px;margin-bottom:45px;">
                 <label for="image">Chọn ảnh môn học:</label>
@@ -286,7 +303,8 @@ function showListSubjectDetail($list_LimitSubject){
                 <div class="">
                 <small id="imageError" style="color: red; display: none;">Vui lòng chọn ảnh môn học</small>
                 </div>						
-              </div>                      
+              </div>  
+                                  
               <div class="form-group1 ">
                 <button type="submit" class="btn1 btn btn-dark" name="btnSubmit">Xác nhận</button>
               </div>
@@ -415,6 +433,7 @@ function showListSubjectDetail($list_LimitSubject){
     // Kiểm tra trường tên môn học
     var name = document.getElementById('name').value.trim();
     var nameError = document.getElementById('nameError');
+
     if (name === "") {
       nameError.style.display = 'inline';
       isValid = false;
@@ -431,7 +450,14 @@ function showListSubjectDetail($list_LimitSubject){
     } else {
       imageError.style.display = 'none';
     }
-
+    var info = document.getElementById('info').value.trim();
+    var infoError = document.getElementById('infoError');
+    if (info === "") {
+      infoError.style.display = 'inline';
+      isValid = false;
+    } else {
+      infoError.style.display = 'none';
+    }
     return isValid;
   }
 
@@ -442,6 +468,9 @@ function showListSubjectDetail($list_LimitSubject){
 
   document.getElementById('txt_image').addEventListener('input', function() {
     document.getElementById('imageError').style.display = 'none';
+  });
+  document.getElementById('info').addEventListener('input', function() {
+    document.getElementById('infoError').style.display = 'none';
   });
 </script>
 </body>

@@ -6,10 +6,11 @@ class Detail{
 
 public $subjectName;
 public $image;
-
-public function __construct( $subjectName,$image){
+public $info;
+public function __construct( $subjectName,$image,$info){
 $this->subjectName=$subjectName;
 $this->image=$image;
+$this->info=$info;
 }
 public function save(){
     $pic_temp = $this->image['tmp_name'];
@@ -19,8 +20,8 @@ public function save(){
         return false;
     }
     $db= new Db();
-    $sql="INSERT INTO Subject(subjectName,subjectImage) VALUES
-    ('$this->subjectName','$picpath');";
+    $sql="INSERT INTO Subject(subjectName,subjectImage,subjectInfo) VALUES
+    ('$this->subjectName','$picpath','$this->info');";
     $result=$db->query_execute($sql);
     return $result;
 }
@@ -118,7 +119,7 @@ public static function list_SubjectDetailId($id)
 
 
 
-public static function update_subject($subjectCode, $subjectName,$picture)
+public static function update_subject($subjectCode, $subjectName,$picture,$info)
 {
 
     if ($picture['name'] != "") 
@@ -131,7 +132,7 @@ public static function update_subject($subjectCode, $subjectName,$picture)
             return false;
         }
     }
-    $sql = "CALL updateSubject('$subjectCode','$subjectName',' $picpath')";
+    $sql = "CALL updateSubject('$subjectCode','$subjectName',' $picpath','$info')";
 try
 {
     $db = new Db();
@@ -143,10 +144,10 @@ catch(PDOException $e)
     return false;
 }
 }
-public static function update_subjectname($subjectCode, $subjectName)
+public static function update_subjectname($subjectCode, $subjectName,$info)
 {
 
-    $sql = "CALL updateNameSubject('$subjectCode','$subjectName')";
+    $sql = "CALL updateNameSubject('$subjectCode','$subjectName','$info')";
 
 try{
     $db = new Db();
