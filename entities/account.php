@@ -66,6 +66,17 @@ public static function getInforAccount($user)
     $result=$db->select_to_array($sql);
     return $result;
 }
+public static function suaMathau($pass,$email){
+    try{
+    $db= new Db();
+    $sql="UPDATE Login SET password = '$pass' WHERE username = '$email' ;";
+    $result=$db->query_execute($sql);
+    return $result;
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
 // public static function get_username($id, $code)
 // {
 //     try {

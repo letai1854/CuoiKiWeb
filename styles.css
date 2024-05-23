@@ -1,0 +1,236 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    overflow-x: hidden;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    height: 80vh;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    position: relative;
+}
+
+.left-panel {
+    background-color: #d32f2f;
+    color: white;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 50%; /* Adjust width as necessary */
+}
+
+.left-panel .logo {
+    max-width: 100px;
+    margin-bottom: 20px;
+    
+}
+
+.right-panel {
+    background-color: white;
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+    margin-left: 50%; /* This should match the left-panel width */
+}
+
+.header {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    font-size: 30px;
+    
+}
+
+.flag {
+    width: 40px;
+    cursor: pointer;
+}
+
+.login-box {
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+}
+
+.login-box h2 {
+    color: #d32f2f;
+    margin-bottom: 20px;
+}
+
+.social-login {
+    display: inline-block;
+    background-color: #3b5998;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #d32f2f;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 10px 10px 40px;
+    border: 1px solid #d32f2f;
+    border-radius: 5px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+button {
+    width: 50%;
+    padding: 10px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    border-radius: 6px;
+}
+
+button:hover {
+    background-color: #b71c1c;
+}
+
+.mascot {
+    width: 100px;
+    position: absolute;
+    bottom: -90px;
+    right: -130px;
+}
+
+.eye {
+    position: absolute;
+    top: 50%;
+    right: 35px;
+    transform: translateY(-50%);
+}
+
+@media (max-width: 1400px) {
+    .mascot {
+        position: static;
+        margin-top: 4px;
+    }
+
+    .left-panel h1 {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+    }
+
+    .left-panel {
+        display: none;
+    }
+
+    .right-panel {
+        padding: 10px;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .login-box {
+        width: 90%;
+    }
+
+    .mascot {
+        position: static;
+        margin-top: 20px;
+    }
+
+    .left-panel h1 {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    .left-panel .logo {
+        max-width: 80px;
+    }
+
+    .login-box {
+        width: 100%;
+    }
+
+    .input-group input {
+        padding: 10px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+
+    .left-panel h1 {
+        font-size: 1.2em;
+    }
+    
+    .container {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .right-panel {
+        width: 100%;
+        height: 100vh;
+    }
+}
+.errorMessage {
+    color: rgb(216, 49, 49);
+    font-size: 14px;
+}
+.d-none {
+    display: none;
+}
+
+
