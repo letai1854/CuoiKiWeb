@@ -36,45 +36,10 @@ if(isset($_POST['email']) && isset($_POST['sdt'])){
                             <h4 class="widget-title text-white font-17 font-weight-bold "><b>Liên hệ:</b></h4>
                             <div class="opening-hours">
                                 <ul class="list-border">
-                                        <li class="clearfix">
-                                            <span>Thông tin liên lạc</span>
-                                            <ul class="list ml-0 mt-5">
-                                                <li class="m-0 pl-0 no-border"> <i class="fa fa-phone text-danger mr-3"></i> <a id="footer-phone" class="text-white"  <?php isset($_POST['email'])?$_POST['email']:123456789 ?>>123456789</a> </li>
-                                                <li class="m-0 pl-0 no-border"> <i class="fas fa-envelope mr-3" aria-hidden="true"></i>
-                                                  <a id="footer-email" class="text-white">DzoanXuanThanh@gmail.com</a> </li>
-                                            </ul>
-                                        </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-md-4">
-                    <div class="text-white">
-                        <div class="widget ">
-                            <h4 class="widget-title text-white font-17 font-weight-bold sm-display-none"><b>&nbsp;&nbsp;&nbsp;</b></h4>
-                            <div class="opening-hours">
-                                <ul class="list-border">
                                     <li class="clearfix">
-                                        <span>Đăng ký nhận bản tin của chúng tôi</span>
-                                        <ul class="list ml-0 mt-5">
-                                    
-                                                  <form action="">
-                                    
-                                                        <div data-mdb-input-init="" class="form-outline mb-4" data-mdb-input-initialized="true">
-                                                          <input type="email" id="form5Example22" class="form-control" placeholder="Địa chỉ email">
-
-                                                        <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 88.8px;"></div><div class="form-notch-trailing"></div></div></div>
-                                                    
-                                                        <button data-mdb-ripple-init="" type="button" class="btn btn-primary mb-4">
-                                                          Đăng ký
-                                                   
-                                                  </form>
-                                                </div>
-                                        
-                                        </ul>
+                                        <li class="m-0 pl-0 no-border"> <i class="fa fa-phone text-danger mr-3"></i> <a id="footer-phone" class="info"  <?php isset($_POST['email'])?$_POST['email']:123456789 ?>>123456789</a> </li>
+                                        <li class="m-0 pl-0 no-border"> <i class="fas fa-envelope mr-3" aria-hidden="true"></i>
+                                        <a id="footer-email" class="info">DzoanXuanThanh@gmail.com</a> </li>
                                     </li>
                                 </ul>
                             </div>
@@ -82,7 +47,21 @@ if(isset($_POST['email']) && isset($_POST['sdt'])){
                     </div>
                 </div>
 
-
+                <div class="col-md-4">
+                    <div class="text-white">
+                        <div class="widget ">
+                            <h4 class="widget-title text-white font-17 font-weight-bold sm-display-none"><b>Khoa công nghệ thông tin</b></h4>
+                            <div class="opening-hours">
+                                <ul class="list-border">
+                                    <li class="clearfix">
+                                        <div class="info"><i class="fa fa-home"> </i> Địa chỉ: Phòng C004, Số 19 Nguyễn Hữu Thọ, P. Tân Phong, Quận 7, Tp. Hồ Chi Minh. </div>
+                                        <div class="info"><i class="fa fa-phone"> </i> Điện thoại: (028) 37755046</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="footer-bottom bg-black-333">
@@ -94,7 +73,6 @@ if(isset($_POST['email']) && isset($_POST['sdt'])){
                         </p>
                     </div>
                 </div>
-
             </div>
         </div>
     </footer>  

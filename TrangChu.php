@@ -51,64 +51,81 @@
     <link rel="stylesheet" href="./style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
-    <link rel="stylesheet" href="style.css">
-   
+    <link rel="stylesheet" href="css/trangchustyle.css">
 </head>
 <body>
   <div class="container">
     <div id="logo">
-      <div>    <img src="./logo.png" alt="Logo"></div>
-          
-            <div><h2 style="margin-left: 6px;">ĐẠI HỌC <br> TÔN ĐỨC THẮNG</h2>
-              <h4 style="margin-left: 6px;">KHOA CÔNG NGHỆ THÔNG TIN</h4>
-            </div>
-        </div>
+      <div>    
+          <img src="./logo.png" alt="Logo"></div>
+          <div><h2 style="margin-left: 6px;">ĐẠI HỌC <br> TÔN ĐỨC THẮNG</h2>
+            <h4 style="margin-left: 6px;">KHOA CÔNG NGHỆ THÔNG TIN</h4>
+          </div>
+      </div>
   </div>
-        <nav class="navbar navbar-expand-lg   py-3 ">
-            <div class="container">
-              <?php
-               if($owner){
-              echo '<p>'. $userName.'</p>';
-               }
-              ?>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span id="bar" class="fas fa-bars"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                 <?php
-                if($owner){
-                  echo' <li class="nav-item">
-                  <a class="nav-link" href="./themmonhoc.php" style="color: white">Thêm môn học</a>
-                </li>
-       
-                <li class="nav-item dropdown">
-                  <a style="color: white" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="./themthongtin.php">
-                    Thông tin
-                  </a>
-                  <ul style="background-color: rgba(4, 49, 252, 0.944);" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li><a style="color: white" class="dropdown-item" href="./themthongtin.php">Thêm thông tin</a></li>
-                  </ul>
-                </li>
-                ';
-                }
-                 ?>
-                  <li class="nav-item">
-                    <a class="nav-link" href="./themgiangvien.php" >Liên hệ</a>
-                  </li>
-                  
-                  <li class="nav-item">
-                    <a class="nav-link"  href="./login.php"><i class="fas fa-user" ></i></a>              </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
-      <div id="home" >
-        
+
+
+  <nav class="navbar navbar-expand-lg py-3">
+    <div class="container">
+      <?php if($owner) { echo '<p class="text-white mb-0">'. $userName.'</p>'; } ?>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarColor01">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">GIỚI THIỆU</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">MÔN HỌC</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">TIN TỨC</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">THÔNG BÁO</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">VIỆC LÀM</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">NGHIÊN CỨU</a>
+          </li>
+          <?php if ($owner) {
+            echo '<li class="nav-item">
+                    <a class="nav-link active" href="./Admin.php">ADMIN</a>
+                  </li>';
+          } ?>
+        </ul>
+        <div class="user-info ms-auto">
+          <a class="nav-link" href="./login.php"><i class="fas fa-user"></i></a>
+          <img src="./images/user1.jpg" alt="User Image">
+        </div>
       </div>
-      <div>
-     
+    </div>
+  </nav>
+  <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="image/bg.jpg" class="d-block w-100" alt="...">
       </div>
+      <div class="carousel-item">
+        <img src="image/background1.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="image/bgtdtu1.jpg" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
       <div class="row container subject-report mt-3">
         <div class="col-xl-9 col-md-6 col-sm-12 col-12">
             <div class="text-center" style="font-size: 1.8rem;font-weight: bold; color:rgba(255, 0, 0, 0.793); "><p>Môn học <br>
@@ -288,7 +305,8 @@
     
     ?>
     
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     </div>
 </div>
 <?php require_once("footer.php") ?>
