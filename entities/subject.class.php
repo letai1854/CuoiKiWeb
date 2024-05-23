@@ -78,7 +78,7 @@ public static function suaTaiLieu($id,$Title,$file){
 }
 public static function suaTenTaiLieu($id,$Title){
     $db= new Db();
-    $sql = "CALL updatNameDetail('$Title',$id)";
+    $sql="UPDATE subjectDetaiil SET subjectTitle = '$Title' WHERE id = '$id' ;";
     $result=$db->query_execute($sql);
     return $result;
 }
@@ -160,10 +160,19 @@ catch(PDOException $e){
 public static function delete_Subject($id)
 {
     $db= new Db();
+    $sqlAll ="DELETE  FROM subjectDetaiil Where subjectCode='$id'";
+    $result=$db->query_execute($sqlAll);
     $sql ="DELETE  FROM Subject Where subjectCode='$id'";
     $result=$db->query_execute($sql);
     return $result;
 }
+// public  function delete_AllSubjectDetaile($id)
+// {
+//     $db= new Db();
+//     $sql ="DELETE  FROM subjectDetaiil Where subjectCode='$id'";
+//     $result=$db->query_execute($sql);
+//     return $result;
+// }
 public static function delete_SubjectDetaile($id)
 {
     $db= new Db();

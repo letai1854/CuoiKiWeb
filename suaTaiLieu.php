@@ -30,7 +30,7 @@ if(isset($_POST['btnAccept']))
       $check=true;
     }
     else{
-      $result=Detail::suaTenTaiLieu($ten,$id);
+      $result=Detail::suaTenTaiLieu($id,$ten);
     }
   }
   if(!$check){
@@ -60,7 +60,7 @@ if(isset($_POST['btnAccept']))
 	}
 }
 ?>
-<script>
+<!-- <script>
 document.addEventListener("DOMContentLoaded", function() {
   var checkType = "<?php echo $checkType; ?>";
   if (checkType !== 'other') {
@@ -71,7 +71,8 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('video').style.display = 'block';
   }
 });
-</script>
+</script> -->
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -174,7 +175,10 @@ document.addEventListener("DOMContentLoaded", function() {
         <div class="row   ">
           <div class="col-xl-8 col-md-6 col-12">
               <h2 class="text-center" >SỬA TÀI LIỆU</h2>
-              <form action="#" method="post" class="formSubject"enctype="multipart/form-data">
+
+
+
+              <!-- <form action="#" method="post" class="formSubject"enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="name">Tên tài liệu:</label>
                   <input type="text" id="name" name="name" class="form-control" value="<?php echo $name?>">
@@ -191,7 +195,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
                 <div id="file" class="form-group" style="display:none;">
                   <label for="document">Chọn file:</label>
-                  <!-- <textarea name="editor" id="editor"></textarea> -->
                   <input type="file" id="document" name="editor" accept=".pdf,.doc,.docx" class="form-control">
                   <div>
                     <p><?php echo ($type!='other') ? $file : ''; ?></p>
@@ -205,22 +208,46 @@ document.addEventListener("DOMContentLoaded", function() {
                   <div class="">
                   <button type="submit" class="btn1 btn" name="btnAccept">Xác nhận</button>
                   </div>
-                  <!-- <div class="undo">
-                    <button  class="btn2 btn" name="btnundo"><a 
-                        <?php if ($checkPer != "") { ?>
-                          href="themTaiLieu.php?sid=<?= $idUndo ?>&type=<?= $checkTypeNotCode ?>&per_page=<?= $checkPer ?>&page=<?= $checkpage ?>"
-                        <?php } else { ?>
-                          href="themTaiLieu.php?sid=<?= $idUndo ?>"
-                        <?php } ?>
-                        style="text-decoration: none; color: white;">
-                        Quay lại
-                      </a></button>
-                  </div> -->
-  
                 </div>
-                
-  
-              </form>
+              </form> -->
+             <form action="#" method="post" class="formSubject" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Tên tài liệu:</label>
+            <input type="text" id="name" name="name" class="form-control" value="<?php echo $name?>">
+            <small id="nameError" class="error" style="color:red">Vui lòng nhập tên tài liệu</small>
+        </div>
+        <div class="form-group">
+            <label for="type">Loại:</label>
+            <select id="type" name="type1" class="form-control" disabled>
+                <option value="theory" <?php if($type == 'theory' || $type == ' theory') echo 'selected'; ?>>Lý thuyết</option>
+                <option value="practice" <?php if($type == 'practice' || $type == ' practice') echo 'selected'; ?>>Thực hành</option>
+                <option value="other" <?php if($type == 'other' || $type == ' other') echo 'selected'; ?>>Khác</option>
+                <input type="hidden" name="type1" value="<?php echo trim($type); ?>">
+            </select>
+        </div>
+        <div id="file" class="form-group" style="display:none;">
+            <label for="document">Chọn file:</label>
+            <input type="file" id="document" name="editor" accept=".pdf,.doc,.docx" class="form-control">
+            <div>
+                <p><?php echo ($type != 'other') ? $file : ''; ?></p>
+            </div>
+        </div>       
+        <div id="video" class="form-group" style="display:none;">
+            <label for="video">Chọn video:</label>
+            <input type="text" id="video" name="video" class="form-control" value="<?php echo ($type == 'other') ? $file : ''; ?>">
+            <small id="videoError" class="error" style="color:red">Vui lòng nhập đường dẫn video hợp lệ (https:\\...)</small>
+        </div>      
+        <div class="form-group1">
+            <div class="">
+                <button type="submit" class="btn1 btn" name="btnAccept">Xác nhận</button>
+            </div>
+        </div>
+    </form> 
+
+
+
+
+
               <div id="notification" style="display: none;">
               <p id="notification-message"></p>
           </div>
@@ -229,7 +256,7 @@ document.addEventListener("DOMContentLoaded", function() {
           <div class="row">
         <div class="col-lg-6 col-md-6  col-12">
             <div class="single" >
-              <a href="" style=" text-decoration: none;
+              <a href="./themgiangvien.php" style=" text-decoration: none;
           color: black;">
                   <div class="single-how-works-icon"><i class="fas fa-user"></i></div>
                   <h6 style=" color:black;   text-transform: uppercase;">thông tin <br>cá nhân</h6>
@@ -239,7 +266,7 @@ document.addEventListener("DOMContentLoaded", function() {
           </div>
           <div class="col-lg-6 col-md-6  col-12">
             <div class="single" >
-            <a href="" style=" text-decoration: none;
+            <a href="./themthongtin.php" style=" text-decoration: none;
           color: black;">
           <div class="single-how-works-icon"><i class="fas fa-newspaper"></i></div>
           <h6 style="  color:black;  text-transform: uppercase;">thông tin <br>bài đăng</h6>
@@ -249,7 +276,7 @@ document.addEventListener("DOMContentLoaded", function() {
           </div>
           <div class="col-lg-6 col-md-6  col-12">
             <div class="single">
-            <a href="" style=" text-decoration: none;
+            <a href="./nghiencuu.php" style=" text-decoration: none;
           color: black;">
           <div class="single-how-works-icon" ><i class="fas fa-microscope"></i></div>
           <h6 style="  color:black;  text-transform: uppercase;">thông tin <br>nghiên cứu</h6>
@@ -259,7 +286,7 @@ document.addEventListener("DOMContentLoaded", function() {
           </div>
           <div class="col-lg-6 col-md-6 col-12">
             <div class="single">
-            <a href="" style=" text-decoration: none;
+            <a href="./Them_Xoa_SuaMonHoc.php" style=" text-decoration: none;
           color: black;">
           <div class="single-how-works-icon" ><i class="fas fa-book"></i></div>
           <h6 style="  color:black;  text-transform: uppercase;">thông tin <br>môn học</h6>
@@ -273,5 +300,58 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>    
       </div>
       <?php require_once("footer.php") ?>
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var checkType = "<?php echo $checkType; ?>";
+            var fileGroup = document.getElementById('file');
+            var videoGroup = document.getElementById('video');
+            document.getElementById('nameError').style.display = 'none';
+            document.getElementById('videoError').style.display = 'none';
+            if (checkType !== 'other') {
+                fileGroup.style.display = 'block';
+                videoGroup.style.display = 'none';
+            } else {
+                fileGroup.style.display = 'none';
+                videoGroup.style.display = 'block';
+            }
+            document.querySelector('form').addEventListener('submit', function(event) {
+                var isValid = true;
+                
+                // Kiểm tra tên tài liệu
+                var name = document.getElementById('name').value.trim();
+                if (name === "") {
+                    document.getElementById('nameError').style.display = 'inline';
+                    isValid = false;
+                } else {
+                    document.getElementById('nameError').style.display = 'none';
+                }
+
+                // Kiểm tra file tài liệu nếu type không phải là "Khác"
+
+                // Kiểm tra đường dẫn video nếu type là "Khác"
+        //         if (checkType === 'other') {
+        //     var videoUrl = videoGroup.value.trim();
+        //     var urlPattern = /^https:/i;
+        //     if (videoUrl === "" || !urlPattern.test(videoUrl) ||videoUrl==null) {
+        //         document.getElementById('videoError').style.display = 'inline';
+        //         isValid = false;
+        //     } else {
+        //         document.getElementById('videoError').style.display = 'none';
+        //     }        // }
+
+                if (!isValid) {
+                    event.preventDefault(); // Ngăn form submit nếu có lỗi
+                }
+            });
+
+            // Ẩn thông báo lỗi khi người dùng nhập dữ liệu vào các trường
+            document.getElementById('name').addEventListener('input', function() {
+                document.getElementById('nameError').style.display = 'none';
+            });
+            document.getElementById('video').addEventListener('input', function() {
+                document.getElementById('videoError').style.display = 'none';
+            });
+        });
+    </script>
 </body>
 </html>

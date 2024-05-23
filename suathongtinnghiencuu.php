@@ -174,7 +174,7 @@
         </div>
           <div class="col-lg-3 col-md-6 col-sm-6 col-12">
           <div class="single" >
-            <a href="" style=" text-decoration: none;
+            <a href="./themgiangvien.php" style=" text-decoration: none;
         color: black;">
                 <div class="single-how-works-icon"><i class="fas fa-user"></i></div>
                 <h6 style="  color: black;  text-transform: uppercase;">thông tin<span> cá nhân</span></h6>
@@ -208,6 +208,7 @@
                     <input type="text" id="title" name = "title" value="<?php
                         echo $infoTitle;
                     ?>"><br>
+                        <small id="nameError" class="error" style="color:red; display: none;">Vui lòng nhập tiêu đề</small>
               </div>
               <?php if (!$anHinhDaiDien): ?>
               <div class="form-group">
@@ -354,4 +355,35 @@
         .catch( error => {
             console.error( error );
         } );
+</script>
+<script>
+document.querySelector('.formSubject').addEventListener('submit', function(event) {
+    let isValid = true;
+
+    // Kiểm tra tiêu đề
+    const title = document.getElementById('title').value.trim();
+    const nameError = document.getElementById('nameError');
+    if (!title) {
+        nameError.style.display = 'inline';
+        isValid = false;
+    } else {
+        nameError.style.display = 'none';
+    }
+
+    // Kiểm tra hình đại diện nếu $anHinhDaiDien là false
+
+    // Kiểm tra nội dung
+
+    // Ngăn gửi form nếu có lỗi
+    if (!isValid) {
+        event.preventDefault();
+    }
+});
+
+// Ẩn lỗi khi người dùng bắt đầu nhập
+document.getElementById('title').addEventListener('input', function() {
+    document.getElementById('nameError').style.display = 'none';
+});
+
+
 </script>

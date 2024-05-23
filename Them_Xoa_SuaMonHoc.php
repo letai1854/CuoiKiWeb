@@ -237,7 +237,7 @@ function showListSubjectDetail($list_LimitSubject){
       <div class="row">
       <div class="col-lg-3 col-md-4 col-sm-6 col-12">
           <div class="single" >
-            <a href="" style=" text-decoration: none;
+            <a href="./themgiangvien.php" style=" text-decoration: none;
         color: black;">
                 <div class="single-how-works-icon"><i class="fas fa-user"></i></div>
                 <h6 style="    text-transform: uppercase;">thông tin<span> cá nhân</span></h6>
@@ -274,14 +274,18 @@ function showListSubjectDetail($list_LimitSubject){
     <div class="col-lg-4 col-md-12 col-12 "style="margin-bottom:30px;">
     <div class="container them">
             <h2 class="text-center" style="">THÊM MÔN HỌC</h2>
-            <form action="#" method="post" class="formSubject" enctype="multipart/form-data" style="height:307px">
+            <form action="#" method="post" class="formSubject" enctype="multipart/form-data" style="height:307px" onsubmit="return validateForm2()">
               <div class="form-group" >
                 <label for="name">Tên môn học:</label>
                 <input type="text" id="name" name="name" class="form-control">
+                <small id="nameError" style="color: red; display: none;">Vui lòng nhập tên môn học</small>
               </div>
               <div class="form-group " style="margin-top:30px;margin-bottom:45px;">
                 <label for="image">Chọn ảnh môn học:</label>
-                <input type="file" name="image" id="txt_image" accept=".PNG,.GIF,.JPG,.JPEG,.jpg,.png,.jpeg"  >						
+                <input type="file" name="image" id="txt_image" accept=".PNG,.GIF,.JPG,.JPEG,.jpg,.png,.jpeg"  >
+                <div class="">
+                <small id="imageError" style="color: red; display: none;">Vui lòng chọn ảnh môn học</small>
+                </div>						
               </div>                      
               <div class="form-group1 ">
                 <button type="submit" class="btn1 btn btn-dark" name="btnSubmit">Xác nhận</button>
@@ -403,6 +407,42 @@ function showListSubjectDetail($list_LimitSubject){
     errorMessage.style.display = 'none';
     return true; // Cho phép gửi biểu mẫu nếu có dữ liệu
   }
+</script>
+<script>
+  function validateForm2() {
+    var isValid = true;
+
+    // Kiểm tra trường tên môn học
+    var name = document.getElementById('name').value.trim();
+    var nameError = document.getElementById('nameError');
+    if (name === "") {
+      nameError.style.display = 'inline';
+      isValid = false;
+    } else {
+      nameError.style.display = 'none';
+    }
+
+    // Kiểm tra trường chọn ảnh
+    var image = document.getElementById('txt_image').value.trim();
+    var imageError = document.getElementById('imageError');
+    if (image === "") {
+      imageError.style.display = 'inline';
+      isValid = false;
+    } else {
+      imageError.style.display = 'none';
+    }
+
+    return isValid;
+  }
+
+  // Loại bỏ thông báo lỗi khi người dùng nhập dữ liệu vào các trường
+  document.getElementById('name').addEventListener('input', function() {
+    document.getElementById('nameError').style.display = 'none';
+  });
+
+  document.getElementById('txt_image').addEventListener('input', function() {
+    document.getElementById('imageError').style.display = 'none';
+  });
 </script>
 </body>
 </html>

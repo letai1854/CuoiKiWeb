@@ -45,8 +45,20 @@
     if($type==''){
     $type='vieclam';
     }
+session_start();
+if (isset($_SESSION['documentType'])) {
+if($_SESSION['i']==1){
+  $type=$_SESSION['documentType'];
+  $_SESSION['i']=2;
+}
+}
+session_write_close();
     if(isset($_POST['loai'])){
     $type=$_POST['Type'];
+    session_start();
+    $_SESSION['documentType']=$type;
+    $_SESSION['i']=1;
+    session_write_close();
     $checkTim=false;
     }
     if(!isset($_POST['loai'])){
@@ -304,7 +316,7 @@
       <div class="row">
       <div class="col-lg-3 col-md-4 col-sm-6 col-12">
           <div class="single" >
-            <a href="" style=" text-decoration: none;
+            <a href="./themgiangvien.php" style=" text-decoration: none;
         color: black;">
                 <div class="single-how-works-icon"><i class="fas fa-user"></i></div>
                 <h6 style="color:black;    text-transform: uppercase;">thông tin<span> cá nhân</span></h6>
@@ -342,30 +354,32 @@
         <h1 class=" " style="">THÊM BÀI ĐĂNG</h1>
       </div>
           <div class="container ">
-            <form action="#" method="post" class="formSubject" enctype="multipart/form-data" onsubmit="return validateForm()">
-              <div class="form-group">
-                    <label for="heading" >Tiêu đề:</label>
-                    <input type="text" id="title" name = "title"><br>
-              </div>
-              <div class="form-group">
-                <label for="job-type" style="margin-right: 26px;" >Loại:</label>
-                <select id="job-type" name="infotype">
-                    <option value="vieclam" >Việc làm</option>
-                    <option value="thongbao"  >Thông báo</option>
-                    <option value="tintuc"  >Tin tức</option>
-                </select>
-              </div>
-              <div class="form-group">
-                    <label for="txt_image" >Hình đại diện:</label>
-                    <input type="file" name="image" id="txt_image" accept=".PNG,.GIF,.JPG,.JPEG,.jpg,.png,.jpeg">	
-              </div>
-              <div class="form-group">
-                    <textarea id="content" name="content" placeholder="Nhập nội dung thông tin" style="width:700px"></textarea>
-              </div>              
-              <div class="form-group1">
-                <button type="submit" class="btn1 btn" name="btnSubmit">Xác nhận</button>
-              </div>
-            </form>
+          <form action="#" method="post" class="formSubject" enctype="multipart/form-data" onsubmit="return validateForm2()">
+    <div class="form-group">
+        <label for="heading">Tiêu đề:</label>
+        <input type="text" id="title" name="title"><br>
+        <small id="nameError" style="color: red; display: none;">Vui lòng nhập tiêu đề</small>
+    </div>
+    <div class="form-group">
+        <label for="job-type" style="margin-right: 26px;">Loại:</label>
+        <select id="job-type" name="infotype">
+            <option value="vieclam">Việc làm</option>
+            <option value="thongbao">Thông báo</option>
+            <option value="tintuc">Tin tức</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="txt_image">Hình đại diện:</label>
+        <input type="file" name="image" id="txt_image" accept=".PNG,.GIF,.JPG,.JPEG,.jpg,.png,.jpeg">
+        <small id="imageError" style="color: red; display: none;">Vui lòng chọn ảnh</small>
+    </div>
+    <div class="form-group">
+        <textarea id="content" name="content" placeholder="Nhập nội dung thông tin" style="width:700px"></textarea>
+    </div>
+    <div class="form-group1">
+        <button type="submit" class="btn1 btn" name="btnSubmit">Xác nhận</button>
+    </div>
+</form>
             <div id="notification" style="display: none;">
               <p id="notification-message"></p>
           </div>
@@ -664,4 +678,43 @@
         .catch( error => {
             console.error( error );
         } );
+</script>
+<script>
+  function validateForm2() {
+        var isValid = true;
+
+        // Kiểm tra trường tên môn học
+        var name = document.getElementById('title').value.trim();
+        var nameError = document.getElementById('nameError');
+        if (name === "") {
+            nameError.style.display = 'inline';
+            isValid = false;
+        } else {
+            nameError.style.display = 'none';
+        }
+
+        // Kiểm tra trường chọn ảnh
+        var image = document.getElementById('txt_image').value.trim();
+        var imageError = document.getElementById('imageError');
+        if (image === "") {
+            imageError.style.display = 'inline';
+            isValid = false;
+        } else {
+            imageError.style.display = 'none';
+        }
+
+        // Kiểm tra trường nội dung
+        return isValid;
+    }
+
+    // Loại bỏ thông báo lỗi khi người dùng nhập dữ liệu vào các trường
+    document.getElementById('title').addEventListener('input', function() {
+        document.getElementById('nameError').style.display = 'none';
+    });
+
+    document.getElementById('txt_image').addEventListener('input', function() {
+        document.getElementById('imageError').style.display = 'none';
+    });
+
+   
 </script>

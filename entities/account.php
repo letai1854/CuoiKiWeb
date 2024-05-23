@@ -36,10 +36,34 @@ public static function get_teacherName($username)
             return false;
         }
 }
-public static function update_User($name,$user){
+public static function update_UserKhongAnh($user,$name,$info,$phone,$email){
     $db=new Db();
-    $sql="update Login set teacherName='$name' where username='$user'";
+    $sql="update Login SET teacherName='$name' , info='$info' , phone='$phone' , email='$email'  where username='$user'";
     $result=$db->query_execute($sql);
+    return $result;
+}
+public static function update_User($user,$name,$info,$phone,$email,$image){
+    $pic_temp = $image['tmp_name'];
+    $user_pic = $image['name'];
+    $picpath = "upload/" . $user_pic;
+    if (move_uploaded_file($pic_temp, $picpath) == false) {
+        return false;
+    }
+    try{
+    $db=new Db();
+    $sql="update Login SET teacherName='$name' , info='$info' , phone='$phone' , email='$email' , image='$picpath' where username='$user'";
+    $result=$db->query_execute($sql);
+    return $result;
+    }
+    catch(PDOException $e){
+        return false;
+    }
+}
+public static function getInforAccount($user)
+{
+    $db=new Db();
+    $sql="SELECT * FROM Login where username='$user'";
+    $result=$db->select_to_array($sql);
     return $result;
 }
 // public static function get_username($id, $code)

@@ -151,7 +151,7 @@
         </div>
           <div class="col-lg-3 col-md-6 col-sm-6 col-12">
           <div class="single" >
-            <a href="" style=" text-decoration: none;
+            <a href="./themgiangvien.php" style=" text-decoration: none;
         color: black;">
                 <div class="single-how-works-icon"><i class="fas fa-user"></i></div>
                 <h6 style="  color: black;  text-transform: uppercase;">thông tin<span> cá nhân</span></h6>
@@ -161,7 +161,7 @@
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
         <div class="single">
-          <a href="" style=" text-decoration: none;
+          <a href="./nghiencuu.php" style=" text-decoration: none;
         color: black;">
         <div class="single-how-works-icon" ><i class="fas fa-microscope"></i></div>
         <h6 style=" color: black;   text-transform: uppercase;">thông tin<span> nghiên cứu</span></h6>
@@ -185,6 +185,7 @@
                     <input type="text" id="title" name = "title" value="<?php
                         echo $infoTitle;
                     ?>"><br>
+                        <small id="nameError" class="error" style="color:red; display: none;">Vui lòng nhập tiêu đề</small>
               </div>
               <div class="form-group">
                 <label for="job-type" style="margin-right: 26px;" >Loại:</label>
@@ -315,14 +316,24 @@
 
 <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
 <script>
-    // function validateForm() {
-    //     var fileInput = document.getElementById('txt_image');
-    //     if (fileInput.files.length === 0) {
-    //         alert('Vui lòng upload ảnh đại diện cho thông tin.');
-    //         return false;
-    //     }
-    //     return true;
-    // }   
+    function validateForm() {
+        var isValid = true;
+
+// Kiểm tra trường tên môn học
+var name = document.getElementById('title').value.trim();
+var nameError = document.getElementById('nameError');
+if (name === "") {
+  nameError.style.display = 'inline';
+  isValid = false;
+} else {
+  nameError.style.display = 'none';
+}
+return isValid;
+}
+// Loại bỏ thông báo lỗi khi người dùng nhập dữ liệu vào các trường
+document.getElementById('title').addEventListener('input', function() {
+document.getElementById('nameError').style.display = 'none';
+});
     ClassicEditor
         .create( document.querySelector( '#content' ), {
             ckfinder:
