@@ -25,7 +25,7 @@ function showListSubjectDetail($list_subject){
                       <img src="'.htmlspecialchars($item['subjectImage']).'" alt="News Image">
                       </div>
                       <div  class="news-content"><a class="thea" style=" text-decoration: none;
-                      color: black;" href="./ChiTietTaiLieu.php?sid="'.htmlspecialchars($item['subjectCode']).'><h5>'.htmlspecialchars($item['subjectName']).'</h5></a>
+                      color: black;" href="./ChiTietTaiLieu.php?sid='.htmlspecialchars($item['subjectCode']).'"><h5>'.htmlspecialchars($item['subjectName']).'</h5></a>
                       <p>'.htmlspecialchars($item['subjectInfo']).'</p>
                       </div>  
                   </div>
@@ -320,7 +320,7 @@ function showListSubjectDetail($list_subject){
 
             <!-- Right Column -->
             <div class="col-lg-4 col-md-12 col-12 sidebar">
-                <h5><i class="fas fa-newspaper"></i> Thông tin mới</h5>
+                <h5><i class="fas fa-newspaper"></i> Thông báo mới</h5>
                 <br>
                 <ul>
                     <?php

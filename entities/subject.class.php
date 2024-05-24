@@ -96,6 +96,13 @@ public static function list_SubjectDtail($id)
     $result=$db->select_to_array($sql);
     return $result;
 }
+public static function list_SubjectDetailByType($id,$Title)
+{
+    $db= new Db();
+    $sql ="SELECT * FROM subjectDetaiil where subjectCode=$id and subjectType = '$Title'";
+    $result=$db->select_to_array($sql);
+    return $result;
+}
 public static function list_SubjectDetailId($id)
 {
     $db= new Db();
@@ -223,6 +230,13 @@ public static function countSearchSubjectDetail($key,$id,$type){
     $result=$db->select_to_array($sql);
     return $result;
 }
+public static function showLimitSubject10(){
+    $db= new Db();
+    $sql ="SELECT * FROM Subject ORDER BY subjectCode ASC LIMIT 11";
+    $result=$db->select_to_array($sql);
+    return $result;
+}
+
 }
 
 ?>
