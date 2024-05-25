@@ -30,6 +30,8 @@
     $result = ThongTin::deleteThongTin($id);
   }
 
+
+
   
 ?>
 
@@ -41,11 +43,8 @@
     <title>home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
     integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
-
-<link rel="stylesheet" href="style.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="myScript/script.js"></script>
     <link rel="stylesheet" href="./style.css">
@@ -126,7 +125,7 @@
     </button>
   </div>
 
-      <div class="row container subject-report mt-3">
+    <div class="row container subject-report mt-3">
         <div class="col-xl-9 col-md-6 col-sm-12 col-12">
             <div class="text-center" style="font-size: 1.8rem;font-weight: bold; color:rgba(255, 0, 0, 0.793); "><p>Môn học <br>
             <hr style="color: red; border-top: 2px solid red; font-weight: bold;"> </p></div>
@@ -167,77 +166,59 @@
         </div>
         
         <div class="col-xl-3 col-md-6 col-sm-12 col-12">
-        <div style="display: inline-block; font-size: 1.8rem; font-weight: bold; color: rgba(255, 0, 0, 0.793);"> <!-- Container bọc quanh cả biểu tượng và văn bản -->
-          <i class="fas fa-newspaper"></i> <!-- Biểu tượng -->
-          <p style="display: inline; margin-left: 5px;">Thông báo</p> <!-- Văn bản -->
+        <div style="display: inline-block; font-size: 1.8rem; font-weight: bold; color: rgba(255, 0, 0, 0.793);"> 
+          <i class="fas fa-newspaper"></i> 
+          <p style="display: inline; margin-left: 5px;">Thông báo</p> 
       </div>
       <div class="row newspaper" style="margin-top: 14px; width:500px; padding-bottom:4px;">
-        <?php
-          if(isset($list_thongbao))
-          {
-            if(is_array($list_thongbao))
-            {
-              foreach($list_thongbao as $item)
-              {
-                if ($owner) {
-                  echo '<div class="col-12  justify-content-between align-items-center">
-                            <div>
-                                <a style="text-decoration: none;" href="chitietthongtin.php?sid='.$item['id'].'"><h6 style="color: black; text-decoration: none;">'.htmlspecialchars($item['infoTitle']).'</h6></a>
-                                <p>'.htmlspecialchars($item['day']).'</p>
-                            </div>
-                            <div >
-                                <button type="button" class="btn btn-sm" style="background-color: rgb(213, 198, 101); border-radius: 3px; width:50px" name="deletebtn"><a style="color: white; text-decoration: none;" href="capnhatthongtin.php?id='.$item['id'].'">Sửa</a></button>
-                                <button type="button" class="btn btn-sm " style="color: white; background-color: rgb(36, 36, 153); border-radius: 3px; width:50px" name="updatebtn" onclick="delete_thongtin(\'' . htmlspecialchars($item['id']) . '\')">Xóa</button>
-                            </div>
-                        </div>';
+      <?php
+        if (isset($list_thongbao)) {
+            if (is_array($list_thongbao)) {
+                foreach ($list_thongbao as $item) {
+                  echo '<li><a href="#">'.htmlspecialchars($item['infoTitle']).'<br><span class="date">'.htmlspecialchars($item['day']).'</span> <span class="new">mới</span></a></li>';
+                    if ($owner) {
+                        echo '<div class="thongbao-actions">';
+                        echo '<button class="edit-btn"><a href="capnhatthongtin.php?id=' . $item['id'] . '">Sửa</a></button>';
+                        echo '<button class="delete-btn" onclick="delete_thongtin(\'' . htmlspecialchars($item['id']) . '\')">Xoá</button>';
+                        echo '</div>';
+                    }
+                    echo '</div>';
                 }
-                else {
-                  echo '<div class="col-12">
-                          <a  style="text-decoration: none;"  href="chitietthongtin.php?sid='.$item['id'].'"><h6 style="color: black;">'.htmlspecialchars($item['infoTitle']).'</h6></a>
-                          <p>'.htmlspecialchars($item['day']).'</p>
-                        </div>';
-                }
-              }
             }
-          }
-
-        ?>
-        <!-- <div class="col-12">
-          <h6 style="color: black;">Thông báo mở khóa học Blockchain cho tất cả sinh viên khoa công nghệ thông tin lần 1 năm 2024</h6>
-        <p>10/05/2024</p>
-        </div>
-        <div class="col-12">
-          <h6 style="color: black;">Thông báo đăng ký tham gia buổi WorkShop về game</h6>
-        <p>9/05/2024</p>
-        </div>
-        <div class="col-12">
-          <h6 style="color: black;">Chương trình thạc sĩ ngành khoa học máy tính</h6>
-        <p>10/04/2024</p>
-        </div>
-        <div class="col-12">
-          <h6 style="color: black;">Mở lớp kĩ năng mềm cho sinh viên công nghệ thông tin</h6>
-        <p>28/03/2024</p>
-        </div>
-        <div class="col-12">
-          <h6 style="color: black;">Lịch thi kỹ năng thực hành chuyên môn đợt tháng 03/2024</h6>
-        <p>22/03/2024</p>
-        </div>
-        <div class="col-12">
-          <h6 style="color: black;"><a href="./thongbao.html">Tư Vấn sức khỏe cho sinh viên năm nhất khoa công nghệ thông tin</a></h6>
-        <p>19/03/2024</p>
-        </div>
-        <div class="col-12">
-          <h6 style="color: black;">Đăng ký tham sự workShop "Kỹ năng giao tiếp hiệu quả trong doanh nghiệp"</h6>
-        <p>12/02/2024</p>
-        </div>
-        <div class="col-12">
-          <h6 style="color: black;">Đăng ký môn học khoa công nghệ thông tin</h6>
-        <p>11/01/2024</p>
-        </div> -->
+        }
+      ?>
       </div>
     
-      </div>
     </div>
+    </div>
+
+    <!-- <div class="col-lg-4 col-md-12 col-12 sidebar">
+        <h5><i class="fas fa-newspaper"></i> Thông tin mới</h5>
+        <br>
+        <ul>
+            <?php
+            $list_thongbao = ThongTin::getListThongTinByTypeLimit8("thongbao");
+            if(isset($list_thongbao))
+            {
+                if(is_array($list_thongbao))
+                {
+                    foreach($list_thongbao as $item)
+                    {
+                        echo '<li><a href="#">'.htmlspecialchars($item['infoTitle']).'<br><span class="date">'.htmlspecialchars($item['day']).'</span> <span class="new">mới</span></a></li>';
+                    }
+                }
+            }
+            ?>
+        </ul>
+        <div class="xemthem"><a style="text-decoration: none;
+              color: red;" href=""><i class="fas fa-square-plus"></i> Xem thêm</a></div>
+    </div> -->
+
+
+
+
+
+
     <div class="row container mt-4">
       <div class="col-xl-9 col-md-8 col-sm-6 col-12">
         <div class="mb-3"  style="display: inline-block; font-size: 1.8rem; font-weight: bold; color: rgba(255, 0, 0, 0.793); "> <!-- Container bọc quanh cả biểu tượng và văn bản -->
