@@ -1,9 +1,10 @@
 <?php
 require_once("entities/subject.class.php");
+require_once("entities/subject.class.php");
 if(isset($_POST['btnSubmit'])){
   $subjectName=$_POST['name'];
 	$txt_image=$_FILES['image'];
-  $newSubject=new Detail($subjectName,$txt_image);
+  // $newSubject=new Detail($subjectName,$txt_image);
   $result=$newSubject->save();
   if(isset($result)){
 		if(!$result){

@@ -69,6 +69,12 @@
             $result=$db->select_to_array($sql);
             return $result;
         }
+        public static function getListThongTinByType4($infoType) {
+            $db= new Db();
+            $sql ="SELECT * FROM News WHERE infoType = '$infoType' ORDER BY id ASC LIMIT 4";
+            $result=$db->select_to_array($sql);
+            return $result;
+        }
         public static function getListThongTinByTypeLimit8($infoType) {
             $db= new Db();
             $sql="SELECT * FROM News WHERE infoType= '$infoType' ORDER BY id DESC LIMIT 8";
@@ -193,6 +199,12 @@
             catch(PDOException $e){
                 return false;
             }
+        }
+        public static function getListThongTinByType1($infoType) {
+            $db= new Db();
+            $sql ="SELECT * FROM News WHERE infoType = '$infoType' ORDER BY id DESC LIMIT 1";
+            $result=$db->select_to_array($sql);
+            return $result;
         }
 
     }

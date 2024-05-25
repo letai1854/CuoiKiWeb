@@ -236,7 +236,12 @@ public static function showLimitSubject10(){
     $result=$db->select_to_array($sql);
     return $result;
 }
-
+public static function showLimitSubject8(){
+    $db= new Db();
+    $sql ="SELECT * FROM Subject ORDER BY subjectCode ASC LIMIT 6";
+    $result=$db->select_to_array($sql);
+    return $result;
+}
 }
 
 ?>

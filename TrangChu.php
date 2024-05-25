@@ -11,20 +11,20 @@
     $owner=false;
   }
 
-  $list_subject = Detail::list_Subject();
+  $list_subject = Detail::showLimitSubject8();
   if(isset($_POST['Delete'])){
     $id=$_POST['Id'];
     $result = Detail::delete_Subject($id);
   }
   try {
-    $list_subject = Detail::list_Subject();
+    $list_subject = Detail::showLimitSubject8();
   } catch (Exception $e) {
 
   }
 
   $list_thongbao = ThongTin::getListThongTinByType("thongbao");
-  $list_vieclam = ThongTin::getListThongTinByType("vieclam");
-  $list_tintuc = ThongTin::getListThongTinByType("tintuc");
+  $list_vieclam = ThongTin::getListThongTinByType4("vieclam");
+  $list_tintuc = ThongTin::getListThongTinByType1("tintuc");
   if(isset($_POST['Delete_thongtin'])){
     $id=$_POST['Id_thongtin'];
     $result = ThongTin::deleteThongTin($id);
@@ -51,6 +51,151 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <link rel="stylesheet" href="css/trangchustyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+      .card{
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+        border-radius: 5px;
+      }
+      .card:hover{
+        transform: scale(1.05);
+        transition: 0.3s ease;
+      }
+
+      .xemthem{
+            font-weight: bold;
+            display: flex;
+            align-items: flex-end;
+            justify-content: end;
+        }
+
+.xemthem a:hover {
+  color: black;
+}
+.item-subject .card2 {
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+}
+
+.item-subject .card2:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.item-subject .card2 .card-img-wrapper {
+  width: 100%;
+  height: 150px; /* Set a fixed height for images */
+  overflow: hidden;
+}
+
+.item-subject .card2 .card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-subject .card2 .card-body {
+  padding: 1rem;
+  text-align: center;
+}
+
+.item-subject .card2 .card-body a {
+  display: block;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.item-subject .card2 .card-body a:hover {
+  color: red;
+}
+.item-subject .card2 .card-body a:hover {
+  color: red;
+}
+.item-subject .card2 .card-body .mt-2 {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.item-subject .card2 .btn {
+  font-size: 0.8rem;
+  border: none;
+  cursor: pointer;
+}
+
+.item-subject .card2 .btn:hover {
+  opacity: 0.8;
+}
+
+.item-subject .card2 .btn a {
+  color: white;
+  text-decoration: none;
+}
+.header {
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: rgba(255, 0, 0, 0.793);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: rgba(255, 0, 0, 0.793);
+}
+
+.item-subject .card3 {
+  overflow: hidden;
+  /* transition: transform 0.3s, box-shadow 0.3s; */
+  height: 100%;
+}
+
+.item-subject .card3:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.item-subject .card3 .card-img-wrapper {
+  width: 100%;
+  height: 150px; ; /* Set a fixed height for images */
+  overflow: hidden;
+}
+
+.item-subject .card3 .card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-subject .card3 .card-body {
+  padding: 1rem;
+  /* text-align: center; */
+}
+
+.item-subject .card3 .card-body a {
+  display: block;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.item-subject .card3 .card-body a:hover {
+  color: red;
+}
+
+.item-subject .card3 .card-body .mt-2 {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+
+
+
+    </style>
 </head>
 <body>
   <div class="container">
@@ -58,15 +203,15 @@
       <div>    
           <img src="./logo.png" alt="Logo"></div>
           <div><h2 style="margin-left: 6px;">ĐẠI HỌC <br> TÔN ĐỨC THẮNG</h2>
-            <h4 style="margin-left: 6px;">KHOA CÔNG NGHỆ THÔNG TIN</h4>
+            <h4 style="margin-left: 6px;">GIẢNG VIÊN KHOA CÔNG NGHỆ THÔNG TIN</h4>
           </div>
       </div>
+      <!-- <img src="./images/user1.jpg" alt="User Image"> -->
   </div>
 
 
   <nav class="navbar navbar-expand-lg py-3">
     <div class="container">
-      <?php if($owner) { echo '<p class="text-white mb-0">'. $userName.'</p>'; } ?>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -98,99 +243,98 @@
         </ul>
         <div class="user-info ms-auto">
           <a class="nav-link" href="./login.php"><i class="fas fa-user"></i></a>
-          <img src="./images/user1.jpg" alt="User Image">
+          <?php if($owner) { echo '<p class="text-white mb-0">'. $userName.'</p>'; } ?>
         </div>
       </div>
     </div>
   </nav>
   <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="image/bg.jpg" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="image/background1.jpg" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="image/bgtdtu1.jpg" class="d-block w-100" alt="...">
-      </div>
+        <div class="carousel-item active">
+            <img src="image/bg.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="image/background1.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="image/bgtdtu1.jpg" class="d-block w-100" alt="...">
+        </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
     </button>
-  </div>
-
-    <div class="row container subject-report mt-3">
-        <div class="col-xl-9 col-md-6 col-sm-12 col-12">
-            <div class="text-center" style="font-size: 1.8rem;font-weight: bold; color:rgba(255, 0, 0, 0.793); "><p>Môn học <br>
-            <hr style="color: red; border-top: 2px solid red; font-weight: bold;"> </p></div>
-            <div class="row">
-                <?php
-                if(isset($list_subject))
-                {
-                  if(is_array($list_subject))
-                  {
-                    foreach($list_subject as $item)
-                    {
-                      echo '<div class="col-xl-3 col-md-3 col-sm-12 mb-3 item-subject">
-                      <div class="card shadow-sm"> 
-                        <img src="'.htmlspecialchars($item['subjectImage']).'" alt="">
-                        <div class="card-body">
-                          <p class="card-text text-center" style="color: blue;">'.htmlspecialchars($item['subjectName']).'</p>
-                          <div class="chitiet" style="text-align: center;">
-    <p><a style="color: red; text-decoration: none;" href="ChiTietMonHoc.php?sid='.$item['subjectCode'].'">Xem chi tiết</a></p>
 </div>
 
-                      ';
-                      if($owner)
-                      {
-                        echo '<button type="button" class="btn btn-sm" style="background-color: rgb(213, 198, 101); border-radius: 3px; width:50px" name="deletebtn"><a style="color: white; text-decoration: none;" href="suamonhoc.php?sid='.$item['subjectCode'].'">Sửa</a></button>
-                        <button type="button" class="btn btn-sm" style="color: white; background-color: rgb(36, 36, 153); border-radius: 3px; width:50px" name="updatebtn" onclick="delete_btn(\'' . htmlspecialchars($item['subjectCode']) . '\')">Xóa</button>
-                        <button type="button" class="btn btn-sm" style="background-color: rgb(32, 115, 40); border-radius: 3px; width:60px">
-                        <a style="color: white; text-decoration: none; width:150px"><a style="color: white; text-decoration: none;" href="themTaiLieu.php?sid='.$item['subjectCode'].'">Thêm</a></a>
-                        </button>';
-                      }
-                      echo '</div>
-                      </div>
-                      </div>';
-                  }
+<div class="container" style="margin-bottom:150px">
+  <div class="row container subject-report1 mt-3">
+      <div class="col-xl-9 col-md-6 col-sm-12 col-12">
+      
+          <div class="text-center" style="font-size: 1.8rem;font-weight: bold; color:rgba(255, 0, 0, 0.793); "> 
+          <div class="">
+          </div>
+          <p>Môn học <br>
+          <hr style="color: red; border-top: 2px solid red; font-weight: bold;"> </p></div>
+          <div class="row" >
+              <?php
+              if(isset($list_subject))
+              {
+                if(is_array($list_subject))
+                {
+                  foreach($list_subject as $item)
+                  {
+                    echo '<div  class="col-xl-4 col-md-6 col-sm-6 col-12  mb-3 item-subject">
+                    <div class="card "> 
+                      <img src="'.htmlspecialchars($item['subjectImage']).'" alt="">
+                      <div class="card-body">
+                        <p class="card-text text-center" style="color: black">'.htmlspecialchars($item['subjectName']).'</p>
+                        <div class="chitiet" style="text-align: center;">
+                        <div class="xemct">
+  <p><a style="font-size: 0.8rem; color:black; text-decoration: none;" href="ChiTietTaiLieu.php?sid='.$item['subjectCode'].'">Xem chi tiết</a></p>
+</div>
+</div>
+
+                    ';
+                    echo '</div>
+                    </div>
+                    </div>';
                 }
               }
-              ?>
-            </div>
-        </div>
-        
-        <div class="col-xl-3 col-md-6 col-sm-12 col-12">
-        <div style="display: inline-block; font-size: 1.8rem; font-weight: bold; color: rgba(255, 0, 0, 0.793);"> 
-          <i class="fas fa-newspaper"></i> 
-          <p style="display: inline; margin-left: 5px;">Thông báo</p> 
-      </div>
-      <div class="row newspaper" style="margin-top: 14px; width:500px; padding-bottom:4px;">
-      <?php
-        if (isset($list_thongbao)) {
-            if (is_array($list_thongbao)) {
-                foreach ($list_thongbao as $item) {
-                  echo '<li><a href="#">'.htmlspecialchars($item['infoTitle']).'<br><span class="date">'.htmlspecialchars($item['day']).'</span> <span class="new">mới</span></a></li>';
-                    if ($owner) {
-                        echo '<div class="thongbao-actions">';
-                        echo '<button class="edit-btn"><a href="capnhatthongtin.php?id=' . $item['id'] . '">Sửa</a></button>';
-                        echo '<button class="delete-btn" onclick="delete_thongtin(\'' . htmlspecialchars($item['id']) . '\')">Xoá</button>';
-                        echo '</div>';
-                    }
-                    echo '</div>';
-                }
             }
-        }
-      ?>
+            ?>
+        <div class="xemthem"><a style="text-decoration: none;
+                    color: red;" href="./MonHoc.php"><i class="fas fa-square-plus"></i> Xem thêm</a></div>
       </div>
-    
-    </div>
-    </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12 col-12 sidebar">
+        <div class="" style=" ">
+              <h5 style="color:red;"><i class="fas fa-newspaper"></i> Thông báo mới</h5>
+              <br>
+              <ul>
+                  <?php
+                  $list_thongbao = ThongTin::getListThongTinByTypeLimit8("thongbao");
+                  if(isset($list_thongbao))
+                  {
+                      if(is_array($list_thongbao))
+                      {
+                          foreach($list_thongbao as $item)
+                          {
+                              echo '<li><a href="#">'.htmlspecialchars($item['infoTitle']).'<br><span class="date">'.htmlspecialchars($item['day']).'</span> <span class="new">mới</span></a></li>';
+                          }
+                      }
+                  }
+                  ?>
+              </ul>
+              <div class="xemthem"><a style="text-decoration: none;
+                    color: red;" href=""><i class="fas fa-square-plus"></i> Xem thêm</a></div>
+      </div>
+          </div>
+  </div>
+
 
     <!-- <div class="col-lg-4 col-md-12 col-12 sidebar">
         <h5><i class="fas fa-newspaper"></i> Thông tin mới</h5>
@@ -223,73 +367,72 @@
       <div class="col-xl-9 col-md-8 col-sm-6 col-12">
         <div class="mb-3"  style="display: inline-block; font-size: 1.8rem; font-weight: bold; color: rgba(255, 0, 0, 0.793); "> <!-- Container bọc quanh cả biểu tượng và văn bản -->
           <i class=" fas fa-calendar"></i> <!-- Biểu tượng -->
-          <p style="display: inline; margin-left: 5px;">Thông tin việc làm</p> <!-- Văn bản -->
+          <p style="display: inline; margin-left: 5px;">Thông tin việc làm
+          <hr style="width: 100%; border-top: 2px solid red; margin-bottom: 20px;">
+      </p> <!-- Văn bản -->
       </div>
       <div class="row">
-          <?php
-          if (isset($list_vieclam)) {
-            if (is_array(($list_vieclam))) {
-              foreach ($list_vieclam as $item) {
-                echo '<div class="col-xl-3 col-md-3 col-sm-12 mb-3 item-subject">
-                      <div class="card shadow-sm">
-                        <img src="'.htmlspecialchars($item['infoImage']).'" alt="">
-                        <div class="card-body">
-                          <div class="d-flex justify-content-between align-items-center">
-                            <a style="text-decoration: none;" href="chitietthongtin.php?sid='.$item['id'].'"><small class="text-body-secondary">'.htmlspecialchars($item['infoTitle']).'</small></a>
-                            <div class="mt-2"><small class="text-body-secondary">' . htmlspecialchars($item['day']) . '</small></div>
-                          </div>'
-                        ;
-
-              if ($owner) {
-                echo '<div class="mt-3">'; // Add margin top for button alignment
-                echo '<button type="button" class="btn btn-sm" style="background-color: rgb(213, 198, 101); border-radius: 3px; width:50px" name="deletebtn"><a style="color: white; text-decoration: none;" href="capnhatthongtin.php?id='.$item['id'].'">Sửa</a></button>
-                      <button type="button" class="btn btn-sm ml-2" style="color: white; background-color: rgb(36, 36, 153); border-radius: 3px; width:50px" name="updatebtn" onclick="delete_thongtin(\'' . htmlspecialchars($item['id']) . '\')">Xóa</button>';
-                echo '</div>'; // Close the div for button alignment
-              }
-              echo '</div>
-                    </div>
+  <?php
+  if (isset($list_vieclam)) {
+    if (is_array($list_vieclam)) {
+      foreach ($list_vieclam as $item) {
+        echo '<div class="col-xl-3 col-md-6 col-sm-12 col-12 mb-3 item-subject">
+                <div class="card2">
+                  <div class="card-img-wrapper">
+                    <img src="'.htmlspecialchars($item['infoImage']).'" class="card-img-top" alt="">
+                  </div>
+                  <div class="card-body text-center">
+                    <a style="text-decoration: none; color: black;" href="chitietthongtin.php?sid='.$item['id'].'">
+                      <small class="text-body-secondary" style="font-weight: bold;">'.htmlspecialchars($item['infoTitle']).'</small>
+                    </a>
+                    <div class="mt-2">
+                      <small class="text-body-secondary">'.htmlspecialchars($item['day']).'</small>
                     </div>';
-              }
-            }
-          }
-        ?>
-      </div>
-    </div>
-    
-    <div class="col-xl-3 col-md-4 col-sm-6 col-12">
-      <div class="mb-3"  style="display: inline-block; font-size: 1.8rem; font-weight: bold; color: rgba(255, 0, 0, 0.793); "> <!-- Container bọc quanh cả biểu tượng và văn bản -->
-        <i class="fas fa-newspaper fas fa-calendar"></i> <!-- Biểu tượng -->
-        <p style="display: inline; margin-left: 5px;">Tin tức</p> <!-- Văn bản -->
-    </div>
-    <?php
-      if (isset($list_tintuc)) {
-        if (is_array(($list_tintuc))) {
-          foreach ($list_tintuc as $item) {
-            echo '<div class="card shadow-sm" style="border: 2px solid rgba(0, 0, 0, 0.386);"> 
-                  <img src="'.htmlspecialchars($item['infoImage']).'" alt="">
-                  <div class="card-body">
-                    <p class="card-text "><a style="text-decoration: none;" href="chitietthongtin.php?sid='.$item['id'].'">'.htmlspecialchars($item['infoTitle']).'</a></p>';
-                        
-            if ($owner) {
-                echo '<div class="mt-3">'; // Add margin top for button alignment
-                echo '<button type="button" class="btn btn-sm" style="background-color: rgb(213, 198, 101); border-radius: 3px; width:50px" name="deletebtn"><a style="color: white; text-decoration: none;" href="capnhatthongtin.php?id='.$item['id'].'">Sửa</a></button>
-                        <button type="button" class="btn btn-sm ml-2" style="color: white; background-color: rgb(36, 36, 153); border-radius: 3px; width:50px" name="updatebtn" onclick="delete_thongtin(\'' . htmlspecialchars($item['id']) . '\')">Xóa</button>';
-                echo '</div>'; // Close the div for button alignment
-            }
-
-            echo '</div>'; // Close the card-body div
-            echo '</div>'; // Close the card div
-
-          }
-        }
+        echo '</div>
+              </div>
+              </div>';
       }
-    
-    ?>
-    
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-    </div>
+    }
+  }
+  ?>
 </div>
+<div class="xemthem"><a style="text-decoration: none;
+                    color: red;" href=""><i class="fas fa-square-plus"></i> Xem thêm</a></div>
+
+
+    </div>
+    
+    <div class="col-xl-3 col-md-4 col-sm-6 col-12 item-subject">
+  <div class="mb-3 header" style="display: flex; align-items: center; font-size: 1.8rem; font-weight: bold; color: rgba(255, 0, 0, 0.793);">
+    <p style="margin-left: 5px;">    <i class="fas fa-calendar"></i> Tin tức</p>
+  </div>
+  <?php
+  if (isset($list_tintuc)) {
+    if (is_array($list_tintuc)) {
+      foreach ($list_tintuc as $item) {
+        echo '<div class="card3 shadow-sm mb-3">
+                <div class="card-img-wrapper">
+                  <img src="'.htmlspecialchars($item['infoImage']).'" alt="" class="card-img-top">
+                </div>
+                <div class="card-body">
+                  <p class="card-text"><a href="chitietthongtin.php?sid='.$item['id'].'">'.htmlspecialchars($item['infoTitle']).'</a></p>';
+        echo '  </div>
+              </div>';
+      }
+    }
+  }
+  ?>
+<div class="xemthem"><a style="text-decoration: none;
+                    color: red;" href=""><i class="fas fa-square-plus"></i> Xem thêm</a></div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</div>
+
+
+
+</div>
+</div>
+
 <?php require_once("footer.php") ?>
 
     <script>

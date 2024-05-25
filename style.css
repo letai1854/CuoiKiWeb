@@ -115,22 +115,24 @@ margin-right: 0;
 width: 100%; /* Đặt chiều rộng của hình ảnh là 100% */
 height: 200px; /* Giữ tỷ lệ khung hình */
 }
+.card1 img {
+    width: 100%; /* Đặt chiều rộng của hình ảnh là 100% */
+    height: 200px; /* Giữ tỷ lệ khung hình */
+    }
 body > div.row.container.subject-report > div.col-xl-9.col-md-6.col-sm-12.col-12 > div.row > div > div{
-background-color: #D0D7E1;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
 }
 body > div.row.container.subject-report > div.col-xl-9.col-md-6.col-sm-12.col-12 > div.row > div > div{
-border-radius: 4px;
-border: 2px solid rgba(203, 207, 208, 0.716) ;
+
+
 }
 .newspaper{
 
 
 }
-body > div.row.container.subject-report.mt-3 > div.col-xl-3.col-md-6.col-sm-12.col-12 > div.row{
-border-radius: 4px;
-border: 2px solid rgba(195, 191, 191, 0.564);
-}
+
+
 #footer li {
 list-style-type: none; /* Loại bỏ dấu chấm tròn */
 }
