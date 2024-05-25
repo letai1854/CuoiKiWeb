@@ -64,7 +64,7 @@
             <?php 
                 foreach($list_research as $item) {
                     echo '<div class="project">
-                          <p><strong>Tên đề tài:</strong> '.htmlspecialchars($item['title']).'</p>
+                          <li><a href="./noidunghoinghi.php?sid='.htmlspecialchars($item['id']).'">'.htmlspecialchars($item['title']).'<br><span class="date">'.htmlspecialchars($item['day']).'</span> <span class="new">mới</span></a></li>
                           <p><strong>Nội dung:</strong> '.htmlspecialchars($item['content']).'</p>
                           <p><strong>Ngày đăng:</strong> '.htmlspecialchars($item['day']).'</p>
                           </div>';

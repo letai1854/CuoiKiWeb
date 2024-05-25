@@ -23,6 +23,13 @@ class Research {
         return $result;
     }
 
+    public static function getResearchById($id) {
+        $db= new Db();
+        $sql ="SELECT * FROM research where id = $id";
+        $result=$db->select_to_array($sql);
+        return $result;
+    }
+
 
 
 }
