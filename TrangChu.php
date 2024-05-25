@@ -258,7 +258,7 @@
             <img src="image/background1.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="image/bgtdtu1.jpg" class="d-block w-100" alt="...">
+            <img src="image/bg3.JPG" class="d-block w-100" alt="...">
         </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
