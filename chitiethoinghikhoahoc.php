@@ -2,16 +2,22 @@
     include_once('entities/research.class.php');
     $list_research = Research::getHoiNghi();
 
-    function truncateText($text, $limit = 100) {
-        // Remove HTML tags và loại bỏ các ký tự không gian HTML (&nbsp;)
-        $text = str_replace('&nbsp;', ' ', strip_tags($text));
+    function truncateTextList($text, $limit = 50) {
+        // Decode HTML entities to ensure all spaces are properly recognized
+        $text = html_entity_decode($text, ENT_QUOTES, 'UTF-8');
+        
+        // Remove all HTML tags
+        $text = strip_tags($text);
+        
         // Split the text into words
         $words = preg_split('/\s+/', $text);
+        
         // If there are more words than the limit, truncate the text
         if (count($words) > $limit) {
             $words = array_slice($words, 0, $limit);
             return implode(' ', $words) . '...';
         }
+        
         return $text;
     }
     
@@ -21,11 +27,11 @@
             if (is_array($list)) {
                 foreach ($list as $item) {
                     // Get truncated content without HTML tags
-                    $truncatedContent = truncateText($item['content']);
+                    $truncatedContent = truncateTextList($item['content']);
                     echo '<div class="project">
-                          <li><a href="./noidunghoinghi.php?sid='.htmlspecialchars($item['id']).'">'.htmlspecialchars($item['title']).'<br><span class="date">'.htmlspecialchars($item['day']).'</span> <span class="new">mới</span></a></li>
-                          <p><strong>Nội dung:</strong> '.htmlspecialchars($item['content']).'</p>
-                          <p><strong>Ngày đăng:</strong> '.htmlspecialchars($item['day']).'</p>
+                          <a href="./noidunghoinghi.php?sid='.htmlspecialchars($item['id']).'" class="project-title">'.htmlspecialchars($item['title']).'</a>
+                          <div class="project-content"><strong>Nội dung:</strong> '.$truncatedContent.'</div>
+                          <div class="project-content"><strong>Ngày đăng:</strong> '.htmlspecialchars($item['day']).'</div>
                           </div>';
                 }
             }

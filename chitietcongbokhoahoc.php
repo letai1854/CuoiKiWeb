@@ -2,6 +2,41 @@
     include_once('entities/research.class.php');
     $list_research = Research::getCongBo();
 
+    function truncateTextList($text, $limit = 50) {
+        // Decode HTML entities to ensure all spaces are properly recognized
+        $text = html_entity_decode($text, ENT_QUOTES, 'UTF-8');
+        
+        // Remove all HTML tags
+        $text = strip_tags($text);
+        
+        // Split the text into words
+        $words = preg_split('/\s+/', $text);
+        
+        // If there are more words than the limit, truncate the text
+        if (count($words) > $limit) {
+            $words = array_slice($words, 0, $limit);
+            return implode(' ', $words) . '...';
+        }
+        
+        return $text;
+    }
+    
+    
+    function showList($list) {
+        if (isset($list)) {
+            if (is_array($list)) {
+                foreach ($list as $item) {
+                    // Get truncated content without HTML tags
+                    $truncatedContent = truncateTextList($item['content']);
+                    echo '<div class="project">
+                          <div class="project-title">'.htmlspecialchars($item['title']).'</div>
+                          <div class="project-content"><strong>Nội dung:</strong> '.$truncatedContent.'</div>
+                          <div class="project-content"><strong>Ngày đăng:</strong> '.htmlspecialchars($item['day']).'</div>
+                          </div>';
+                }
+            }
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -72,13 +107,7 @@
         </div>
         <div class="content">
             <?php 
-                foreach($list_research as $item) {
-                    echo '<div class="project">
-                          <p><strong>Tên đề tài:</strong> '.htmlspecialchars($item['title']).'</p>
-                          <p><strong>Nội dung:</strong> '.htmlspecialchars($item['content']).'</p>
-                          <p><strong>Ngày đăng:</strong> '.htmlspecialchars($item['day']).'</p>
-                          </div>';
-                }
+                showList($list_research);
             ?>
         </div>
     </div>

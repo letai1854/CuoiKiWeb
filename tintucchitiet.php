@@ -49,8 +49,7 @@ function showListSubjectDetail($list_subject) {
         }
     }
 }
-
-              ?>
+?>
 
 
 <!DOCTYPE html>
