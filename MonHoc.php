@@ -184,12 +184,12 @@ function showListSubjectDetail($list_subject){
             justify-content: end;
         }
         .news-item p {
-    font-size: 0.9em;
-    font-weight: normal; 
-}
-.sidebar ul li a .date {
-    font-weight: normal; /* Đảm bảo rằng ngày không bị in đậm */
-}
+            font-size: 0.9em;
+            font-weight: normal; 
+        }
+        .sidebar ul li a .date {
+            font-weight: normal; /* Đảm bảo rằng ngày không bị in đậm */
+        }
     </style>
 </head>
 <body>
