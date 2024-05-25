@@ -22,7 +22,7 @@ session_write_close();
         <div class="collapse navbar-collapse justify-content-center" id="navbarColor01">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">GIỚI THIỆU</a>
+                    <a class="nav-link active" href="./gioithieu.php">GIỚI THIỆU</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="./MonHoc.php">MÔN HỌC</a>
