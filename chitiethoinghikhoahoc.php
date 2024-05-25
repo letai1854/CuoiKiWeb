@@ -1,6 +1,42 @@
 <?php
     include_once('entities/research.class.php');
     $list_research = Research::getHoiNghi();
+
+    function truncateTextList($text, $limit = 50) {
+        // Decode HTML entities to ensure all spaces are properly recognized
+        $text = html_entity_decode($text, ENT_QUOTES, 'UTF-8');
+        
+        // Remove all HTML tags
+        $text = strip_tags($text);
+        
+        // Split the text into words
+        $words = preg_split('/\s+/', $text);
+        
+        // If there are more words than the limit, truncate the text
+        if (count($words) > $limit) {
+            $words = array_slice($words, 0, $limit);
+            return implode(' ', $words) . '...';
+        }
+        
+        return $text;
+    }
+    
+    
+    function showList($list) {
+        if (isset($list)) {
+            if (is_array($list)) {
+                foreach ($list as $item) {
+                    // Get truncated content without HTML tags
+                    $truncatedContent = truncateTextList($item['content']);
+                    echo '<div class="project">
+                          <a href="./noidunghoinghi.php?sid='.htmlspecialchars($item['id']).'" class="project-title">'.htmlspecialchars($item['title']).'</a>
+                          <div class="project-content"><strong>Nội dung:</strong> '.$truncatedContent.'</div>
+                          <div class="project-content"><strong>Ngày đăng:</strong> '.htmlspecialchars($item['day']).'</div>
+                          </div>';
+                }
+            }
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -14,21 +50,16 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <link rel="stylesheet" href="style.css" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f7fb;
-            margin: 0;
-            padding: 20px 0;
-        }
-        .container {
+        #info {
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow: hidden;
-            padding: 20px;
+            padding: 50px;
             margin-bottom: 20px;
         }
-        .header {
+
+        #info .header {
             background-color: #eef3fb;
             padding: 20px;
             text-align: center;
@@ -37,41 +68,49 @@
             color: #333;
             border-bottom: 2px solid #ddd;
         }
-        .project {
+
+        #info .project {
             padding: 10px 0;
             border-bottom: 1px solid #ddd;
         }
-        .project:last-child {
+
+        #info .project:last-child {
             border-bottom: none;
         }
-        .project-title {
+
+        #info .project-title {
             font-size: 18px;
             color: #0066cc;
             margin-bottom: 5px;
         }
-        .project-content {
+
+        #info .project-content {
             font-size: 14px;
             color: #666;
         }
+
     </style>
 </head>
 <body>
-    <div class="container">
+    <div>
+        <div id="logo">
+        <div>    
+            <img src="./logo.png" alt="Logo"></div>
+            <div><h2 style="margin-left: 6px;">ĐẠI HỌC <br> TÔN ĐỨC THẮNG</h2>
+                <h4 style="margin-left: 6px;">GIẢNG VIÊN KHOA CÔNG NGHỆ THÔNG TIN</h4>
+            </div>
+        </div>
+        <!-- <img src="./images/user1.jpg" alt="User Image"> -->
+    </div>
+    <div id="info" class="container">
         <div class="header">
             Hội nghị khoa học
         </div>
         <div class="content">
-            <?php 
-                foreach($list_research as $item) {
-                    echo '<div class="project">
-                          <p><strong>Tên đề tài:</strong> '.htmlspecialchars($item['title']).'</p>
-                          <p><strong>Nội dung:</strong> '.htmlspecialchars($item['content']).'</p>
-                          <p><strong>Ngày đăng:</strong> '.htmlspecialchars($item['day']).'</p>
-                          </div>';
-                }
-            ?>
+            <?php showList($list_research); ?>
         </div>
     </div>
+
     <?php
         require_once('footer.php');
     ?>
