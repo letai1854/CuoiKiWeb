@@ -1,7 +1,14 @@
 <?php 
 require_once('entities/account.php');
 require_once('entities/subject.class.php');
-session_start();
+require_once('session.php');
+
+if(isset($_SESSION['username'])){
+  $userName = user::get_teacherName($_SESSION['username']);
+  $owner = true;
+} else {
+  $owner = false;
+}
 if(isset($_SESSION['username']))
 {
 $user=$_SESSION['username'];
@@ -154,11 +161,22 @@ if(isset($_POST['btnxacnhan'])){
    </style>
 </head>
 <body>
-<div class="infor container text-center py-1 mt-1">
+<div class="container">
+    <div id="logo">
+      <div>    
+          <img src="./logo.png" alt="Logo"></div>
+          <div><h2 style="margin-left: 6px;">ĐẠI HỌC <br> TÔN ĐỨC THẮNG</h2>
+            <h4 style="margin-left: 6px;">GIẢNG VIÊN KHOA CÔNG NGHỆ THÔNG TIN</h4>
+          </div>
+      </div>
+      <!-- <img src="./images/user1.jpg" alt="User Image"> -->
+  </div>
+<?php require_once("nav.php") ?>
+<div class="infor container text-center py-1 mt-10">
       <div class="row">
       <div class="col-lg-4 col-md-4 col-sm-6 col-12">
           <div class="single" >
-            <a href="./themgiangvien.php" style=" text-decoration: none;
+            <a href="./themthongtin.php" style=" text-decoration: none;
         color: black;">
                 <div class="single-how-works-icon"><i class="fas fa-newspaper"></i></div>
                 <h6 style="color:black;    text-transform: uppercase;">thông tin <br> bài đăng</span></h6>

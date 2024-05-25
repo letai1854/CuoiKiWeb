@@ -1,5 +1,14 @@
 <?php
 require_once("entities/subject.class.php");
+require_once('entities/account.php');
+
+require_once('session.php');
+if(isset($_SESSION['username'])){
+$userName = user::get_teacherName($_SESSION['username']);
+$owner = true;
+} else {
+$owner = false;
+}
 if(isset($_POST['btnAccept']))
 {
   $name=$_POST['name'];
@@ -63,7 +72,7 @@ $checkTim=false;
 if($type==''){
   $type='theory';
 }
-session_start();
+// session_start();
 
 if (isset($_SESSION['documentType'])) {
 if($_SESSION['i']==1){
@@ -258,7 +267,7 @@ function showListSubjectDetail($subjectDetail,$type){
             width: 150px;
         }
         .danhmuc{
-          width: 300px;
+          width: 125px;
           border: 1px solid black;
           border-radius: 3px;
           padding: 5px 0px 4px 12px;
@@ -334,10 +343,22 @@ function showListSubjectDetail($subjectDetail,$type){
         color: black;
         transform: scale(1.1);
     }
+
     </style>
 </head>
 <body>
-<div class="infor container text-center py-1 mt-1">
+<div class="container">
+    <div id="logo">
+      <div>    
+          <img src="./logo.png" alt="Logo"></div>
+          <div><h2 style="margin-left: 6px;">ĐẠI HỌC <br> TÔN ĐỨC THẮNG</h2>
+            <h4 style="margin-left: 6px;">GIẢNG VIÊN KHOA CÔNG NGHỆ THÔNG TIN</h4>
+          </div>
+      </div>
+      <!-- <img src="./images/user1.jpg" alt="User Image"> -->
+  </div>
+<?php require_once("nav.php") ?>
+<div class="infor container text-center py-1 mt-10">
       <div class="row">
       <div class="col-lg-3 col-md-4 col-sm-6 col-12">
           <div class="single" >
@@ -473,13 +494,15 @@ function showListSubjectDetail($subjectDetail,$type){
       </div>
         <div class="col-lg-5 col-md-6 col-12">
           <div class="danhmuc container">
-          <div class="container1">
+          <div class="">
             <div class="label1">LOẠI TÀI LIỆU</div>
-            <select id="documentType" onchange="getOption(this.value)" onchange="updateTypeValue(this.value)">
-                    <option value="theory" <?php if(trim($type) == 'theory' ) echo 'selected'; ?>>Lý thuyết</option>
-                    <option value="practice" <?php if(trim($type) == 'practice' ) echo 'selected'; ?>>Thực hành</option>
-                    <option value="other" <?php if(trim($type) == 'other') echo 'selected'; ?>>Khác</option>
-            </select>
+            <div class="">
+              <select id="documentType" onchange="getOption(this.value)" onchange="updateTypeValue(this.value)">
+                      <option value="theory" <?php if(trim($type) == 'theory' ) echo 'selected'; ?>>Lý thuyết</option>
+                      <option value="practice" <?php if(trim($type) == 'practice' ) echo 'selected'; ?>>Thực hành</option>
+                      <option value="other" <?php if(trim($type) == 'other') echo 'selected'; ?>>Khác</option>
+              </select>
+            </div>
           </div>
           </div>
 

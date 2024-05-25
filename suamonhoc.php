@@ -1,5 +1,14 @@
 <?php
 require_once("entities/subject.class.php");
+require_once('entities/account.php');
+
+require_once('session.php');
+if(isset($_SESSION['username'])){
+$userName = user::get_teacherName($_SESSION['username']);
+$owner = true;
+} else {
+$owner = false;
+}
 $id=$_GET['sid'];
 $subject=Detail::get_Subject($id);
 $name=$subject[0]['subjectName'];
@@ -121,6 +130,17 @@ if(isset($_POST['btnSubmit']))
    </style>
 </head>
 <body>
+<div class="container">
+    <div id="logo">
+      <div>    
+          <img src="./logo.png" alt="Logo"></div>
+          <div><h2 style="margin-left: 6px;">ĐẠI HỌC <br> TÔN ĐỨC THẮNG</h2>
+            <h4 style="margin-left: 6px;">GIẢNG VIÊN KHOA CÔNG NGHỆ THÔNG TIN</h4>
+          </div>
+      </div>
+      <!-- <img src="./images/user1.jpg" alt="User Image"> -->
+  </div>
+<?php require_once("nav.php") ?>
     <div class="ct container">
       <div class="row ">
         <div class="col-xl-8 col-md-6 col-12">

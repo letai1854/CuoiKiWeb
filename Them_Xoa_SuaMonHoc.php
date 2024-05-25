@@ -3,6 +3,18 @@ require_once('entities/account.php');
 require_once('entities/subject.class.php');
 require_once('entities/thongtin.class.php');
 
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+
+if(isset($_SESSION['username'])){
+  $userName = user::get_teacherName($_SESSION['username']);
+  $owner = true;
+} else {
+  $owner = false;
+}
+
+
 $list_subject = Detail::list_Subject();
 $item_per_page=!empty($_GET['per_page'])?$_GET['per_page']:3;
 $current_page=!empty($_GET['page'])?$_GET['page']:1;
@@ -245,7 +257,18 @@ function showListSubjectDetail($list_LimitSubject){
 
 </style>
 <body>
-<div class="infor container text-center py-1 mt-1">
+<div class="container">
+    <div id="logo">
+      <div>    
+          <img src="./logo.png" alt="Logo"></div>
+          <div><h2 style="margin-left: 6px;">ĐẠI HỌC <br> TÔN ĐỨC THẮNG</h2>
+            <h4 style="margin-left: 6px;">GIẢNG VIÊN KHOA CÔNG NGHỆ THÔNG TIN</h4>
+          </div>
+      </div>
+      <!-- <img src="./images/user1.jpg" alt="User Image"> -->
+  </div>
+<?php require_once("nav.php") ?> 
+<div class="infor container text-center py-1 mt-10">
       <div class="row">
       <div class="col-lg-3 col-md-4 col-sm-6 col-12">
           <div class="single" >
@@ -400,6 +423,10 @@ function showListSubjectDetail($list_LimitSubject){
     </div>
     </div>
 </div>
+
+
+<?php require_once("footer.php") ?> 
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const inputField = document.getElementById('tim');

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,11 +66,25 @@
 .single-how-works-icon{
   font-size: 90px;
 }
+#se{
+  margin-bottom: 100px;
+}
 
     </style>
 </head>
 <body>
-  <section>
+<div class="container">
+    <div id="logo">
+      <div>    
+          <img src="./logo.png" alt="Logo"></div>
+          <div><h2 style="margin-left: 6px;">ĐẠI HỌC <br> TÔN ĐỨC THẮNG</h2>
+            <h4 style="margin-left: 6px;">GIẢNG VIÊN KHOA CÔNG NGHỆ THÔNG TIN</h4>
+          </div>
+      </div>
+      <!-- <img src="./images/user1.jpg" alt="User Image"> -->
+  </div>
+<?php require_once("nav.php") ?>
+  <section id="se">
   <div class="container text-center py-5 mt-5">
           <h3>Chỉnh sửa thông tin</h3>
           <p>Bạn có thể chỉnh sửa tất cả nội dung website trong bốn lựa chọn dưới đây</p>
@@ -112,6 +128,7 @@
 </div>
   </section>
 
+  <?php require_once("footer.php") ?>
 <!-- <section id="new" class="w-100 " >
 <div class="container text-center py-5 mt-5">
           <h3>Chỉnh sửa thông tin</h3>

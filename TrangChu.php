@@ -203,8 +203,8 @@
       <!-- <img src="./images/user1.jpg" alt="User Image"> -->
   </div>
 
-
-  <nav class="navbar navbar-expand-lg py-3">
+  <?php require_once("nav.php") ?>
+  <!-- <nav class="navbar navbar-expand-lg py-3">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -215,16 +215,16 @@
             <a class="nav-link active" href="#">GIỚI THIỆU</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">MÔN HỌC</a>
+            <a class="nav-link active" href="./MonHoc.php">MÔN HỌC</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">TIN TỨC</a>
+            <a class="nav-link active" href="./tintucchitiet.php">TIN TỨC</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">THÔNG BÁO</a>
+            <a class="nav-link active" href="./thongbaochitiet.php">THÔNG BÁO</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">VIỆC LÀM</a>
+            <a class="nav-link active" href="./vieclamchitiet.php">VIỆC LÀM</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -248,7 +248,7 @@
         </div>
       </div>
     </div>
-  </nav>
+  </nav> -->
   <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-inner">
         <div class="carousel-item active">
@@ -324,14 +324,14 @@
                       {
                           foreach($list_thongbao as $item)
                           {
-                              echo '<li><a href="#">'.htmlspecialchars($item['infoTitle']).'<br><span class="date">'.htmlspecialchars($item['day']).'</span> <span class="new">mới</span></a></li>';
+                              echo '<li><a href="./noidungthongbao.php?sid='.htmlspecialchars($item['id']).'">'.htmlspecialchars($item['infoTitle']).'<br><span class="date">'.htmlspecialchars($item['day']).'</span> <span class="new">mới</span></a></li>';
                           }
                       }
                   }
                   ?>
               </ul>
               <div class="xemthem"><a style="text-decoration: none;
-                    color: red;" href=""><i class="fas fa-square-plus"></i> Xem thêm</a></div>
+                    color: red;" href="./thongbaochitiet.php"><i class="fas fa-square-plus"></i> Xem thêm</a></div>
       </div>
           </div>
   </div>
@@ -342,17 +342,17 @@
         <br>
         <ul>
             <?php
-            $list_thongbao = ThongTin::getListThongTinByTypeLimit8("thongbao");
-            if(isset($list_thongbao))
-            {
-                if(is_array($list_thongbao))
-                {
-                    foreach($list_thongbao as $item)
-                    {
-                        echo '<li><a href="#">'.htmlspecialchars($item['infoTitle']).'<br><span class="date">'.htmlspecialchars($item['day']).'</span> <span class="new">mới</span></a></li>';
-                    }
-                }
-            }
+            // $list_thongbao = ThongTin::getListThongTinByTypeLimit8("thongbao");
+            // if(isset($list_thongbao))
+            // {
+            //     if(is_array($list_thongbao))
+            //     {
+            //         foreach($list_thongbao as $item)
+            //         {
+            //             echo '<li><a href="#">'.htmlspecialchars($item['infoTitle']).'<br><span class="date">'.htmlspecialchars($item['day']).'</span> <span class="new">mới</span></a></li>';
+            //         }
+            //     }
+            // }
             ?>
         </ul>
         <div class="xemthem"><a style="text-decoration: none;
@@ -383,7 +383,7 @@
                     <img src="'.htmlspecialchars($item['infoImage']).'" class="card-img-top" alt="">
                   </div>
                   <div class="card-body text-center">
-                    <a style="text-decoration: none; color: black;" href="chitietthongtin.php?sid='.$item['id'].'">
+                    <a style="text-decoration: none; color: black;" href="./noidungvieclam.php?sid='.htmlspecialchars($item['id']).'">
                       <small class="text-body-secondary" style="font-weight: bold;">'.htmlspecialchars($item['infoTitle']).'</small>
                     </a>
                     <div class="mt-2">
@@ -398,7 +398,7 @@
   ?>
 </div>
 <div class="xemthem"><a style="text-decoration: none;
-                    color: red;" href=""><i class="fas fa-square-plus"></i> Xem thêm</a></div>
+                    color: red;" href="./vieclamchitiet.php"><i class="fas fa-square-plus"></i> Xem thêm</a></div>
 
 
     </div>
@@ -416,7 +416,7 @@
                   <img src="'.htmlspecialchars($item['infoImage']).'" alt="" class="card-img-top">
                 </div>
                 <div class="card-body">
-                  <p class="card-text"><a href="chitietthongtin.php?sid='.$item['id'].'">'.htmlspecialchars($item['infoTitle']).'</a></p>';
+                  <p class="card-text"><a href="./noidungtintuc.php?sid='.htmlspecialchars($item['id']).'">'.htmlspecialchars($item['infoTitle']).'</a></p>';
         echo '  </div>
               </div>';
       }
@@ -424,7 +424,7 @@
   }
   ?>
 <div class="xemthem"><a style="text-decoration: none;
-                    color: red;" href=""><i class="fas fa-square-plus"></i> Xem thêm</a></div>
+                    color: red;" href="./tintucchitiet.php"><i class="fas fa-square-plus"></i> Xem thêm</a></div>
   
 </div>
 

@@ -6,9 +6,6 @@
 
 ?>
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,11 +37,11 @@
 
         header {
             background-color: #f5f5f5;
-            display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
             border-bottom: 1px solid #ccc;
+            display: flex;
         }
 
         header img {

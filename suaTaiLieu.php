@@ -1,5 +1,14 @@
 <?php
 require_once("entities/subject.class.php");
+require_once('entities/account.php');
+
+require_once('session.php');
+if(isset($_SESSION['username'])){
+$userName = user::get_teacherName($_SESSION['username']);
+$owner = true;
+} else {
+$owner = false;
+}
 $id=$_GET['sid'];
 $idUndo=$_GET['id'];
 $checkType = isset($_GET['type']) ? base64_decode($_GET['type']) : '';
@@ -168,6 +177,17 @@ document.addEventListener("DOMContentLoaded", function() {
    </style>
 </head>
 <body>
+<div class="container">
+    <div id="logo">
+      <div>    
+          <img src="./logo.png" alt="Logo"></div>
+          <div><h2 style="margin-left: 6px;">ĐẠI HỌC <br> TÔN ĐỨC THẮNG</h2>
+            <h4 style="margin-left: 6px;">GIẢNG VIÊN KHOA CÔNG NGHỆ THÔNG TIN</h4>
+          </div>
+      </div>
+      <!-- <img src="./images/user1.jpg" alt="User Image"> -->
+  </div>
+<?php require_once("nav.php") ?>
       <!-- <div class="titleSubject">
         <h1 class=" " style="color: rgba(4, 17, 255, 0.966);"><?php echo $name ?></h1>
       </div> -->
