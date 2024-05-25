@@ -1,6 +1,5 @@
 <?php
     include_once('entities/research.class.php');
-    $list_research = Research::getHoiNghi();
     require_once('entities/account.php');
 
     require_once('session.php');
@@ -10,7 +9,15 @@
     } else {
     $owner = false;
     }
-
+    $item_per_page=!empty($_GET['per_page'])?$_GET['per_page']:4;
+$current_page=!empty($_GET['page'])?$_GET['page']:1;
+$offset=($current_page-1)*$item_per_page;
+$checkTim=false;
+$checkTim = isset($_GET['c']) ? base64_decode($_GET['c']) : false;
+if(isset($_POST['btntimkiem'])){
+    $checkTim=true;
+    $key=$_POST['tim']; 
+}
     function truncateTextList($text, $limit = 50) {
         // Decode HTML entities to ensure all spaces are properly recognized
         $text = html_entity_decode($text, ENT_QUOTES, 'UTF-8');
@@ -37,15 +44,42 @@
                 foreach ($list as $item) {
                     // Get truncated content without HTML tags
                     $truncatedContent = truncateTextList($item['content']);
-                    echo '<div class="project">
-                          <a href="./noidunghoinghi.php?sid='.htmlspecialchars($item['id']).'" class="project-title">'.htmlspecialchars($item['title']).'</a>
-                          <div class="project-content"><strong>Nội dung:</strong> '.$truncatedContent.'</div>
-                          <div class="project-content"><strong>Ngày đăng:</strong> '.htmlspecialchars($item['day']).'</div>
-                          </div>';
+                          echo '<div class="news-item">
+              <div class="news-img">
+              <img src="'.htmlspecialchars($item['image']).'" alt="News Image">
+              </div>
+              <div  class="news-content"><a class="thea" style=" text-decoration: none;
+              color: black;" href="./noidunghoinghikhoahoc.php?sid='.htmlspecialchars($item['id']).'"><h5>'.htmlspecialchars($item['title']).'</h5></a>
+              <p> '.$truncatedContent.'</p> <div class="project-content"><strong>Ngày đăng:</strong> '.htmlspecialchars($item['day']).'</div>
+              </div>  
+          </div>
+          <hr>';
                 }
             }
         }
     }
+    function showListSubjectDetail($list_subject){
+        if(isset($list_subject))
+        {
+          if(is_array($list_subject))
+          {
+            foreach($list_subject as $item)
+            {
+              echo '<div class="news-item">
+              <div class="news-img">
+              <img src="'.htmlspecialchars($item['subjectImage']).'" alt="News Image">
+              </div>
+              <div  class="news-content"><a class="thea" style=" text-decoration: none;
+              color: black;" href="./ChiTietTaiLieu.php?sid='.htmlspecialchars($item['subjectCode']).'"><h5>'.htmlspecialchars($item['subjectName']).'</h5></a>
+              <p>'.htmlspecialchars($item['subjectInfo']).'</p>
+              </div>  
+          </div>
+          <hr>';
+          }
+        }
+      }
+    }
+      ?>
 ?>
 
 <!DOCTYPE html>
@@ -97,6 +131,31 @@
             font-size: 14px;
             color: #666;
         }
+        .header{
+            margin-bottom: 30px;
+        }
+        .page-item{
+            border: 1px solid #eeeded;
+            text-decoration: none;
+            color: black;
+            padding: 3px 9px;
+            font-weight: bold;
+            background-color: #eeeded;
+
+
+        }
+        .current-page{
+            color:#fff;
+            background-color: black;
+            cursor: pointer;
+        }
+        .page-item:hover{
+            background-color:#908E8E;
+            border-radius: 1px solid #908E8E;
+            color: #fff;
+            text-decoration: none;
+            transform: scale(1.1) ;
+        }
 
     </style>
 </head>
@@ -117,10 +176,40 @@
             Hội nghị khoa học
         </div>
         <div class="content">
-            <?php showList($list_research); ?>
-        </div>
-    </div>
+            
 
+            <?php
+              $totalSubject=1;
+              $list_thongbao="";
+              $list_research = Research::getHoiNghi($item_per_page,$offset);
+              $totalSubject=count(Research::countgetHoiNghi());
+              $totalPage=ceil($totalSubject/$item_per_page);
+            showList($list_research); ?>
+        </div>
+    
+    <?php
+        if($current_page>3){
+            $firs_page=1;
+    ?>
+        <a class="page-item" href="?per_page=<?=$item_per_page?>&page=<?=$firs_page?>&c=<?= base64_encode($checkTim) ?><?= $checkTim ? "&key=".base64_encode($key) : '' ?>">First</a>
+            <?php }?>
+            
+        <?php
+        for($num=1;$num<=$totalPage;$num++){?>
+            <?php if($num!=$current_page){ ?>
+                <?php if ($num>$current_page-3 &&$num<$current_page+3){?>
+                    <a class="page-item" href="?per_page=<?=$item_per_page?>&page=<?=$num?> <?php ?>&c=<?= base64_encode($checkTim) ?><?= $checkTim ? "&key=".base64_encode($key) : '' ?>"><?=$num?></a>
+        <?php }?>
+        <?php }else{ ?></else>
+            <strong  class="current-page page-item"><?=$num?></strong>
+            <?php }?>
+        <?php } 
+          if($current_page<$totalPage-3){
+              $end_page=$totalPage;
+          ?>
+          <a class="page-item" href="?per_page=<?=$item_per_page?>&page=<?=$end_page?>&c=<?= base64_encode($checkTim) ?><?= $checkTim ? "&key=".base64_encode($key) : '' ?>">Last</a>
+    <?php }?>
+    </div>
     <?php
         require_once('footer.php');
     ?>
