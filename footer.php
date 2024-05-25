@@ -54,8 +54,8 @@ if(isset($_POST['email']) && isset($_POST['sdt'])){
                             <div class="opening-hours">
                                 <ul class="list-border">
                                     <li class="clearfix">
-                                        <div class="info"><i class="fa fa-home"> </i> Địa chỉ: Phòng C004, Số 19 Nguyễn Hữu Thọ, P. Tân Phong, Quận 7, Tp. Hồ Chi Minh. </div>
-                                        <div class="info"><i class="fa fa-phone"> </i> Điện thoại: (028) 37755046</div>
+                                        <li class="m-0 pl-0 no-border"> <i class="fa fa-home"></i><div class="info"> Địa chỉ: Phòng C004, Số 19 Nguyễn Hữu Thọ, P. Tân Phong, Quận 7, Tp. Hồ Chi Minh. </div></li>
+                                        <li class="m-0 pl-0 no-border"> <i class="fa fa-phone"></i><div class="info"> Điện thoại: (028) 37755046</div></li>
                                     </li>
                                 </ul>
                             </div>

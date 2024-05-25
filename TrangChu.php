@@ -41,17 +41,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <script src="myScript/script.js"></script>
     <link rel="stylesheet" href="./style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
-    <link rel="stylesheet" href="css/trangchustyle.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
       .card{
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
@@ -195,7 +189,7 @@
 
 
 
-    </style>
+</style>
 </head>
 <body>
   <div class="container">
@@ -232,8 +226,15 @@
           <li class="nav-item">
             <a class="nav-link active" href="#">VIỆC LÀM</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="#">NGHIÊN CỨU</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              NGHIÊN CỨU
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="chitiethoinghikhoahoc.php">HỘI NGHỊ KHOA HỌC</a>
+              <a class="dropdown-item" href="chitietnckh.php">CÔNG TRÌNH NGHIÊN CỨU KHOA HỌC</a>
+              <a class="dropdown-item" href="chitietcongbokhoahoc.php">CÔNG BỐ KHOA HỌC</a>
+            </div>
           </li>
           <?php if ($owner) {
             echo '<li class="nav-item">
@@ -424,8 +425,7 @@
   ?>
 <div class="xemthem"><a style="text-decoration: none;
                     color: red;" href=""><i class="fas fa-square-plus"></i> Xem thêm</a></div>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+  
 </div>
 
 
@@ -481,6 +481,7 @@
         }
     }
 </script>
+
 
 
 </body>
