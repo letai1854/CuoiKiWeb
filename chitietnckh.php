@@ -1,7 +1,15 @@
 <?php
     include_once('entities/research.class.php');
     $list_research = Research::getNCKH();
+    require_once('entities/account.php');
 
+require_once('session.php');
+if(isset($_SESSION['username'])){
+$userName = user::get_teacherName($_SESSION['username']);
+$owner = true;
+} else {
+$owner = false;
+}
     function truncateTextList($text, $limit = 50) {
         // Decode HTML entities to ensure all spaces are properly recognized
         $text = html_entity_decode($text, ENT_QUOTES, 'UTF-8');
@@ -92,16 +100,17 @@
     </style>
 </head>
 <body>
-    <div>
-        <div id="logo">
-        <div>    
-            <img src="./logo.png" alt="Logo"></div>
-            <div><h2 style="margin-left: 6px;">ĐẠI HỌC <br> TÔN ĐỨC THẮNG</h2>
-                <h4 style="margin-left: 6px;">GIẢNG VIÊN KHOA CÔNG NGHỆ THÔNG TIN</h4>
-            </div>
-        </div>
-        <!-- <img src="./images/user1.jpg" alt="User Image"> -->
-    </div>
+<div class="container">
+    <div id="logo">
+      <div>    
+          <img src="./logo.png" alt="Logo"></div>
+          <div><h2 style="margin-left: 6px;">ĐẠI HỌC <br> TÔN ĐỨC THẮNG</h2>
+            <h4 style="margin-left: 6px;">GIẢNG VIÊN KHOA CÔNG NGHỆ THÔNG TIN</h4>
+          </div>
+      </div>
+      <!-- <img src="./images/user1.jpg" alt="User Image"> -->
+  </div>
+<?php require_once("nav.php") ?>
     <div id="info" class="container">
         <div class="header">
             Công trình NCKH

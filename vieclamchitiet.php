@@ -2,7 +2,15 @@
 require_once('entities/account.php');
 require_once('entities/subject.class.php');
 require_once('entities/thongtin.class.php');
+require_once('entities/account.php');
 
+require_once('session.php');
+if(isset($_SESSION['username'])){
+$userName = user::get_teacherName($_SESSION['username']);
+$owner = true;
+} else {
+$owner = false;
+}
 $list_subject = Detail::list_Subject();
 $item_per_page=!empty($_GET['per_page'])?$_GET['per_page']:5;
 $current_page=!empty($_GET['page'])?$_GET['page']:1;
@@ -59,21 +67,16 @@ function showListSubjectDetail($list_subject) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tài Liệu Thầy Dzoãn Xuân Thanh</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="myScript/script.js"></script>
+    <link rel="stylesheet" href="./style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
         }
-        .navbar {
-            background-color: #0056b3;
-        }
-        .navbar-nav .nav-link {
-            color: white;
-            font-weight: bold;
-        }
+
         .container {
             margin-top: 20px;
         }
@@ -211,45 +214,17 @@ function showListSubjectDetail($list_subject) {
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="https://via.placeholder.com/150x50" alt="HUTECH Logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Giới thiệu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Đào tạo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">NCKH</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Giảng viên</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sinh viên</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Doanh nghiệp</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Liên hệ</a>
-                    </li>
-                </ul>
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
-                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Tìm kiếm</button>
-                </form>
-            </div>
-        </div>
-    </nav>
+    <div class="container">
+    <div id="logo">
+      <div>    
+          <img src="./logo.png" alt="Logo"></div>
+          <div><h2 style="margin-left: 6px;">ĐẠI HỌC <br> TÔN ĐỨC THẮNG</h2>
+            <h4 style="margin-left: 6px;">GIẢNG VIÊN KHOA CÔNG NGHỆ THÔNG TIN</h4>
+          </div>
+      </div>
+      <!-- <img src="./images/user1.jpg" alt="User Image"> -->
+  </div>
+<?php require_once("nav.php") ?>
 
     <!-- Main Content -->
     <div class="container container1">
@@ -368,6 +343,9 @@ function showListSubjectDetail($list_subject) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfR+8abtTE1Pi6jizo" 
     crossorigin="anonymous"></script>
+
+    <?php require_once("footer.php") ?>
+
 </body>
 </html>
 <script>
