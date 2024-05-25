@@ -57,7 +57,10 @@ session_write_close();
             </ul>
             <div class="user-info ms-auto">
                 <a class="nav-link" href="./login.php"><i class="fas fa-user"></i></a>
-                <?php if($owner) { echo '<p class="text-white mb-0">'. $userName.'</p>'; } ?>
+                <?php if($owner) { echo '<p class="text-white mb-0">'. $userName.'</p>';
+              echo '  <a class="nav-link" href="logout.php"><i class="fas fa-right-from-bracket"></i></a>';
+                
+                } ?>
             </div>
         </div>
     </div>
