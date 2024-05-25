@@ -38,7 +38,7 @@ function showListSubjectDetail($list_subject) {
                             <img src="'.htmlspecialchars($item['infoImage']).'" alt="News Image">
                         </div>
                         <div class="news-content">
-                            <a class="thea" style="text-decoration: none; color: black;" href="./noidungthongbao.php?sid='.htmlspecialchars($item['id']).'">
+                            <a class="thea" style="text-decoration: none; color: black;" href="./noidungvieclam.php?sid='.htmlspecialchars($item['id']).'">
                                 <h5>'.htmlspecialchars($item['infoTitle']).'</h5>
                             </a>
                             <p>'.htmlspecialchars($truncatedContent).'</p>
@@ -258,7 +258,7 @@ function showListSubjectDetail($list_subject) {
             <div class="col-lg-8 col-md-12 col-12">
                 <div class="title">
                     <div class="subject">
-                        <h2 style="color:red;font-weight: bold;"><i class="fas fa-newspapers"></i>  Thông báo</h2>
+                        <h2 style="color:red;font-weight: bold;"><i class="fas fa-newspaper"></i>  Việc làm</h2>
                     </div>
                     <div class="container-fluid tim">
                         <form class="d-flex" action="#" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
@@ -277,8 +277,8 @@ function showListSubjectDetail($list_subject) {
                     $checkTim=true;
                     $key=$_POST['tim'];
                     if(!empty($key)){
-                        $list_LimitSubject=thongTin::getSearchNewstDetail($key,'thongbao',$item_per_page,$offset);
-                        $totalSubject=count(thongTin::countSearchNewstDetail($key,'thongbao'));
+                        $list_LimitSubject=thongTin::getSearchNewstDetail($key,'vieclam',$item_per_page,$offset);
+                        $totalSubject=count(thongTin::countSearchNewstDetail($key,'vieclam'));
                     }
                 }
                 if($checkTim==true)
@@ -294,14 +294,14 @@ function showListSubjectDetail($list_subject) {
                 $checkTim=true;
                 
                 if(!empty($key)){
-                    $list_LimitSubject=thongTin::getSearchNewstDetail($key,'thongbao',$item_per_page,$offset);
-                    $totalSubject=count(thongTin::countSearchNewstDetail($key,'thongbao'));
+                    $list_LimitSubject=thongTin::getSearchNewstDetail($key,'vieclam',$item_per_page,$offset);
+                    $totalSubject=count(thongTin::countSearchNewstDetail($key,'vieclam'));
                 }  
                 }
                 else{
                     $checkTim=false;
-                    $list_LimitSubject=thongTin::getListThongTinByTypeLimit('thongbao',$item_per_page,$offset);
-                    $totalSubject=count(thongTin::getListThongTinByType('thongbao'));
+                    $list_LimitSubject=thongTin::getListThongTinByTypeLimit('vieclam',$item_per_page,$offset);
+                    $totalSubject=count(thongTin::getListThongTinByType('vieclam'));
                 }
                 $totalPage=ceil($totalSubject/$item_per_page);
                 showListSubjectDetail($list_LimitSubject);
@@ -336,25 +336,25 @@ function showListSubjectDetail($list_subject) {
 
             <!-- Right Column -->
             <div class="col-lg-4 col-md-12 col-12 sidebar">
-                <h5><i class="fas fa-newspaper"></i> Thông báo mới</h5>
+                <h5><i class="fas fa-newspaper"></i> Việc làm mới</h5>
                 <br>
                 <ul>
                     <?php
-                    $list_thongbao = ThongTin::getListThongTinByTypeLimit8("thongbao");
+                    $list_thongbao = ThongTin::getListThongTinByTypeLimit8("vieclam");
                     if(isset($list_thongbao))
                     {
                         if(is_array($list_thongbao))
                         {
                             foreach($list_thongbao as $item)
                             {
-                                echo '<li><a href="./noidungthongbao.php?sid='.htmlspecialchars($item['id']).'">'.htmlspecialchars($item['infoTitle']).'<br><span class="date">'.htmlspecialchars($item['day']).'</span> <span class="new">mới</span></a></li>';
+                                echo '<li><a href="./noidungvieclam.php?sid='.htmlspecialchars($item['id']).'">'.htmlspecialchars($item['infoTitle']).'<br><span class="date">'.htmlspecialchars($item['day']).'</span> <span class="new">mới</span></a></li>';
                             }
                         }
                     }
                     ?>
                 </ul>
                 <div class="xemthem"><a style="text-decoration: none;
-                      color: red;" href="./thongbaochitiet.php"><i class="fas fa-square-plus"></i> Xem thêm</a></div>
+                      color: red;" href="./vieclamchitiet.php"><i class="fas fa-square-plus"></i> Xem thêm</a></div>
             </div>
         </div>
     </div>

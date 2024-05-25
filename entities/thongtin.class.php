@@ -206,6 +206,24 @@
             $result=$db->select_to_array($sql);
             return $result;
         }
+        public static function showNewsLimit($type,$item, $offset){
+            $db= new Db();
+            $sql ="SELECT * FROM News where infoType ='$type' and ORDER BY ASC DESC LIMIT $item OFFSET $offset;";
+            $result=$db->select_to_array($sql);
+            return $result;
+        }
+        public static function countNewsLimit($type){
+            $db= new Db();
+            $sql ="SELECT * FROM News where infoType ='$type'";
+            $result=$db->select_to_array($sql);
+            return $result;
+        }
+        public static function showSearchNews($key,$id,$type,$item, $offset){
+            $db= new Db();
+            $sql ="SELECT * FROM subjectDetaiil where subjectType ='$type' and subjectCode=$id and  subjectTitle LIKE '%$key%' LIMIT $item OFFSET $offset;";
+            $result=$db->select_to_array($sql);
+            return $result;
+        }
 
     }
 
