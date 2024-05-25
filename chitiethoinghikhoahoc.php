@@ -80,7 +80,7 @@ if(isset($_POST['btntimkiem'])){
       }
     }
       ?>
-?>
+
 
 <!DOCTYPE html>
 <html lang="vi">
