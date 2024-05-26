@@ -77,14 +77,14 @@
             color: white;
         }
 
-        nav ul li {
+        /* nav ul li {
             padding: 10px 20px;
         }
 
         nav ul li a {
             color: white;
             text-decoration: none;
-        }
+        } */
 
         main {
             flex: 1;
