@@ -25,7 +25,7 @@ session_write_close();
         <div class="collapse navbar-collapse justify-content-center" id="navbarColor01">
             <ul class="navbar-nav">
             <li class="nav-item">
-                    <a class="nav-link active" href="./TrangChu.php">TRANG CHỦ</a>
+                    <a class="nav-link active" href="./index.php">TRANG CHỦ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="./gioithieu.php">GIỚI THIỆU</a>

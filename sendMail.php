@@ -182,7 +182,7 @@ if (isset($_POST['btnlogin'])) {
   <div class="container">
     <div class="right-panel">
       <div class="header">
-        <a href="./TrangChu.php" style="color: #b71c1c;"><i class="fas fa-house-user"></i></a>
+        <a href="./index.php" style="color: #b71c1c;"><i class="fas fa-house-user"></i></a>
       </div>
       <div class="login-box">
         <h2>XIN CHÀO!</h2>

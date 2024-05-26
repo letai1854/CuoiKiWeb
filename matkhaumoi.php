@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result) {
             echo '<script>alert("Đổi mật khẩu thành công");</script>';
             // Chuyển hướng người dùng đến trang khác sau khi đổi mật khẩu thành công
-            header("Location: login.php");
+            header("Location: index.php");
             exit();
         } else {
             echo '<script>alert("Đổi mật khẩu không thành công");</script>';
@@ -185,7 +185,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <div class="container">
     <div class="right-panel">
       <div class="header">
-        <a href="./TrangChu.php" style="color: #b71c1c;"><i class="fas fa-house-user"></i></a>
+        <a href="./index.php" style="color: #b71c1c;"><i class="fas fa-house-user"></i></a>
       </div>
       <div class="login-box">
         <h2>XIN CHÀO!</h2>
