@@ -13,6 +13,9 @@ if(isset($_SESSION['username'])){
 session_write_close();
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+
+</style>
 
 <nav class="navbar navbar-expand-lg py-3">
     <div class="container">

@@ -43,7 +43,7 @@ $nameTitle=$sub[0]['subjectName'];
             flex-direction: column;
             height: 100vh;
         }
-
+        
         header {
             background-color: #f5f5f5;
             display: flex;
