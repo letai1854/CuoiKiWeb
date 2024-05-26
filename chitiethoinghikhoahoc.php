@@ -18,7 +18,7 @@ if(isset($_POST['btntimkiem'])){
     $checkTim=true;
     $key=$_POST['tim']; 
 }
-    function truncateTextList($text, $limit = 50) {
+    function truncateTextList($text, $limit = 100) {
         // Decode HTML entities to ensure all spaces are properly recognized
         $text = html_entity_decode($text, ENT_QUOTES, 'UTF-8');
         
@@ -48,8 +48,7 @@ if(isset($_POST['btntimkiem'])){
               <div class="news-img">
               <img src="'.htmlspecialchars($item['image']).'" alt="News Image">
               </div>
-              <div  class="news-content"><a class="thea" style=" text-decoration: none;
-              color: black;" href="./noidunghoinghikhoahoc.php?sid='.htmlspecialchars($item['id']).'"><h5>'.htmlspecialchars($item['title']).'</h5></a>
+              <div class="news-content"><a class="thea" href="./noidunghoinghikhoahoc.php?sid='.htmlspecialchars($item['id']).'"><h5 class="thea">'.htmlspecialchars($item['title']).'</h5></a>
               <p> '.$truncatedContent.'</p> <div class="project-content"><strong>Ngày đăng:</strong> '.htmlspecialchars($item['day']).'</div>
               </div>  
           </div>
@@ -58,27 +57,7 @@ if(isset($_POST['btntimkiem'])){
             }
         }
     }
-    function showListSubjectDetail($list_subject){
-        if(isset($list_subject))
-        {
-          if(is_array($list_subject))
-          {
-            foreach($list_subject as $item)
-            {
-              echo '<div class="news-item">
-              <div class="news-img">
-              <img src="'.htmlspecialchars($item['subjectImage']).'" alt="News Image">
-              </div>
-              <div  class="news-content"><a class="thea" style=" text-decoration: none;
-              color: black;" href="./ChiTietTaiLieu.php?sid='.htmlspecialchars($item['subjectCode']).'"><h5>'.htmlspecialchars($item['subjectName']).'</h5></a>
-              <p>'.htmlspecialchars($item['subjectInfo']).'</p>
-              </div>  
-          </div>
-          <hr>';
-          }
-        }
-      }
-    }
+    
       ?>
 
 
@@ -156,7 +135,12 @@ if(isset($_POST['btntimkiem'])){
             text-decoration: none;
             transform: scale(1.1) ;
         }
-
+        .thea:hover {
+            color: red;
+        }
+        .thea {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>

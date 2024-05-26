@@ -43,26 +43,6 @@ function truncateTextList($text, $limit = 50) {
             font-family: Arial, sans-serif;
             line-height: 1.6;
         }
-        #logo {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        #logo img {
-            width: 80px;
-            height: 80px;
-        }
-        #logo h2 {
-            margin-left: 10px;
-            font-size: 1.5em;
-            line-height: 1.2;
-        }
-        #logo h4 {
-            margin-left: 10px;
-            font-size: 1em;
-            line-height: 1.2;
-            color: #666;
-        }
         .profile {
             display: flex;
             align-items: center;
@@ -96,12 +76,6 @@ function truncateTextList($text, $limit = 50) {
         .content-wrapper {
             padding: 20px;
             margin-bottom: 20px;
-        }
-        footer {
-            margin-top: 20px;
-            padding: 20px 0;
-            background: #f1f1f1;
-            text-align: center;
         }
     </style>
 </head>

@@ -28,47 +28,43 @@
         height: 100%;
         transition: 0.3s ease;
       }
-      /* .infor .single:hover{
-        cursor: pointer;
-        background-color: rgb(245, 178, 178,0.7);
+      
+      .single {
+        transition: transform 1s, background-color 1s;
+      }
 
-      } */
-.single {
-  transition: transform 1s, background-color 1s;
-}
-
-.single:hover {
-  /* transform: scale(1.2) ; */
-  transform: scale(1.1) ;
-  background-color: #908E8E;
-  color:#eeeded;
-}
+      .single:hover {
+        /* transform: scale(1.2) ; */
+        transform: scale(1.1) ;
+        background-color: #908E8E;
+        color:#eeeded;
+      }
 
     .infor .single button{
-    color: #1d1d1d;
-    background: none;
-    font-size: 14px;
-    font-weight: 500;
-    border-bottom: 1px solid black;
-    text-transform: uppercase;
-    display: inline-block;
-    padding: 2.5px;
-    transform: translateY(10px);
-    transition:  0.3s ease;
+      color: #1d1d1d;
+      background: none;
+      font-size: 14px;
+      font-weight: 500;
+      border-bottom: 1px solid black;
+      text-transform: uppercase;
+      display: inline-block;
+      padding: 2.5px;
+      transform: translateY(10px);
+      transition:  0.3s ease;
 
-      }
+    }
     .infor .single button:hover{
-    color: brown;
-    background-color: none;
-    border-bottom: #fff;
+      color: brown;
+      background-color: none;
+      border-bottom: #fff;
     
-}
-.single-how-works-icon{
-  font-size: 90px;
-}
-#se{
-  margin-bottom: 100px;
-}
+    }
+    .single-how-works-icon{
+      font-size: 90px;
+    }
+    #se {
+      margin-bottom: 100px;
+    }
 
     </style>
 </head>
@@ -129,45 +125,8 @@
   </section>
 
   <?php require_once("footer.php") ?>
-<!-- <section id="new" class="w-100 " >
-<div class="container text-center py-5 mt-5">
-          <h3>Chỉnh sửa thông tin</h3>
-          <p>Bạn có thể chỉnh sửa tất cả nội dung website trong bốn lựa chọn dưới đây</p>
-</div>
-        <div class="row  p-0 m-0">
-          <div class="one col-lg-3 col-md-6 col-12 p-0">
-            <img class="img-fluid" src="./images/monhoc.png" alt="">
-            <div class="details">
-              <h3 style="color: #555454f6;">ĐIỀU CHỈNH THÔNG TIN MÔN HỌC</h3 >
-              <button class="text-uppercase" ><a href="./Them_Xoa_SuaMonHoc.php" style="text-decoration: none; color:black">Chỉnh sửa</a></button>
-            </div>
-          </div>
-          <div class="one col-lg-3 col-md-6 col-12 p-0">
-            <img class="img-fluid" src="./images/m1.png" alt="">
-            <div class="details">
-              <h3 style="color: #555454f6;"> ĐIỀU CHỈNH THÔNG TIN NGHIÊN CỨU</h3 >
-              <button class="text-uppercase">Chỉnh sửa</button>
-            </div>
-          </div>
-          <div class="one col-lg-3 col-md-6 col-12 p-0">
-            <img class="img-fluid" src="./images/u7.png" alt="">
-            <div class="details">
-              <h3 style="color: #555454f6;"> CHỈNH SỬA THÔNG TIN CÁ NHÂN</h3 >
-              <button class="text-uppercase">Chỉnh sửa</button>
-            </div>
-          </div>
-          <div class="one col-lg-3 col-md-6 col-12 p-0">
-            <img class="img-fluid" src="./images/m3.png" alt="">
-            <div class="details">
-              <h3 style="color: #555454f6;"> ĐIỀU CHỈNH THÔNG TIN BÀI ĐĂNG</h3 >
-              <button class="text-uppercase">Chỉnh sửa</button>
-            </div>
-          </div>
-        </div>
-      </section> -->
+
     
-
-
 </body>
 </html>
 

@@ -10,7 +10,7 @@ $owner = true;
 } else {
 $owner = false;
 }
-    function truncateTextList($text, $limit = 50) {
+    function truncateTextList($text, $limit = 100) {
         // Decode HTML entities to ensure all spaces are properly recognized
         $text = html_entity_decode($text, ENT_QUOTES, 'UTF-8');
         
@@ -37,7 +37,7 @@ $owner = false;
                     // Get truncated content without HTML tags
                     $truncatedContent = truncateTextList($item['content']);
                     echo '<div class="project">
-                          <div class="project-title">'.htmlspecialchars($item['title']).'</div>
+                          <div class="project-title"><h5 class="thea">'.htmlspecialchars($item['title']).'</h5></div>
                           <div class="project-content"><strong>Nội dung:</strong> '.$truncatedContent.'</div>
                           <div class="project-content"><strong>Ngày đăng:</strong> '.htmlspecialchars($item['day']).'</div>
                           </div>';
@@ -58,6 +58,9 @@ $owner = false;
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <link rel="stylesheet" href="style.css" />
     <style>
+        .thea {
+            color:black
+        }
         #info {
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
