@@ -46,8 +46,8 @@ function showListSubjectDetail($list_subject) {
                             <img src="'.htmlspecialchars($item['infoImage']).'" alt="News Image">
                         </div>
                         <div class="news-content">
-                            <a class="thea" style="text-decoration: none; color: black;" href="./noidungthongbao.php?sid='.htmlspecialchars($item['id']).'">
-                                <h5>'.htmlspecialchars($item['infoTitle']).'</h5>
+                            <a class="thea" href="./noidungthongbao.php?sid='.htmlspecialchars($item['id']).'">
+                                <h5 class="thea">'.htmlspecialchars($item['infoTitle']).'</h5>
                             </a>
                             <p>'.htmlspecialchars($truncatedContent).'</p>
                         </div>  
@@ -78,6 +78,12 @@ function showListSubjectDetail($list_subject) {
         }
         .container {
             margin-top: 20px;
+        }
+        .thea:hover {
+            color: red;
+        }
+        .thea {
+            text-decoration: none;
         }
         .news-item img {
             width: 150px;
@@ -208,6 +214,9 @@ function showListSubjectDetail($list_subject) {
         .sidebar ul li a .date {
             font-weight: normal; /* Đảm bảo rằng ngày không bị in đậm */
         }
+        .thongbaopanel:hover {
+            color:red;
+        }
     </style>
 </head>
 <body>
@@ -321,7 +330,7 @@ function showListSubjectDetail($list_subject) {
                         {
                             foreach($list_thongbao as $item)
                             {
-                                echo '<li><a href="./noidungthongbao.php?sid='.htmlspecialchars($item['id']).'">'.htmlspecialchars($item['infoTitle']).'<br><span class="date">'.htmlspecialchars($item['day']).'</span> <span class="new">mới</span></a></li>';
+                                echo '<li><a class="thongbaopanel" href="./noidungthongbao.php?sid='.htmlspecialchars($item['id']).'">'.htmlspecialchars($item['infoTitle']).'<br><span class="date">'.htmlspecialchars($item['day']).'</span> <span class="new">mới</span></a></li>';
                             }
                         }
                     }

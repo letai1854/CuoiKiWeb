@@ -28,16 +28,18 @@ function showListSubjectDetail($list_subject){
                   {
                     foreach($list_subject as $item)
                     {
-                      echo '<div class="news-item">
-                      <div class="news-img">
-                      <img src="'.htmlspecialchars($item['subjectImage']).'" alt="News Image">
-                      </div>
-                      <div  class="news-content"><a class="thea" style=" text-decoration: none;
-                      color: black;" href="./ChiTietTaiLieu.php?sid='.htmlspecialchars($item['subjectCode']).'"><h5>'.htmlspecialchars($item['subjectName']).'</h5></a>
-                      <p>'.htmlspecialchars($item['subjectInfo']).'</p>
-                      </div>  
-                  </div>
-                  <hr>';
+                        echo '<div class="news-item">
+                            <div class="news-img">
+                                <img src="'.htmlspecialchars($item['subjectImage']).'" alt="News Image">
+                            </div>
+                            <div class="news-content">
+                                <a class="thea" href="./ChiTietTaiLieu.php?sid='.htmlspecialchars($item['subjectCode']).'">
+                                    <h5 class="thea">'.htmlspecialchars($item['subjectName']).'</h5>
+                                </a>
+                                <p>'.htmlspecialchars($item['subjectInfo']).'</p>
+                            </div>  
+                        </div>
+                        <hr>';
                   }
                 }
               }
@@ -60,13 +62,12 @@ function showListSubjectDetail($list_subject){
         body {
             font-family: Arial, sans-serif;
         }
-        /* .navbar {
-            background-color: #0056b3;
+        .thea {
+            text-decoration: none;
         }
-        .navbar-nav .nav-link {
-            color: white;
-            font-weight: bold;
-        } */
+        .thea:hover {
+            color: red;
+        }
         .container {
             margin-top: 20px;
         }
@@ -88,38 +89,38 @@ function showListSubjectDetail($list_subject){
             font-size: 0.9em;
         }
         .sidebar h5 {
-    font-size: 1.8rem;
-    color: red;
-    font-weight: bold;
-    margin-bottom: 16px;
-    margin-top: 3px;
-}
+            font-size: 1.8rem;
+            color: red;
+            font-weight: bold;
+            margin-bottom: 16px;
+            margin-top: 3px;
+        }
 
-.sidebar ul {
-    list-style-type: none;
-    padding: 0;
-}
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
 
-.sidebar ul li {
-    background-color: #f1f1f1;
-    margin-bottom: 3px;
-    padding: 10px;
-    border-radius: 5px;
-}
+        .sidebar ul li {
+            background-color: #f1f1f1;
+            margin-bottom: 3px;
+            padding: 10px;
+            border-radius: 5px;
+        }
 
-.sidebar ul li a {
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    display: block;
-    font-size: 0.8rem;
-}
+        .sidebar ul li a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            display: block;
+            font-size: 0.8rem;
+        }
 
-.sidebar ul li a .new {
-    color: red;
-    font-weight: bold;
-    float: right;
-}
+        .sidebar ul li a .new {
+            color: red;
+            font-weight: bold;
+            float: right;
+        }
         .news-item {
             display: flex;
         }
@@ -198,6 +199,9 @@ function showListSubjectDetail($list_subject){
         }
         .sidebar ul li a .date {
             font-weight: normal; /* Đảm bảo rằng ngày không bị in đậm */
+        }
+        .thongbaoinfo:hover {
+            color: red;
         }
     </style>
 </head>
@@ -310,7 +314,7 @@ function showListSubjectDetail($list_subject){
                         {
                             foreach($list_thongbao as $item)
                             {
-                                echo '<li><a href="#">'.htmlspecialchars($item['infoTitle']).'<br><span class="date">'.htmlspecialchars($item['day']).'</span> <span class="new">mới</span></a></li>';
+                                echo '<li><a class="thongbaoinfo" href="./noidungthongbao.php?sid='.htmlspecialchars($item['id']).'">'.htmlspecialchars($item['infoTitle']).'<br><span class="date">'.htmlspecialchars($item['day']).'</span> <span class="new">mới</span></a></li>';
                             }
                         }
                     }

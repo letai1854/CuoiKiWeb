@@ -63,134 +63,147 @@
             justify-content: end;
         }
 
-.xemthem a:hover {
-  color: black;
-}
-.item-subject .card2 {
-  overflow: hidden;
-  transition: transform 0.3s, box-shadow 0.3s;
-  height: 100%;
-}
+      .xemthem a:hover {
+        color: black;
+      }
+      .item-subject .card2 {
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        height: 100%;
+      }
 
-.item-subject .card2:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
+      .item-subject .card2:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
 
-.item-subject .card2 .card-img-wrapper {
-  width: 100%;
-  height: 150px; /* Set a fixed height for images */
-  overflow: hidden;
-}
+      .item-subject .card2 .card-img-wrapper {
+        width: 100%;
+        height: 150px; /* Set a fixed height for images */
+        overflow: hidden;
+      }
 
-.item-subject .card2 .card-img-top {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+      .item-subject .card2 .card-img-top {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
 
-.item-subject .card2 .card-body {
-  padding: 1rem;
-  text-align: center;
-}
+      .item-subject .card2 .card-body {
+        padding: 1rem;
+        text-align: center;
+      }
 
-.item-subject .card2 .card-body a {
-  display: block;
-  color: black;
-  text-decoration: none;
-  font-weight: bold;
-}
+      .item-subject .card2 .card-body a {
+        display: block;
+        color: black;
+        text-decoration: none;
+        font-weight: bold;
+      }
 
-.item-subject .card2 .card-body a:hover {
-  color: red;
-}
-.item-subject .card2 .card-body a:hover {
-  color: red;
-}
-.item-subject .card2 .card-body .mt-2 {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-}
+      .item-subject .card2 .card-body a:hover {
+        color: red;
+      }
+      .item-subject .card2 .card-body a:hover {
+        color: red;
+      }
+      .item-subject .card2 .card-body .mt-2 {
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+      }
 
-.item-subject .card2 .btn {
-  font-size: 0.8rem;
-  border: none;
-  cursor: pointer;
-}
+      .item-subject .card2 .btn {
+        font-size: 0.8rem;
+        border: none;
+        cursor: pointer;
+      }
 
-.item-subject .card2 .btn:hover {
-  opacity: 0.8;
-}
+      .item-subject .card2 .btn:hover {
+        opacity: 0.8;
+      }
 
-.item-subject .card2 .btn a {
-  color: white;
-  text-decoration: none;
-}
-.header {
-  display: flex;
-  align-items: center;
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: rgba(255, 0, 0, 0.793);
-}
+      .item-subject .card2 .btn a {
+        color: white;
+        text-decoration: none;
+      }
+      .header {
+        display: flex;
+        align-items: center;
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: rgba(255, 0, 0, 0.793);
+      }
 
-.header {
-  display: flex;
-  align-items: center;
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: rgba(255, 0, 0, 0.793);
-}
+      .header {
+        display: flex;
+        align-items: center;
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: rgba(255, 0, 0, 0.793);
+      }
 
-.item-subject .card3 {
-  overflow: hidden;
-  /* transition: transform 0.3s, box-shadow 0.3s; */
-  height: 100%;
-}
+      .item-subject .card3 {
+        overflow: hidden;
+        /* transition: transform 0.3s, box-shadow 0.3s; */
+        height: 100%;
+      }
 
-.item-subject .card3:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
+      .item-subject .card3:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
 
-.item-subject .card3 .card-img-wrapper {
-  width: 100%;
-  height: 150px; ; /* Set a fixed height for images */
-  overflow: hidden;
-}
+      .item-subject .card3 .card-img-wrapper {
+        width: 100%;
+        height: 150px; ; /* Set a fixed height for images */
+        overflow: hidden;
+      }
 
-.item-subject .card3 .card-img-top {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+      .item-subject .card3 .card-img-top {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
 
-.item-subject .card3 .card-body {
-  padding: 1rem;
-  /* text-align: center; */
-}
+      .item-subject .card3 .card-body {
+        padding: 1rem;
+        /* text-align: center; */
+      }
 
-.item-subject .card3 .card-body a {
-  display: block;
-  color: black;
-  text-decoration: none;
-  font-weight: bold;
-}
+      .item-subject .card3 .card-body a {
+        display: block;
+        color: black;
+        text-decoration: none;
+        font-weight: bold;
+      }
 
-.item-subject .card3 .card-body a:hover {
-  color: red;
-}
+      .item-subject .card3 .card-body a:hover {
+        color: red;
+      }
 
-.item-subject .card3 .card-body .mt-2 {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-}
-
-
-
-
+      .item-subject .card3 .card-body .mt-2 {
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+      }
+      .thongbaopanel a:hover {
+        color: red;
+      }
+      .xemct a {
+        color: black;
+      }
+      .xemct a:hover {
+        color: red;
+      }
+      .vieclamcard .vieclamtitle {
+        color: black;
+      }
+      .vieclamcard .vieclamtitle:hover {
+        color: red;
+      }
 </style>
 </head>
+
+
 <body>
   <div class="container">
     <div id="logo">
@@ -295,7 +308,7 @@
                         <p class="card-text text-center" style="color: black">'.htmlspecialchars($item['subjectName']).'</p>
                         <div class="chitiet" style="text-align: center;">
                         <div class="xemct">
-  <p><a style="font-size: 0.8rem; color:black; text-decoration: none;" href="ChiTietTaiLieu.php?sid='.$item['subjectCode'].'">Xem chi tiết</a></p>
+  <p><a style="font-size: 0.8rem; text-decoration: none;" href="ChiTietTaiLieu.php?sid='.$item['subjectCode'].'">Xem chi tiết</a></p>
 </div>
 </div>
 
@@ -312,7 +325,7 @@
       </div>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12 col-12 sidebar">
-        <div class="" style=" ">
+        <div class="thongbaopanel">
               <h5 style="color:red;"><i class="fas fa-newspaper"></i> Thông báo mới</h5>
               <br>
               <ul>
@@ -382,12 +395,12 @@
                   <div class="card-img-wrapper">
                     <img src="'.htmlspecialchars($item['infoImage']).'" class="card-img-top" alt="">
                   </div>
-                  <div class="card-body text-center">
-                    <a style="text-decoration: none; color: black;" href="./noidungvieclam.php?sid='.htmlspecialchars($item['id']).'">
-                      <small class="text-body-secondary" style="font-weight: bold;">'.htmlspecialchars($item['infoTitle']).'</small>
+                  <div class="card-body text-center vieclamcard">
+                    <a style="text-decoration: none;" href="./noidungvieclam.php?sid='.htmlspecialchars($item['id']).'">
+                      <small class="vieclamtitle" style="font-weight: bold;">'.htmlspecialchars($item['infoTitle']).'</small>
                     </a>
                     <div class="mt-2">
-                      <small class="text-body-secondary">'.htmlspecialchars($item['day']).'</small>
+                      <small>'.htmlspecialchars($item['day']).'</small>
                     </div>';
         echo '</div>
               </div>
